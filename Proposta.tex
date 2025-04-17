@@ -1,0 +1,63 @@
+\documentclass[12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[brazil]{babel}
+% \usepackage[english]{babel}
+
+\usepackage{amsmath,amsthm,amsfonts,amssymb}
+\usepackage{graphicx,cite,enumerate}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage[normalem]{ulem}
+\useunder{\uline}{\ul}{}
+\usepackage{booktabs}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{systeme}
+\usepackage{array}
+\usepackage{makecell}
+\usepackage{afterpage}
+\usepackage{algorithm} 
+\usepackage{algpseudocode}
+\usepackage{longtable}
+\usepackage{adjustbox}
+\usepackage{rotating}
+\usepackage{quotes}
+\usepackage{caption, subcaption}
+
+% My customization
+%% Hide link boxes
+\hypersetup{hidelinks}
+%% Custom commands
+\input{10_style/my_commands.tex}
+%% Line spacing
+\usepackage{geometry}
+\geometry{a4paper,portrait,hmargin={3.5cm,1.5cm}}
+\renewcommand{\baselinestretch}{2}
+%% Fonstize set at line 1
+
+
+\title{\textbf{Multi-Scale Investigations For Reacting Multi-Phase Dispersed Spray Flows}}
+\author{João Vinícius Hennings de Lara}
+\date{April 2025}
+
+
+
+\begin{document}
+
+
+\maketitle
+
+\input{20_capitulos/Introducao}    % Introdução Justificativa e síntese da bibliografia fundamental
+\input{20_capitulos/Teoria}        % Fundamentação Teórica
+\input{20_capitulos/Literatura}    % Material (Software e Hardware)
+\input{20_capitulos/Metodologia}   % Materiais e Métodos
+\input{20_capitulos/Plano}         % Plano de Trabalho e Cronograma de Excecução
+\input{20_capitulos/Resultados}    % Resultados Esperados // Forma de análise dos resultados
+
+\bibliographystyle{abntex2-alf}
+\bibliography{bibliography}
+
+
+\end{document}

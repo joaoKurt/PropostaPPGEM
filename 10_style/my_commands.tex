@@ -1,0 +1,86 @@
+% !TEX root = ../pmaluminum.tex
+
+
+%%%%%%%%%%%%%%%%%%%
+% My commands
+%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\goal}[1]{[\textbf{Goal:} \blue{\emph{#1}}]}
+\newcommand{\todo}[1]{[\textbf{TODO:} \red{\emph{#1}}]}
+\newcommand{\question}[1]{[\emph{\textbf{Q:} \red{#1}}]}
+\newcommand{\source}[1]{[\green{\emph{src} #1}]}
+\newcommand{\todoeq}{[\green{\emph{EQ}}]}
+\newcommand{\todofig}{[\green{\emph{FIG}}]}
+
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\delScalar}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\delScalarSq}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+\newcommand{\delScalarTwo}[3]{\frac{\partial^2 #1}{\partial #2\partial #3}}
+\newcommand{\delVector}[2]{\frac{\partial \mathbf{#1}}{\partial #2}}
+\newcommand{\dScalar}[2]{\frac{\diff #1}{\diff #2}}
+\newcommand{\dScalarSq}[2]{\frac{\diff^2 #1}{\diff #2^2}}
+\newcommand{\dVector}[2]{\frac{\diff \mathbf{#1}}{\diff #2}}
+\newcommand{\Nabla}{\boldsymbol{\nabla}}
+\newcommand{\dr}[1]{\ \diff_{\mathrm{r}}\left(#1\right)}
+\newcommand{\dt}[1]{\ \diff_{\mathrm{t}}\left(#1\right)}
+% \newcommand{\dt}[1]{\dScalar{#1}{t}}
+
+\newcommand{\blue}[1]{\textcolor{blue}{#1}}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\newcommand{\green}[1]{\textcolor{green}{#1}}
+
+\newcommand{\Sh}{\mathrm{Sh}}
+\newcommand{\Nu}{\mathrm{Nu}}
+\newcommand{\Le}{\mathrm{Le}}
+\newcommand{\Sc}{\mathrm{Sc}}
+\newcommand{\Bi}{\mathrm{Bi}}
+\newcommand{\Reynolds}{\mathrm{Re}}
+\newcommand{\Prandtl}{\mathrm{Pr}}
+
+\newcommand{\qAl}{\mathrm{Al}}
+\newcommand{\qO}{\mathrm{O}}
+\newcommand{\qH}{\mathrm{H}}
+\newcommand{\qC}{\mathrm{C}}
+\newcommand{\qN}{\mathrm{N}}
+\newcommand{\qCO}{\mathrm{CO}}
+\newcommand{\qAlAlOOO}{\qAl_2 \qO_3}
+% \newcommand{\qH2O}{\H_2\O}
+% \newcommand{\H}{\H_2}
+
+\newcommand{\mrm}[1]{\mathrm{#1}}
+
+\newcommand{\ejected}{\mrm{ejected}}
+\newcommand{\const}{\mrm{const}}
+\newcommand{\cond}{\mrm{cond}}
+\newcommand{\conv}{\mrm{conv}}
+\newcommand{\comb}{\mrm{comb}}
+\newcommand{\melt}{\mrm{melt}}
+\newcommand{\evap}{\mrm{evap}}
+\newcommand{\boil}{\mrm{boil}}
+\newcommand{\film}{\mrm{film}}
+\newcommand{\rad}{\mrm{rad}}
+\newcommand{\dep}{\mrm{dep}}
+\newcommand{\net}{\mrm{net}}
+\newcommand{\env}{\mrm{env}}
+\newcommand{\flm}{\mrm{flm}}
+\newcommand{\HSR}{\mrm{HSR}}
+\newcommand{\HGR}{\mrm{HGR}}
+\newcommand{\st}{\mrm{st}}
+
+\newcommand{\qntdd}[2]{\ensuremath{#1 \, \mathrm{#2}}}
+
+\renewcommand{\eqref}[1]{(\ref{#1})}
+
+\newcommand{\from}[1]{
+    \\
+    \vspace{0.2cm} 
+    {\small 
+    \textbf{From}: \citeonline{#1}.
+    }}
+
+\newcommand{\fromme}{
+    \\
+    \vspace{0.2cm} 
+    {\small 
+    \textbf{From}: present author.
+    }}
