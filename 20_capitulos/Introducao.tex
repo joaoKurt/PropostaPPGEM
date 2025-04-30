@@ -1,33 +1,18 @@
 \section{Introdução}
 
+% 1. Introdução
+%    1. Motivação
+%       1. entre as duas conectar c como e pq simular
+%    2. Lacunas (Revisão Bibliográfica, estado da arte)
+%    3. Justificativa
+%    4. Objetivos (e Hipótese)
+%    5. Contribuição Científica
 
-No cenario atual de busca pela transição energética e descarbonização, a pesquisa em combustão é mais importânte do que nunca.
-Nesse contexto, os principais objetivos são reduzir emissões, adaptar os modelos para novos combustíveis mais limpos e para novos modos de combustão, necessários para motores mais limpos.
+% Importância de trabalhar com combustão no contexto global.
 
-Análises históricas indicam que a transição para fontes de energia renováveis se dará ao longo de décadas \cite{MasriA2021}, [MASRI 1, 3 também]. Até lá, combustíveis fosseis mantém o seu domínio.
-Além disso, no setor de transportes, a eletrificação dificilmente substituirá combustíveis fósseis em veículos de cargas pesadas ou para transporte aéreo ou marítmo, mesmo considerando previsões otimistas para o desevolvimento de baterias \cite{MasriA2021}. O mesmo pode ser dito para processos industriais intensivos em energia, como cimento e aço.
-
-Uma opçao para a descarbonização desses setores é o uso de eletrocombustíveis, também chamados de \emph{e-fuels}, \emph{power-to-x} (PtX) ou \emph{powerfuels}.
-Estes são combustíveis líquidos ou gasosos produzidos a partir de água, gas carbônico ($\text{CO}_2$), eventualmente nitrogênio $\text N_2$ e energias de fontes renováveis. 
-Pode-se produzir, por exemplo: hidrogênio, metano, metanol, hidrocarbonetos líquidos (processo Fischer-Tropf), éteres de oximetileno (OMEs) e amônia (processo Haber-Bosch). source{MASRI 9}.
-Os combustíveis PtX podem utilizar a infraestrutura de transporte, distribuição e armazenamento já existente dos combustíveis fósseis \source{MASRI 9-13} e podem chegar a ser neutros em termos de emissões, apesar que ainda mais caros que combustíveis de origem fóssil \source{MASRI 42, 43}. 
-
-Outra alternativa para combustíveis de origem fóssil são os combustíveis verdes ou bio-combustíveis, produzidos a partir de platas. 
-Por exemplo, o etanol e o metanol produzidos a partir do bagaço de cana, tecnologia desenvolvida no brasil; ou o etanol produzido a partir de milho, como nos estados Unidos; ou o metano advindo da biomassa. \source
-Esses combustíveis reduzem  ...
-
-Outra alternativa ainda é o uso de pós metálicos...
-
-% A eletrólise da água produz hidrogênio, $\text H_2$.
-% Hidrogênio com gas carbônico pode produzir hidrocarbonetos a partir do processo Fischer-Tropsch, ou metano, metanol ou éteres de oximetileno (OMEs).
-% Por outro lado, hidrogênio também pode ser utilizado diretamente em células de combustível ou em motores de combustão futuros, ou produzir amônmia a partir do processo de Haber-Bosch.  
-
-
-
-% Necessidade de trabalhar com combustão no contexto global.
+% Como se simula combustão
 
 % Necessidade de modelos HMT para partículas em simulações de combustão e sua importância
-
 
 % Explain need for multicomponent modeling in current global context
 % Explain need for modeling the interior of the droplet
@@ -37,8 +22,70 @@ Outra alternativa ainda é o uso de pós metálicos...
 % GAP: lack of consistent multicomponent version of evaporation models and lack of multicomponent single-droplet burning models.
 % GAP: lack of computationally affordable methods that account for droplet interior AND advanced evaporation/SDC models.
 
-Exemplo de citação \cite{Wu2023}.
+A demanda pela transição energética e pela descarbonização da economia busca alternativas pela substituição dos combustíveis fósseis nos setores de energia, transporte, indústria. 
+Alguns setores, como o energético e o de transportes urbano de baixa carga, têm mostrado grande progresso no uso de energias renováveis e na eletrificação, respectivamente \source{}.
+Porém, combustíveis fósseis são extremamente difíceis de substituir em outros setores, como o de transporte de carga pesada, aéreo e marítimo, e em algumas indústrias como aço e cimento \source{}.
+Isso se deve, em parte, à elevada densidade energética e energia específicas dos combustíveis fósseis, especialmente os combustíveis líquidos \source{}, mas também à extensa infraestrutura de transporte, distribuição e armazenamento para combustíveis líquidos já existente. \source{}
+Além disso, uma análise histórica indica que a transição para fontes renováveis se dará ao longo de décadas \cite{MasriA2021}.
 
+Nota-se que processos de combustão continuarão relevates nas próximas décadas e soluções devem ser procuradas para concicliar essa demanda com os esforços de transição energética e descarbonização da economia.
+A comunidade científica busca, então, três caminhos: (i) novos combustíveis; (ii) novas origens para os mesmos combustíveis; (iii) melhorar a eficiência dos motores a combustão e reduzir a formação de poluentes.
+A primeria abordagem consiste em desevolver o uso de combustíveis que não poluam -- como hidrogênio, amônia e pós metálicos -- ou que poluam menos -- como OMEs e naphta (ver \cite{MasriA2021}) -- ou que venham de outras fontes -- como o etanol e o metanol.
+Dentre as fontes não fósseis, se destacam os bio-combustíveis, produzidos a partir de biomassa renovável, e o eletrocombustíveis, sintetizados a partir de água, gás carbônico e energia de fontes renováveis.
+Em particular o etanol é importante para o Brasil ... \yellow{TODO}
+% São exemplos da primeira abordagem o interesse crescente na combustão da amônia \source{}, do hidrogênio \source{}, do metanol \source{} e do etanol \source{} -- conhecidos Brasil --, de pós metálicos \source{} e outros \source{}. 
+% Pela segunda abordagem, se destacam os eletrocombustíveis (\emph{e-fuels}), sintetizados a partir de gás carbônico, água e energia elétrica, e os bio-combustíveis
+
+Independente da origem do combustível, o processo de combustão deve ser compreendido para que motores e queimadores eficientes e com baixa formação de poluentes sejam desenvolvidos.
+Para tanto é necessário pesquisa em combustão, que pode ser estruturada em trabalhos experimentais ou trabalhos de modelagem.
+Em particular, a modelagem da combustão turbulenta de sprays é bem desafiadora, devido aos diversos fênomenos envolvidos.
+São escoamentos particulados, dispersos e reativos, que envolvem fenômenos multi-escala, multifásicos e, frequentemente, combustíveis multicomponente.
+Revisando a literatura mais recente, o autor notou a ausência de estudos investigando a influência de modelar a combustão de gota isolada na estrutura da chama.
+Ademais, há um atraso em termos de complexidade na utilização de modelos de transferência de massa e calor (HMT - \emph{heat and mass transder}) em gotas nas simulações de larga escala, em comparação com simulações de uma única gota.
+% Revisando a literatura mais recente, constatou-se uma dificuldade de identificar e modelar diferentes modos de combustão de spray.
+% \colorbox{cyan}{Em particular, como a combustão isolada de gotículas afeta a estrutura da chama.}
+
+Na área da modelagem, que é foco dessa pesquisa
+Como se entende o processo ... experimento e modelagem ... foco em modelagem e simulação ... CFD.
+A simulação de combustão gasosa já é bem complexa, em parte devido à coexistência de fenômenos químicos e fenômenos de transporte, assim pela influência da turbulência e as interações entre esses aspectos.
+A combustão de sprays traz a complexidade adicional de possuir duas fases: uma fase contínua e gasosa, e uma fase dispersa, geralmente líquida.
+Escoamentos bifásicos como no caso de aerosóis ou sprays já são bem complexos, mesmo quando não reativos.
+% Talvez por isso, para a simulação de escoamentos reativos de sprays, para parte química, utiliza-se técnicas desenvolvidas para a combustão gasosa.
+% Combustíveis ... a maioria é líquido ... maior complexidade e desafios ...
+% Foco em combustão de sprays líquidos ... 
+
+A modelagem para a sinulação de escoamentos reativos, dispersos e multifásicos, como na combustão de sprays, requer três partes: (i) a modelagem da fase contínua gasosa; (ii) a modelagem da fase dispersa, líquida; (iii) a modelagem da química homogênea, i.e. da combustão na fase gasosa.
+Para a parte (iii), a maioria dos trabalhos de combustão de sprays utiliza metodologias desenvolvidas para a combustão gasosa, considerando as gotas apenas como fontes de vapor de combustível.
+Isso corresponde 
+
+% Necessidade e dificuldade de simular a combustão turbulenta de Sprays... Mencionar revisões ... que tipos de simulação tem .. dificuldade e necessidade de simulações de larga escala ... normalmente com química tabelada.
+
+% Âmbito e objetivo desse trabalho.
+
+% Necessidade e dificuldade de representação multicomponente da gota.
+
+% Necessidade e dificuldade de representar o interior da gota.
+
+% Necessidade e dificuldade de representar diferentes modos de combustão de gota -> combustão de gota isolada.
+
+% No cenario atual de busca pela transição energética e descarbonização, a pesquisa em combustão é mais importânte do que nunca.
+% Nesse contexto, os principais objetivos são reduzir emissões, adaptar os modelos para novos combustíveis mais limpos e para novos modos de combustão, necessários para motores mais limpos.
+
+% Análises históricas indicam que a transição para fontes de energia renováveis se dará ao longo de décadas \cite{MasriA2021}, [MASRI 1, 3 também]. Até lá, combustíveis fosseis mantém o seu domínio.
+% Além disso, no setor de transportes, a eletrificação dificilmente substituirá combustíveis fósseis em veículos de cargas pesadas ou para transporte aéreo ou marítmo, mesmo considerando previsões otimistas para o desevolvimento de baterias \cite{MasriA2021}. O mesmo pode ser dito para processos industriais intensivos em energia, como cimento e aço.
+
+% Uma opçao para a descarbonização desses setores é o uso de eletrocombustíveis, também chamados de \emph{e-fuels}, \emph{power-to-x} (PtX) ou \emph{powerfuels}.
+% Estes são combustíveis líquidos ou gasosos produzidos a partir de água, gas carbônico ($\text{CO}_2$), eventualmente nitrogênio $\text N_2$ e energias de fontes renováveis. 
+% Pode-se produzir, por exemplo: hidrogênio, metano, metanol, hidrocarbonetos líquidos (processo Fischer-Tropf), éteres de oximetileno (OMEs) e amônia (processo Haber-Bosch). source{MASRI 9}.
+% Os combustíveis PtX podem utilizar a infraestrutura de transporte, distribuição e armazenamento já existente dos combustíveis fósseis \source{MASRI 9-13} e podem chegar a ser neutros em termos de emissões, apesar que ainda mais caros que combustíveis de origem fóssil \source{MASRI 42, 43}. 
+
+% Outra alternativa para combustíveis de origem fóssil são os combustíveis verdes ou bio-combustíveis, produzidos a partir de platas. 
+% Por exemplo, o etanol produzidos a partir do bagaço de cana, tecnologia desenvolvida no brasil; ou o etanol produzido a partir de milho, como nos estados Unidos; ou o metano advindo da biomassa. \source
+% Esses combustíveis reduzem  ...
+
+% Exemplo de citação \cite{Wu2023}.
+
+\subsection{Objetivo}
 
 
 
@@ -46,7 +93,6 @@ Exemplo de citação \cite{Wu2023}.
 % \subsection{Motivação}
 % \subsection{Lacunas}
 % \subsection{Contribuição Científica}
-
-\subsection{Objetivos}
+% \subsection{Objetivos}
 
 Desenvolver um modelo 

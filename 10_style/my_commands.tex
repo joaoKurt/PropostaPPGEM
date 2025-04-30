@@ -8,7 +8,7 @@
 \newcommand{\goal}[1]{[\textbf{Goal:} \blue{\emph{#1}}]}
 \newcommand{\todo}[1]{[\textbf{TODO:} \red{\emph{#1}}]}
 \newcommand{\question}[1]{[\emph{\textbf{Q:} \red{#1}}]}
-\newcommand{\source}[1]{[\green{\emph{src} #1}]}
+\newcommand{\source}[1]{[\green{\emph{src}#1}]}
 \newcommand{\todoeq}{[\green{\emph{EQ}}]}
 \newcommand{\todofig}{[\green{\emph{FIG}}]}
 
@@ -25,9 +25,10 @@
 \newcommand{\dt}[1]{\ \diff_{\mathrm{t}}\left(#1\right)}
 % \newcommand{\dt}[1]{\dScalar{#1}{t}}
 
-\newcommand{\blue}[1]{\textcolor{blue}{#1}}
-\newcommand{\red}[1]{\textcolor{red}{#1}}
-\newcommand{\green}[1]{\textcolor{green}{#1}}
+\newcommand{\blue}[1]{\colorbox{blue}{#1}}
+\newcommand{\red}[1]{\colorbox{red}{#1}}
+\newcommand{\green}[1]{\colorbox{green}{#1}}
+\newcommand{\yellow}[1]{\colorbox{yellow}{#1}}
 
 \newcommand{\Sh}{\mathrm{Sh}}
 \newcommand{\Nu}{\mathrm{Nu}}
