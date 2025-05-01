@@ -1,0 +1,81 @@
+
+O primerio MEC foi desenvolvido por \source{Fuchs} na década de 1960. 
+Esse modelo considera apenas a difusão de massa de e para a gota, representando assim evaporação e condensação.
+Por considerar apenas o transporte por difusão, a taxa de variação da  massica de da gota, $\dot m_A$, desse modelo dependende linearmente da diferença de fração mássica da espécie $A$ na superfície e no ambiente.
+\begin{equation}
+    \dot m_A = 2 \pi r_s \rho D \Sh (Y_{A,\infty} - Y_{A,s}) \label{eq:maxwell}
+\end{equation}
+% % Essa equação pode ser reescrita utilizando o número de Sherwood.
+% % \begin{equation}
+% %     \dot m_{A} = A_p \frac{\Sh}{d_p} \rho D (Y_{A, \infty} - Y_{A, s})  \label{eq:maxwell_Sh}
+% % \end{equation}
+Porém, o fluxo de massa provocado pelo fenômeno de evaporação torna relevante o transporte de massa por convecção, chamado de \emph{Stefan flow} nesse contexto. 
+Assim, o modelo de Stefan-Fuchs considera os transportes por condução e convecção para/da gota e por isso é muito mais utilizado que o modelo de Fuchs.
+O fluxo de massa nesse caso tem uma dependência logarítmica com a diferença de fração mássica do combustível. \source{Williams, Turns}
+\begin{align}
+    \dot m_{A} &= 2 \pi r_s \Sh \rho D \ln{(1 + B_M)}              \label{eq:m_evap_BM} \\
+    \dot m_A   &= 2 \pi r_s \Nu \frac{\lambda}{c_p} \ln{(1 + B_T)} \label{eq:m_evap_BT}
+\end{align}
+Esse modelo usa o chamado número de transporte de Spalding, introduzido por \source{Spalding}, que pode ser derivado da equação de temperatura ou de espécie, originando $B_T$ e $B_M$ (para igualdade, ver \source{Glassman2008}).
+\begin{align}
+    B_M &= \frac{Y_{A,s} - Y_{A,\infty}}{1 - Y_{A,s}} \label{eq:B_M} \\
+    B_T &= \frac{c_p (T_\infty - T_s)}{h_\evap}       \label{eq:B_T}
+\end{align} 
+Ambos modelos de Fuchs e de Stefan-Fuchs assumem gotas esféricas, num ambiente quiescente, em regime quasi-estacionário, considerando o interior da gota com temperatura e concentração uniforme e desconsiderando a inércia térmica da gota. 
+
+Essa última hipótese significa que a parte térmica do modelo não é capaz de prever o período de aquecimento da gota, antes da evaporação.
+Isso altera significativamente a chama em larga escala, já que o período de aquecimendo da gota é comparável ao tempo de combustão \source{source?} \question{burn time = tempo de combustão?}
+Por esse motivo, Ambrazon e Sirignano \source{Sirignano1989} melhoraram o modelo corrigindo o número de transporte de temperatura de Spalding
+e atualizando a correlação entre os números de transporte de Spalding para incluir números de Lewis não unitários.
+\begin{equation}
+    B_T = \frac{c_p (T_\infty - T_s)}{h_\evap - Q_{\net}/\dot m_A} \label{eq:B_T_AS}
+\end{equation}
+\begin{equation}
+    B_T = (1 + B_M)^\phi - 1,
+    \qquad
+    \phi=\frac{c_{p,A}}{c_{p,l}}\frac{1}{\Le}
+    \label{eq:B_M_B_T}
+\end{equation}
+O fluxo de massa no modelo de Ambrazon e Sirignano é corrigido considerando a teoria de filme (\emph{film theory}) e efeitos do \emph{Stefan flow} na camada limite da partícula, corrigindo o uso das expressões experimentais para um ambiente convectivo.
+Nesse modelo, a taxa de variação da massa pode ser obtida pela equação \eqref{eq:m_evap_AS_BM} e então a taxa líquida de transferência de calor para a gota pela equação \eqref{eq:B_T_AS}.
+\begin{align}
+\dot m_{A} &= 2 \pi r_s \Sh^* \rho D \ln{(1 + B_M)}              
+,\qquad
+\Sh^* = \Sh_0 \frac{B_M}{\ln (1 + B_M)} (1 + B_M)^{-0,7} \label{eq:m_evap_AS_BM}
+\\
+\dot m_A   &= 2 \pi r_s \Nu^* \frac{\lambda}{c_p} \ln{(1 + B_T)} 
+,\qquad
+\Nu^* = \Nu_0 \frac{B_T}{\ln (1 + B_T)} (1 + B_T)^{-0,7} \label{eq:m_evap_AS_BT}
+\end{align}
+
+O modelo Abramzon-Sirignano é baseado na hipótese de equilíbrio termodinâmico na interface líquido-gás.
+Por outro lado, dois anos antes, Bellan e Harstad \source{BellanHarstadt} desenvolveram o modelo que inclui a condição de não equilíbrio termodinâmico na interface.
+\todo{Ele obteve a seguinte formulação}
+\begin{equation}
+    \text{Taxa de variacao massica Bellan-Harstad}
+\end{equation}
+
+
+Sazhin em \source{Sazhin2006PECS} comparou o modelo Stefan-Fuchs (chamado de clássico) com o modelo de Abramzon-Sirignano e com correlações experimentais desenvolvidas para hidrocarbonetos alcanos.
+Ele obteve que o modelo de Stefan-Fuchs obtém as maiores taxas de evaporação, enquanto as correlações obtém as taxas mais conservadoras; o modelo de Abramzon-Sirignano obtendo valores intermediários, mais próximos das correlações experimentais que do modelo clássico.
+
+Miller \source{Miller1999} comparou os modelos de Ambrazon-Sirignano e Bellan-Harstad e combinou-os em uma única representação matemática.
+\todo{A sua comparação mostrou ...}
+
+Sacomano \source{Sacomano2019} comparou os modelos de AS e BL usando a formulação de Miller1999 \todo{na situação ...}. 
+Também comparou diferentes modelos de pressão de vapor de combustível na superfície da gota.
+\todo{Ele encontrou ...}
+
+Seguindo uma abordagem totalmente diferente, baseada em cinética ao invés de fenômenos de transporte, o modelo de Hertz-Knudsen-Langmuir \source{Langmuir} propõe uma formula para a taxa de variação da massa da gota.
+\todo{Formulação de Lamguir-Knudsen}
+\begin{equation}
+    \text{Formulação de Lamguir-Knudsen}
+\end{equation}
+
+Por outro lado, outros desenvolvimentos na decáda de 1980 e 1990 focaram em reduzir as hipóteses presentes no modelo de Stefan-Fuchs, principalmente no tange à dependência dos coeficientes de transporte na temperatura em em números de Lewis não unitários.
+Um desses trabalhos é Fachini \source{ FachiniF1999}.
+
+Já Ulzama \source{Ulzama2006} considerou efeitos transitórios na modelagem da fase gasosa, criando um modelo misto transitório-quasi-estacionário.
+Porém, obtiveram resultados parecidos com o modelo clássico.
+
+Modelo Chiu \emph{renormalization theory} \source{Chiu1999 e outros} para DNS e modelo integral de FanL \source{FanL2021}.

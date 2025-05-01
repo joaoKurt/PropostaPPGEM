@@ -25,6 +25,7 @@
 \usepackage{rotating}
 \usepackage{quotes}
 \usepackage{caption, subcaption}
+\usepackage{etoolbox}
 
 % My customization
 %% Hide link boxes
@@ -51,13 +52,14 @@
 
 \input{20_capitulos/Introducao}    % Introdução Justificativa e síntese da bibliografia fundamental
 \input{20_capitulos/Teoria}        % Fundamentação Teórica
-% \input{20_capitulos/Literatura}    % Material (Software e Hardware)
-\input{20_capitulos/Metodologia}   % Materiais e Métodos
+% \input{20_capitulos/Literatura}   
+\input{20_capitulos/Metodologia}   % Materiais e Métodos (Software e Hardware)
 \input{20_capitulos/Plano}         % Plano de Trabalho e Cronograma de Excecução
 \input{20_capitulos/Resultados}    % Resultados Esperados // Forma de análise dos resultados
 
+\newpage
 \bibliographystyle{abntex2-alf}
-\bibliography{bibliography}
+\bibliography{bibliography,bibliography2}
 
 
 \end{document}

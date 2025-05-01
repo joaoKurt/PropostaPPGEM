@@ -9,9 +9,7 @@
 %    5. Contribuição Científica
 
 % Importância de trabalhar com combustão no contexto global.
-
 % Como se simula combustão
-
 % Necessidade de modelos HMT para partículas em simulações de combustão e sua importância
 
 % Explain need for multicomponent modeling in current global context
@@ -22,41 +20,91 @@
 % GAP: lack of consistent multicomponent version of evaporation models and lack of multicomponent single-droplet burning models.
 % GAP: lack of computationally affordable methods that account for droplet interior AND advanced evaporation/SDC models.
 
-A demanda pela transição energética e pela descarbonização da economia busca alternativas pela substituição dos combustíveis fósseis nos setores de energia, transporte, indústria. 
-Alguns setores, como o energético e o de transportes urbano de baixa carga, têm mostrado grande progresso no uso de energias renováveis e na eletrificação, respectivamente \source{}.
-Porém, combustíveis fósseis são extremamente difíceis de substituir em outros setores, como o de transporte de carga pesada, aéreo e marítimo, e em algumas indústrias como aço e cimento \source{}.
-Isso se deve, em parte, à elevada densidade energética e energia específicas dos combustíveis fósseis, especialmente os combustíveis líquidos \source{}, mas também à extensa infraestrutura de transporte, distribuição e armazenamento para combustíveis líquidos já existente. \source{}
-Além disso, uma análise histórica indica que a transição para fontes renováveis se dará ao longo de décadas \cite{MasriA2021}.
+A demanda pela transição energética e pela descarbonização da economia busca alternativas para substituição dos combustíveis fósseis nos setores de energia, transporte, indústria. 
+Alguns setores, como o energético e o de transportes urbano de baixa carga, têm mostrado grande progresso no uso de energias renováveis e na eletrificação, respectivamente \source{}. 
+Porém, combustíveis fósseis são extremamente difíceis de substituir em outros setores, especialmente os combustíveis líquidos.
+São estes os que possuem maior energia específica e densidade energética, sendo os mais adequados para aplicações de transporte, como no setor automotivo de cargas pesadas, naval e aeronáutico.
+Além do setor de transporte, combustíveis líquidos são importantes para algumas indústrias como aço e cimento \source{}, para algumas termoelétricas
+e até para máquinas de pequeno porte, portáteis, movidas a motor de combustão interna (MCI).
+Por fim, uma análise histórica indica que a transição para fontes renováveis se dará ao longo de décadas \cite{MasriA2021}.
 
-Nota-se que processos de combustão continuarão relevates nas próximas décadas e soluções devem ser procuradas para concicliar essa demanda com os esforços de transição energética e descarbonização da economia.
-A comunidade científica busca, então, três caminhos: (i) novos combustíveis; (ii) novas origens para os mesmos combustíveis; (iii) melhorar a eficiência dos motores a combustão e reduzir a formação de poluentes.
-A primeria abordagem consiste em desevolver o uso de combustíveis que não poluam -- como hidrogênio, amônia e pós metálicos -- ou que poluam menos -- como OMEs e naphta (ver \cite{MasriA2021}) -- ou que venham de outras fontes -- como o etanol e o metanol.
-Dentre as fontes não fósseis, se destacam os bio-combustíveis, produzidos a partir de biomassa renovável, e o eletrocombustíveis, sintetizados a partir de água, gás carbônico e energia de fontes renováveis.
-Em particular o etanol é importante para o Brasil ... \yellow{TODO}
-% São exemplos da primeira abordagem o interesse crescente na combustão da amônia \source{}, do hidrogênio \source{}, do metanol \source{} e do etanol \source{} -- conhecidos Brasil --, de pós metálicos \source{} e outros \source{}. 
-% Pela segunda abordagem, se destacam os eletrocombustíveis (\emph{e-fuels}), sintetizados a partir de gás carbônico, água e energia elétrica, e os bio-combustíveis
+% São exemplos de combustíveis líquidos a gasolina, o etanol, o diesel, o kerosene, o kerosene de aviação, etc. 
+% O etanol, em particular, é de grande relevância para o Brasil.
 
-Independente da origem do combustível, o processo de combustão deve ser compreendido para que motores e queimadores eficientes e com baixa formação de poluentes sejam desenvolvidos.
+Nota-se que processos de combustão continuarão relevates nas próximas décadas.
+Em especial, todas as aplicações mencionadas baseam-se na combustão turbulenta de sprays líquidos.
+Assim, soluções devem ser procuradas para concicliar essa tecnologia com os esforços de transição energética e descarbonização da economia.
+A comunidade científica busca, então, três caminhos: \textbf{(i)} novos combustíveis; \textbf{(ii)} novas origens para os mesmos combustíveis; \textbf{(iii)} melhorar a eficiência dos motores a combustão e reduzir a formação de poluentes.
+
+Independente da origem do combustível, o processo de combustão deve ser compreendido para que motores e queimadores eficientes e com baixa emissão de poluentes sejam desenvolvidos.
 Para tanto é necessário pesquisa em combustão, que pode ser estruturada em trabalhos experimentais ou trabalhos de modelagem.
-Em particular, a modelagem da combustão turbulenta de sprays é bem desafiadora, devido aos diversos fênomenos envolvidos.
-São escoamentos particulados, dispersos e reativos, que envolvem fenômenos multi-escala, multifásicos e, frequentemente, combustíveis multicomponente.
-Revisando a literatura mais recente, o autor notou a ausência de estudos investigando a influência de modelar a combustão de gota isolada na estrutura da chama.
-Ademais, há um atraso em termos de complexidade na utilização de modelos de transferência de massa e calor (HMT - \emph{heat and mass transder}) em gotas nas simulações de larga escala, em comparação com simulações de uma única gota.
+A modelagem da combustão turbulenta de sprays, foco desse trabalho, deve ser capaz de representar diferentes combustíveis líquidos, atendendo combustíveis oriundos das demandas (i) e (ii), assim como representar os diferentes fenômenos envolvidos nesse processo, como ignição e formação de poluentes, de forma a atender a demanda (iii).
+Nesse âmbito, é de extrema importância o modelo de transferência de calor e massa da gota, líquida, para a fase gasosa, ou seja, o modelo de vaporação e condensação das gotas do spray.
+É conhecido que essa modelagem tem enorme influência na chama como um todo \source{}, influenciando a sua estrutura, temperatura, geometria e, por consequência, formação de poluentes também.
+
+Nesse sentido, revisando a literatura mais recente, nota-se a necessidade de maior desenvolvimento desses modelos HMT (\emph{Heat and Mass Transfer}) para representar corretamente diferentes combustíveis.
+Por exemplo, modelos simples não são capazes de representar todos os fenômenos associados, por exemplo, à combustão de etanol.
+Em especial, nota-se uma demanda pela aplicação de modelos complexos, desenvolvidos e testados na escala de uma única gota, em simulações de larga escala da chama como um todo.
+Para representar combustíveis como o etanol, anidro ou hidratado, é necessário uma modelar a gota de forma \textbf{multicomponente}, considerando \textbf{termodinâmica de mistura não-ideal} e os efeitos de transferência de calor e massa no \textbf{interior da gota}.
+
+No modelo HMT descrito acima, a reação química é resolvida separadamente do modelo da gota.
+Isso corresponde a uma chama longe e não presa a gota, em que a chama é alimentada pelo vapor de combustível oriundo de várias gotas evaporando. 
+Em contraste, é possível que ocorra a combustão de uma gota isolada, com uma frente de chama próxima e circundante à gota, a uma distância na mesma ordem de grandeza que o diâmetro da gota.
+Isso é chamado \textbf{combustão de gota isolada} (\emph{single droplet combustion}).
+Revisando a literatura, constatou-se que não é muito claro quando a combustão de gota isolada ocorre, nem o seu efeito na chama em larga escala.
+Sabe-se que a combustão de gota isolada é isolada é importante para a ignição do spray \source{AggarwalS2014}, mas não foram encontrados estudos sobre o seu impacto na estrutura da chama.
+
+\subsection{Objetivos}
+
+Com isso em vista, a presente tese visa estudar e desenvolver modelos analíticos para a transferência de calor e masssa em gotas em dois cenários: 
+\begin{enumerate}
+    \item[\textbf{A.}] Modelo le Evaporaçào e Condensação (MEC); e 
+    \item[\textbf{B.}] Modelo le Combustão le Gota Isolada (MCDI).
+\end{enumerate}
+Esses modelos devem considerar os seguintes aspectos: 
+\begin{enumerate}
+    \item[\textbf{1.}] Descrição multicomponente da gota; 
+    \item[\textbf{2.}] Mistura com termodinâmica não-ideal; 
+    \item[\textbf{3.}] Efeitos de transferência	de calor e massa no interior da gota. 
+\end{enumerate}
+O objetivo é desenvolver simulações de larga escala com ambos modelos, {A} e {B}, com a capacidade:
+\begin{enumerate}
+    \item[\textbf{4.}] Determinação de quando ocorre a combustão de gota isolada;
+\end{enumerate}
+ou seja, de determinar se utiliza modelo {A} ou o modelo {B}.
+Dessa forma, o autor visa investigar o efeito de cosiderar a combustao de gota isolada, e dos aspectos {1}, {2} e {3}, na estrutura da chama.
+A investigação da estrutura da chama inclui a investigação de aspectos como destribuição de temperatura e concentraçoes de espécies, o que é essencial para a determinação da ignição, da eficiência de combustão e das emissões de poluentes.
+
+
+% A modelagem de combustão de gota isolada (MCGI), reduz a complexidade do problema de cinética química da simulação, mas aumenta a complexidade do modelo de transferência de calor e massa da gota, quando comparado ao modelo de evaporação/condensação (MEC).
+% Assim, faz sentido desenvolver MEC primeiro, e depois o MCGI.
+% Também, considerando que o objetivo é realizar uma simulação de chama turbulenta que use tanto um MEC quanto de um MCGI, é desejável que ambos tenhas as mesmas capacidades, (1) a (3).
+% Por esse motivo, e considerando que, para simular, uma chama turbulenta de spray é necessário tanto um MEC quanto um MCGI,
+
+% Utilizando essa abordagem, obtém-se, em larga escala, chamas ao redor de um grupo de gotas, internas ou exernas ao grupo (\emph{internal group combustion} ou \emph{external group combustion}), ou frentes de chama externas e não envovlventes (\emph{external sheath combustion}).
+% Porém, uma frente chama também pode se formar ao redor de uma única gota, condição chamada combustão de gota isolada (\emph{single droplet combustion}).
+% Revisando literatura, nota-se que não é claro quando a combustão de spray ocorre em cada modo \source
+
+
+
+% São escoamentos particulados, dispersos e reativos, que envolvem fenômenos multi-escala, multifásicos e, frequentemente, combustíveis multicomponente.
+% Revisando a literatura mais recente, o autor notou a ausência de estudos investigando a influência de modelar a combustão de gota isolada na estrutura da chama.
+% Ademais, há um atraso em termos de complexidade na utilização de modelos de transferência de massa e calor (HMT - \emph{heat and mass transder}) em gotas nas simulações de larga escala, em comparação com simulações de uma única gota.
 % Revisando a literatura mais recente, constatou-se uma dificuldade de identificar e modelar diferentes modos de combustão de spray.
 % \colorbox{cyan}{Em particular, como a combustão isolada de gotículas afeta a estrutura da chama.}
 
-Na área da modelagem, que é foco dessa pesquisa
-Como se entende o processo ... experimento e modelagem ... foco em modelagem e simulação ... CFD.
-A simulação de combustão gasosa já é bem complexa, em parte devido à coexistência de fenômenos químicos e fenômenos de transporte, assim pela influência da turbulência e as interações entre esses aspectos.
-A combustão de sprays traz a complexidade adicional de possuir duas fases: uma fase contínua e gasosa, e uma fase dispersa, geralmente líquida.
-Escoamentos bifásicos como no caso de aerosóis ou sprays já são bem complexos, mesmo quando não reativos.
+% Na área da modelagem, que é foco dessa pesquisa
+% Como se entende o processo ... experimento e modelagem ... foco em modelagem e simulação ... CFD.
+% A simulação de combustão gasosa já é bem complexa, em parte devido à coexistência de fenômenos químicos e fenômenos de transporte, assim pela influência da turbulência e as interações entre esses aspectos.
+% A combustão de sprays traz a complexidade adicional de possuir duas fases: uma fase contínua e gasosa, e uma fase dispersa, geralmente líquida.
+% Escoamentos bifásicos como no caso de aerosóis ou sprays já são bem complexos, mesmo quando não reativos.
 % Talvez por isso, para a simulação de escoamentos reativos de sprays, para parte química, utiliza-se técnicas desenvolvidas para a combustão gasosa.
 % Combustíveis ... a maioria é líquido ... maior complexidade e desafios ...
 % Foco em combustão de sprays líquidos ... 
 
-A modelagem para a sinulação de escoamentos reativos, dispersos e multifásicos, como na combustão de sprays, requer três partes: (i) a modelagem da fase contínua gasosa; (ii) a modelagem da fase dispersa, líquida; (iii) a modelagem da química homogênea, i.e. da combustão na fase gasosa.
-Para a parte (iii), a maioria dos trabalhos de combustão de sprays utiliza metodologias desenvolvidas para a combustão gasosa, considerando as gotas apenas como fontes de vapor de combustível.
-Isso corresponde 
+% A modelagem para a sinulação de escoamentos reativos, dispersos e multifásicos, como na combustão de sprays, requer três partes: (i) a modelagem da fase contínua gasosa; (ii) a modelagem da fase dispersa, líquida; (iii) a modelagem da química homogênea, i.e. da combustão na fase gasosa.
+% Para a parte (iii), a maioria dos trabalhos de combustão de sprays utiliza metodologias desenvolvidas para a combustão gasosa, considerando as gotas apenas como fontes de vapor de combustível.
+% Isso corresponde 
 
 % Necessidade e dificuldade de simular a combustão turbulenta de Sprays... Mencionar revisões ... que tipos de simulação tem .. dificuldade e necessidade de simulações de larga escala ... normalmente com química tabelada.
 
@@ -74,6 +122,13 @@ Isso corresponde
 % Análises históricas indicam que a transição para fontes de energia renováveis se dará ao longo de décadas \cite{MasriA2021}, [MASRI 1, 3 também]. Até lá, combustíveis fosseis mantém o seu domínio.
 % Além disso, no setor de transportes, a eletrificação dificilmente substituirá combustíveis fósseis em veículos de cargas pesadas ou para transporte aéreo ou marítmo, mesmo considerando previsões otimistas para o desevolvimento de baterias \cite{MasriA2021}. O mesmo pode ser dito para processos industriais intensivos em energia, como cimento e aço.
 
+% Enquanto os caminhos (i) e (ii) concerne principalmente, aos químicos, o caminho (iii) requer a modelagem de processos de combustão. 
+% A primeria abordagem consiste em desevolver o uso de combustíveis que não poluam -- como hidrogênio, amônia e pós metálicos -- ou que poluam menos -- como OMEs e naphta (ver \cite{MasriA2021}) -- ou que venham de outras fontes -- como o etanol e o metanol.
+% Dentre as fontes não fósseis, se destacam os bio-combustíveis, produzidos a partir de biomassa renovável, e o eletrocombustíveis, sintetizados a partir de água, gás carbônico e energia de fontes renováveis.
+% Em particular o etanol é importante para o Brasil ... \yellow{TODO}
+% São exemplos da primeira abordagem o interesse crescente na combustão da amônia \source{}, do hidrogênio \source{}, do metanol \source{} e do etanol \source{} -- conhecidos Brasil --, de pós metálicos \source{} e outros \source{}. 
+% Pela segunda abordagem, se destacam os eletrocombustíveis (\emph{e-fuels}), sintetizados a partir de gás carbônico, água e energia elétrica, e os bio-combustíveis.
+
 % Uma opçao para a descarbonização desses setores é o uso de eletrocombustíveis, também chamados de \emph{e-fuels}, \emph{power-to-x} (PtX) ou \emph{powerfuels}.
 % Estes são combustíveis líquidos ou gasosos produzidos a partir de água, gas carbônico ($\text{CO}_2$), eventualmente nitrogênio $\text N_2$ e energias de fontes renováveis. 
 % Pode-se produzir, por exemplo: hidrogênio, metano, metanol, hidrocarbonetos líquidos (processo Fischer-Tropf), éteres de oximetileno (OMEs) e amônia (processo Haber-Bosch). source{MASRI 9}.
@@ -85,14 +140,10 @@ Isso corresponde
 
 % Exemplo de citação \cite{Wu2023}.
 
-\subsection{Objetivo}
-
-
-
 
 % \subsection{Motivação}
 % \subsection{Lacunas}
 % \subsection{Contribuição Científica}
 % \subsection{Objetivos}
 
-Desenvolver um modelo 
+% Desenvolver um modelo 

@@ -6,11 +6,17 @@
 %%%%%%%%%%%%%%%%%%%
 
 \newcommand{\goal}[1]{[\textbf{Goal:} \blue{\emph{#1}}]}
-\newcommand{\todo}[1]{[\textbf{TODO:} \red{\emph{#1}}]}
+\newcommand{\todo}[1]{[\textbf{TODO:} \yellow{\emph{#1}}]}
 \newcommand{\question}[1]{[\emph{\textbf{Q:} \red{#1}}]}
-\newcommand{\source}[1]{[\green{\emph{src}#1}]}
 \newcommand{\todoeq}{[\green{\emph{EQ}}]}
 \newcommand{\todofig}{[\green{\emph{FIG}}]}
+% \newcommand{\source}[1]{[\green{\emph{src}#1}]}
+\newcommand{\source}[1]{%
+  \ifstrempty{#1}%
+    {\green{[\emph{src}]}}%
+    {\green{[\emph{#1} ]}}%
+}
+
 
 \newcommand{\diff}{\mathrm{d}}
 \newcommand{\delScalar}[2]{\frac{\partial #1}{\partial #2}}
