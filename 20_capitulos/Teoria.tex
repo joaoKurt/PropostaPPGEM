@@ -15,24 +15,83 @@
 %          1. FGM
 
 
+\subsection{Combustão Turbulenta de Sprays}
 
-\subsection{Transferência de Calor e Massa em Gotas}
+A combustão turbulenta de sprays é caracterizada pela competição de vários processos físicos e químicos, fortemente acoplados e em diferentes escalas de tempo e comprimento. 
+Na formação de um spray turbulento, um jato de combustível líquido se quebra devido a instabiliades hidrodinâmica de Kevin-Helmholz e Rayleigh-Taylor, formando gotas que se dispersam, deformam e atomizam devido à forças aerodinâmicas superando as tensões superficiais da gota.
+Isso forma o {regime denso} do spray, onde ocorre também outros fenômenos como colisões, coalescência e interferência por esteira aerodinâmica, turbulência ou por alteração da concentração de vapor de combustível devido à evaporação.
+A medida que o jato se atomizam em gotas menores e dispersas, as gotas deixam de interferir umas nas outras e o regime é chamado de disperso ou diluído. 
+As gotas de combustível evaporam, fornecendo vapor combustível para a chama, que por sua vez influencia e é influenciada pelas próprias gotas e pela turbulência local.
+Revisões detalhadas e com mais referências para processos e interações na combustão turbulenta de sprays podems er encontradas em \source{JennyB2012, MasriA2016 SanchezA2015, ZhouL2021}.
 
-\subsubsection{Modelos de Evaporação e Condensação Monocomponente}
 
-\input{20_capitulos/Teoria-MEC-mono-resumo.tex}
+O foco deste trabalho é na modelagem das escalas micro (da gota) e macro (do spray e da chama) da região diluida de um spray de combustível líquido.
+Modelar a escala macro requer um modelo para a fase contínua, gasosa, um modelo para as reações químicas e um modelo para a fase dispersa, as gotas.
+Dois exemplos de modelos para a fase contínua e para a química, escolhidos por relevância e experiência no grupo de pesquisa, serão apresentadas nas próximas Subseções \ref{sec:gas} e \ref{sec:chem}.
+Atenção especial será dada para a modelagem da gota, uma vez que o foco desse trabalho é desenvolver novos modelos para essa escala e investigar os efeitos na escala da chama.
+Modelos de transferência de calor e massa em gotas são discutidos nas Seções \ref{sec:MEC}. 
+
+% Na abordagem macro, há duas fases nesse sistema: a fase contínua (gasosa) e a fase líquida (gotas); e ambas precisam de modelagem termo-física e química.
+% Para a fase contínua, gasosa, isso se traduz nas equações de transporte, adequadas ao modelo de turbulência escolhido, e em uma modelagem química, que serão resolvidas durante a simulação.
+
+% Já a fase contínua, por ser na escala da partícula, precisa ser modelada com um modelo analítico, já que a 
+
+% Para a modelagem macro, a modelagem micro precisa ser incluida.
+% Nas simulações Euler-Lagrange, foco deste trabalho e deste grupo de pesquisa,  
+
+% A medida que as gotas se formam, elas evaporam, alterando a concentração
+% A combustão turbulenta de sprays é um problema multi-fásico, multi-componente, multi-escala, multi-região e multi-físico. 
+
+\subsubsection{Modelagem da Fase Contínua} \label{sec:gas}
+
+Modelagem CHEM1D. 
+Modelagem LES.
+Experiência com DTF.
+
+\subsubsection{Modelagem Química} \label{sec:chem}
+
+Mencionar química detalhada para CHEM1D.
+Introdução FGM.
+
+
+\subsection{Modelos de Evaporação e Condensação (MEC)} \label{sec:MEC}
+
+% Para modelar as gotas em uma simulação macro, na escala da chama do spray, as gotas são tratadas como infinitamente pequenas, como pontos cuja influência na fase contínua se dá através de termos fonte, obtidos a partir de modelos analíticos na escala da gota. 
+% Essa abordagem é denominada \emph{PSIC - Particle Source in Cell}.
+% Desenvolver e testar esses modelos analíticos é o foco deste trabalho.
+
+Na escala uma gota, o problema pode ser dividido em duas regiões segregadas: a gota, líquida; e o gás ambiente circundante. 
+Cada região é governada por um conjunto de equações.
+Ambas regiões podem ser resolvidas numericamente (simuladas) ou modeladas com um resultado analítico.
+Ambas regiões podem ser modeladas com diferentes graus de fidelidade.
+Trabalhos que resolvem numericamente tanto o interior quanto o exterior da gota são capazes de simular muitos efeitos físicos a um elevado custo computacional (veja \source{Resolved evap small scale.}).
+Por viabilizar o uso em simulações na escala da chama de spray, mais comuns são modelos que usam um modelo analítico em uma região e simulam a outra.
+Geralmente, uma solução analítica é utilizada para a descrição espacial da fase gasosa e as propriedades da gota são integradas no tempo. 
+
+No que tange a região líquida, do interior da gota, a hipótese mais simples é assumir uma distribuição homogênea de temperatura e espécie no interior da gota e negligenciar recirculação.
+Isso elimina a necessidade de modelar o interior da gota.
+Para a região gasosa, é 
+Dessa forma, a fase gasosa pode ser resolvida analíticamente e a evolução da gota integrada no tempo.
+Essa é a base para os modelos apresentados na Seção \ref{sec:RMM}.
+
+Diferentes abordagem existem para considerar o interior da partícula.
+Algumas são discutidas na Seção \ref{sec:int}.
+
+
+\subsubsection{Modelos com Interior de Gota Homogêneo} \label{sec:RMM}
+
+% \input{20_capitulos/Teoria-MEC-mono-resumo.tex}
 % \input{20_capitulos/Teoria-MEC-mono-eqs.tex}
 
-\subsubsection{Modelos de Evaporação e Condensação Multicomponente}
-
-\subsubsection{Modelos para o Interor da Gota}
+\input{20_capitulos/Teoria-MEC-multi.tex}
 
 
+\subsubsection{Modelos para o Interor da Gota} \label{sec:int}
 
 
-\subsection{Combustão de Gota Isolada}
+\subsection{Modelos de Combustão de Gota Isolada (MCGI)} \label{sec:MCGI}
 
-\subsubsection{Gotas Mono- e Multi-Componente}
+% \subsubsection{Gotas Mono e Multi-Componente}
 
 % Por outro lado, outros desenvolvimentos na decáda de 1980 e 1990 focaram em reduzir as hipóteses presentes no modelo de Stefan-Fuchs, principalmente no tange à dependência dos coeficientes de transporte na temperatura em em números de Lewis não unitários.
 % Um desses trabalhos é Fachini \source{ FachiniF1999}.
@@ -40,22 +99,4 @@
 % Já Ulzama \source{Ulzama2006} considerou efeitos transitórios na modelagem da fase gasosa, criando um modelo misto transitório-quasi-estacionário.
 % Porém, obtiveram resultados parecidos com o modelo clássico.
 
-
 \subsubsection{Modelos de Modo de Combustão de Gotas}
-
-
-
-
-\subsection{Combustão Turbulenta de Sprays}
-
-\subsubsection{Modelagem da Fase Contínua}
-
-Modelagem CHEM1D
-
-Modelagem LES
-
-\subsubsection{Modelagem Química}
-
-Mencionar química detalhada para CHEM1D
-
-Introdução FGM e ATF
