@@ -26,7 +26,6 @@
 \usepackage{quotes}
 \usepackage{caption, subcaption}
 \usepackage{etoolbox}
-\usepackage[alf]{abntex2cite}
 
 % My customization
 %% Hide link boxes
@@ -38,6 +37,11 @@
 \geometry{a4paper,portrait,hmargin={3cm,1.5cm}}
 \renewcommand{\baselinestretch}{1.5}
 %% Fonstize set at line 1
+%% Bibliography style ABNTEX2
+\usepackage[alf]{abntex2cite}
+%%% See https://mirrors.ibiblio.org/CTAN/macros/latex/contrib/abntex2/doc/abntex2cite-alf.pdf
+%% Include References in toc
+\usepackage[nottoc]{tocbibind}
 
 
 % \title{\textbf{Multi-Scale Investigations For Reacting Multi-Phase Dispersed Spray Flows}}

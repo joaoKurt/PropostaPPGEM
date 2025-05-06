@@ -1,0 +1,30 @@
+
+A modelagem de MEC \textbf{multicomponente} está intrinsicamente ligada ao tópico da difusão diferencial.
+Essa modelagem vem sido desenvolvida pelo grupo de pesquisa nos últimos anos.
+
+\citeonline{SacomanoF2021Fluids} estuda a influência da difusão diferencial gasosa na oxi-combustão de metano diluído em vapor d'água. 
+Foram comparados três modelos diferentes para o fluxo de calor e de espécie.
+O combustível nesse caso é gasoso, porém o vapor d'água pode se condensar em zonas frias ou evaporar em zonas quentes, constituindo uma fase dispersa.
+Para esta fase foi utilizado o modelo de Abramzon-Sirignano \cite{Sirignano1989} na formulação de Miller \cite{MillerR1998}.
+
+No ano seguinte, uma formulação rigorosa e robusta para a troca de calor e massa em gotas multicomponente foi derivada a partir das equações fundamentais em \cite{SacomanoF2022IJHMT}.
+Essa formulação inclui efeitos de difusão diferencial de forma detalhada, ao custo de exigir um solver iterativo para resolver um conjunto de equações não linear para o MEC.
+Incluiu também efeitos de mistura não ideal, utilizado modelos como \todo{modelos não ideal}.
+O aspecto da difusão diferencial modelo baseou-se em trabalhos como \cite{ToniniS2015IJTS, ZhangL2012Fuel}. 
+
+Esse modelo foi testado em \cite{SacomanoF2024CF} para a combustão de névoa quiescente de etanol anidro em atmosfera úmida, formando uma chama lisa e laminar, no CHEM1D \cite{Sommers1994PhD}.
+A consideração dos efeitos inclusos nesse modelo se mostrou relevante até para o etanol anidro, já que o ar úmido pode condensar na gota de etanol.
+
+Em \cite{SacomanoF2025CF}, o modelo completo, chamado "Full-DD" (DD - \emph{differential diffusion}), foi comparado com um modelo intermediário desenvolvido por Wang \cite{WangC2013CF}, chamado "Partial-DD" e com o modelo clássico de Stefan-Fuchs, para avaliar o compromisso fidelidade versus custo computacional.
+\todo{Encontrou-se}.
+
+O modelo completo foi extendido mais ainda por \cite{SantosA2024IJHMT} utilizando a equação de Maxwell-Stefan para a difusão, ao invés da difusão de Fick utilizada em todos os outros trabalhos mencionados até agora.
+Esse modelo baseou-se por exemplo em \cite{ToniniS2015IJTS}.
+
+Por uma outra perspectiva, foco exclusivo foi dado em \cite{SantosA2023IJHMT} para a equação da temperatura durante o processo de evaporação e condensação.
+Nesse trabalho, os autores mostram que a equação de temperatura é independente do modelo utilizado para a transferência de massa, podendo estes serem modelados de desacoplada.
+Cosntatou-se também que efeitos multicomponentes, enquanto mais complicados na transferência de massa por causa da difusão diferencial, na transferência de calor podem ser considerados diretamente por meio de calores específicos adequados.
+
+Quanto ao aspecto \textbf{não ideal da mistura}, \citeonline{SacomanoF2022IJHMT} usou os métodos \todo{...}
+
+\source{WangW2024} e \source{ZanuttoC2019}.
