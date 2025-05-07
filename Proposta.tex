@@ -5,7 +5,7 @@
 % \usepackage[english]{babel}
 
 \usepackage{amsmath,amsthm,amsfonts,amssymb}
-\usepackage{graphicx,cite,enumerate}
+\usepackage{graphicx,enumerate}
 \usepackage{hyperref}
 \usepackage{float}
 \usepackage{booktabs}
@@ -28,18 +28,30 @@
 \usepackage{etoolbox}
 
 % My customization
+
 %% Hide link boxes
 \hypersetup{hidelinks}
+
 %% Custom commands
 \input{10_style/my_commands.tex}
+
 %% Line spacing
 \usepackage{geometry}
 \geometry{a4paper,portrait,hmargin={3cm,1.5cm}}
 \renewcommand{\baselinestretch}{1.5}
+
 %% Fonstize set at line 1
-%% Bibliography style ABNTEX2
-\usepackage[alf]{abntex2cite}
-%%% See https://mirrors.ibiblio.org/CTAN/macros/latex/contrib/abntex2/doc/abntex2cite-alf.pdf
+
+%% Bibliography style bibtex (with citeonline)
+    \usepackage{cite}
+    %%% https://www.overleaf.com/learn/latex/Bibtex_bibliography_styles#Table_of_stylename_values
+%% Bibliography style with natbib (with citeauthor)
+    % \usepackage{natbib}
+    %%% https://www.overleaf.com/learn/latex/Natbib_bibliography_styles
+%% Bibliography style ABNTEX2 with citeonline
+    % \usepackage[alf]{abntex2cite} 
+    %%% See https://mirrors.ibiblio.org/CTAN/macros/latex/contrib/abntex2/doc/abntex2cite-alf.pdf
+
 %% Include References in toc
 \usepackage[nottoc]{tocbibind}
 
@@ -66,7 +78,8 @@
 \input{20_capitulos/Resultados}    % Resultados Esperados // Forma de análise dos resultados
 
 \newpage
-\bibliographystyle{abntex2-alf}
+% \bibliographystyle{abntex2-alf}
+\bibliographystyle{plain}
 \bibliography{bibliography,bibliography2}
 
 

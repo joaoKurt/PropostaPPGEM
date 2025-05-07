@@ -1,39 +1,42 @@
 
-O primerio MEC foi desenvolvido por \citeonline{Fuchs1959} na década de 1960. 
-Esse modelo considera apenas a difusão de massa de e para a gota, representando assim evaporação e condensação.
-Por considerar apenas o transporte por difusão, a taxa de variação da  massica de da gota, desse modelo dependende linearmente da diferença de fração mássica da espécie na superfície e no ambiente.
+O primerio MEC foi desenvolvido por Fuchs \cite{Fuchs1959} na década de 1960. 
+Esse modelo considera apenas a difusão de massa de e para a gota, representando assim evaporação e condensação, obtendo uma taxa de variação mássica linearmente dependente da diferença de fração de combustível na superfície da gota e no ambiente /cite{Glassman2008}.
+% Por considerar apenas o transporte por difusão, a taxa de variação da  massica de da gota, desse modelo dependende linearmente da diferença de fração mássica da espécie na superfície e no ambiente.
 
 Porém, o fluxo de massa provocado pelo fenômeno de evaporação torna relevante o transporte de massa por convecção, chamado de \emph{Stefan flow} nesse contexto. 
 Assim, o modelo de Stefan-Fuchs considera os transportes por condução e convecção para/da gota e por isso é muito mais utilizado que o modelo de Fuchs.
-O fluxo de massa nesse caso tem uma dependência logarítmica com a diferença de fração mássica do combustível. \cite{Glassman2008, Turns2000}
-Esse modelo usa o chamado número de transporte de Spalding, introduzido por \source{Spalding}, que pode ser derivado da equação de temperatura ou de espécie, originando $B_T$ e $B_M$.
+O fluxo de massa nesse caso tem uma dependência logarítmica com a diferença de fração mássica do combustível \cite{Glassman2008, Turns2000}.
+Esse modelo usa o chamado número de transporte de Spalding, introduzido em \cite{Law1978}, que pode ser derivado da equação de temperatura ou de espécie, originando $B_T$ e $B_M$.
 
-Ambos modelos de Fuchs e de Stefan-Fuchs assumem gotas esféricas, num ambiente quiescente, em regime quasi-estacionário, considerando o interior da gota com temperatura e concentração uniforme e desconsiderando a inércia térmica da gota.
-A hipótese quiescente pode ser relaxada para ambientes levemente convectivos utilizando correlações experimentais, como as de Froessling e a de Ranz-Marshall. 
-A última hipótese, por sua vez, significa que a parte térmica do modelo não é capaz de prever o período de aquecimento da gota, antes da evaporação.
-Isso altera significativamente a chama em larga escala, já que, dependo do combustível e do tamanho da partícula, o período de aquecimendo da gota pode ser comparável ao tempo de combustão \source{source?} \question{burn time = tempo de combustão?}
+Além das hipóteses já mencionadas de gota homogênea, esférica e regime quasi-estacionário, ambos modelos de Fuchs e de Stefan-Fuchs assumem também um ambiente quiescente e desconsideram a inércia térmica da gota.
+A hipótese de ambiente quiescente pode ser relaxada para ambientes levemente convectivos utilizando correlações experimentais, como as de Froessling e a de Ranz-Marshall. 
+O efeito do \emph{Stefan flow} nas correlações experimentais para o fluxo de calor e massa para é partícula é considerado no modelo de Abramzon Sirignano \cite{Sirignano1989} utilizado correções adivindas da teoria de filme (\emph{film theory}).
+Eles também relaxam a hipótese de número de Lewis unitário e de inércia térmica desprezível, fornecendo uma metodologia para calcular a fase transiente de aquecimento da gota.
 
-Por esse motivo, Ambrazon e Sirignano \cite{Sirignano1989} melhoraram o modelo corrigindo o número de transporte de temperatura de Spalding com o fluxo líquido de calor para a gota, permitindo simular o período de aquecimento da gota.
-Atualizaram também a correlação entre os números de transporte de Spalding para incluir números de Lewis não unitários.
-Também utilizam a teoria de filme (\emph{film theory}) para considerar os efeitos do \emph{Stefan flow} na camada limite da partícula, corrigindo o uso das expressões experimentais para um ambiente convectivo. 
+% A última hipótese, por sua vez, significa que a parte térmica do modelo não é capaz de prever o período de aquecimento da gota, antes da evaporação.
+% Isso altera significativamente a chama em larga escala, já que, dependo do combustível e do tamanho da partícula, o período de aquecimendo da gota pode ser comparável ao tempo de vida \source{}.
+
+% Por esse motivo, Ambrazon e Sirignano \cite{Sirignano1989} melhoraram o modelo corrigindo o número de transporte de temperatura de Spalding com o fluxo líquido de calor para a gota, permitindo simular o período de aquecimento da gota.
+% Atualizaram também a correlação entre os números de transporte de Spalding para incluir números de Lewis não unitários.
+% Também utilizam a teoria de filme (\emph{film theory}) para considerar os efeitos do \emph{Stefan flow} na camada limite da partícula, corrigindo o uso das expressões experimentais para um ambiente convectivo. 
 
 Todos os modelos apresentados até agora são baseados na hipótese de equilíbrio termodinâmico na interface líquido-gás.
-Por outro lado, dois anos antes, Bellan e Harstad \cite{BellanJ1987} desenvolveram o modelo que inclui a condição de não equilíbrio termodinâmico na interface.
+Por outro lado, dois anos antes da correção de Abramzon e Sirignano, Bellan e Harstad \cite{BellanJ1987} desenvolveram o modelo que inclui a condição de não equilíbrio termodinâmico na interface.
 
-\citeonline{MillerR1998} compararam os modelos de Ambrazon-Sirignano e Bellan-Harstad e combinou-os em uma única representação matemática.
+Miller, Harstad and Bellan \cite{MillerR1998} compararam os modelos de Ambrazon-Sirignano e Bellan-Harstad e combinaram-os em uma única representação matemática.
 Por isso, é um dos modelos mais utilizados para a simulação turbulenta de sprays.  
 \todo{A sua comparação mostrou ...}
 
 Todos os modelos apresentados até agora assumem que a fase líquida e a fase gasosa podem ser tratadas como contínuas.
 Desfazendo-se dessa hipótese, o modelo de Hertz-Knudsen-Langmuir \source{Langmuir} propõe uma formula para a taxa de variação da massa da gota baseada em cinética.
 
-\citeonline{Sazhin2006} comparou o modelo Stefan-Fuchs (chamado de clássico) com o modelo de Abramzon-Sirignano e com correlações experimentais desenvolvidas para hidrocarbonetos alcanos.
+Sazhin \cite{Sazhin2006} comparou o modelo Stefan-Fuchs (chamado de clássico) com o modelo de Abramzon-Sirignano e com correlações experimentais desenvolvidas para hidrocarbonetos alcanos.
 Ele obteve que o modelo de Stefan-Fuchs obtém as maiores taxas de evaporação, enquanto as correlações obtém as taxas mais conservadoras; o modelo de Abramzon-Sirignano obtendo valores intermediários, mais próximos das correlações experimentais que do modelo clássico.
 
-
-\citeonline{SacomanoF2019IJHMT} comparou os modelos de AS e Miller usando a formulação de Miller1999 \todo{na situação ...}. 
+Sacomano~et.~al \cite{SacomanoF2019IJHMT} comparou os modelos de Abramzon-Sirignano e Bellan-Harstad usando a formulação de \cite{MillerR1998} em uma simulação com química detalhada no CHEM1D \cite{Sommers1994PhD}.
+\todo{Resultado para modelo de evap.}
 Também comparou diferentes modelos de pressão de vapor de combustível na superfície da gota.
-\todo{Ele encontrou ...}
+\todo{Mencionar necessidade de CC/Raul} \todo{e resultado da comparação}.
 
 
 % Modelo Chiu \emph{renormalization theory} \source{Chiu1999 e outros} para DNS e modelo integral de FanL \source{FanL2021}.

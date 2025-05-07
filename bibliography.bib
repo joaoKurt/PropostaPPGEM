@@ -128,7 +128,7 @@
   issn     = {0017-9310},
   doi      = {https://doi.org/10.1016/j.ijheatmasstransfer.2023.124172},
   url      = {https://www.sciencedirect.com/science/article/pii/S0017931023003253},
-  author   = {Artur {Carvalho Santos} and Fernando Luiz {Sacomano Filho} and Aymeric ViE},
+  author   = {Artur {Carvalho Santos} and Fernando Luiz {Sacomano Filho} and Aymeric Vie},
   keywords = {Droplet evaporation, Multi-component droplets, Droplet heat transfer, Evaporation modeling, Spray combustion},
   abstract = {A key aspect of modeling the heat and mass transport of droplets is the description of diffusion transport, and multiple approaches exist to address it. While many contributions focus on the description of the mass transfer, details about the energy formulation to describe the droplet's heat transfer are seldom developed in the literature. This work demonstrates that a general gas-phase energy formulation can be obtained independently from the species diffusion transport modeling while incorporating multi-species enthalpy diffusion terms with a simple expression. Considering the ideal gas simplification, it is shown that a simple choice of specific heats is sufficient to characterize the inclusion or not of multi-species enthalpy diffusion effects. Furthermore, it is also demonstrated that the final energy expression degenerates in the single-component limit to the same energy formulation as in the model of (Abramzon and Sirignano, Int. J. Heat and Mass Trans, Vol.32(9), pp.1605-1618, 1989), considered as a reference in the literature. Simulations are conducted for droplets of multiple fuel compositions in varied atmospheric conditions to represent spray combustion scenarios and evaluate the impact of incorporating or not the enthalpy diffusion term, and conclude on the need and ease of use of the proposed energy formulation.}
 }
@@ -399,7 +399,7 @@
 
 
 @article{vanOijen2002CTM,
-author = {J A van Oijen and L P H de Goey and},
+author = {J.A. {van Oijen} and L. P. H. de Goey},
 title = {Modelling of premixed counterflow flames using the flamelet-generated manifold method},
 journal = {Combustion Theory and Modelling},
 volume = {6},
@@ -412,3 +412,18 @@ URL = { https://doi.org/10.1088/1364-7830/6/3/305 },
 eprint = { https://doi.org/10.1088/1364-7830/6/3/305},
 abstract = { In the recently introduced flamelet-generated manifold (FGM) method the ideas of the manifold and the flamelet approach are combined: a manifold is constructed using one-dimensional (1D) flamelets. In this paper the effect of flame stretch on the accuracy of the FGM method is investigated. In order to isolate the effect of flame stretch, premixed methane/air counterflow flames are simulated. In the case of unit Lewis numbers, a 1D manifold is sufficient to model the main effects of flame stretch. A manifold with two progress variables reproduces the results computed using detailed kinetics almost exactly. When non-unit Lewis numbers are used, the enthalpy and element composition of the burnt mixture change, which may influence the mass burning rate significantly. If these composition changes are included in the manifold using one additional controlling variable, the results agree well with detailed computations. }
 }
+
+@article{vanOijen2016PECS,
+title = {State-of-the-art in premixed combustion modeling using flamelet generated manifolds},
+journal = {Progress in Energy and Combustion Science},
+volume = {57},
+pages = {30-74},
+year = {2016},
+issn = {0360-1285},
+doi = {https://doi.org/10.1016/j.pecs.2016.07.001},
+url = {https://www.sciencedirect.com/science/article/pii/S0360128515300137},
+author = {J.A. {van Oijen} and A. Donini and R.J.M. Bastiaans and J.H.M. {ten Thije Boonkkamp} and L.P.H. {de Goey}},
+keywords = {Flamelets, Manifolds, Reduced chemistry, Flame stretch, Preferential diffusion},
+abstract = {Flamelet based chemical reduction techniques are very promising methods for efficient and accurate modeling of premixed flames. Over the years the Flamelet Generated Manifold (FGM) technique has been developed by the Combustion Technology Group of Eindhoven University of Technology. Current state-of-the-art of FGM for the modeling of premixed and partially-premixed flames is reviewed. The fundamental basis of FGM consists of a generalized description of the flame front in a (possibly moving) flame-adapted coordinate system. The basic nature of the generalized flamelet model is that effects of strong stretch in turbulent flames are taken into account by resolving the detailed structure of flame stretch and curvature inside the flame front. The generalized flamelet model, which forms the basis on which FGM is built, is derived in Part I. To be able to validate numerical results of flames obtained with full chemistry and obtained from FGM, it is important that the generalized flamelet model is analyzed further. This is done by investigating the impact of strong stretch, curvature and preferential diffusion effects on the flame dynamics as described by the local mass burning rate. This so-called strong stretch theory is derived and analyzed in Part I, as well as multiple simplifications of it, to compare the strong stretch theory with existing stretch theories. The results compare well with numerical results for flames with thin reaction layers, but described by multiple-species transport and chemistry. This opens the way to use the generalized flamelet model as a firm basis for applying FGM in strongly stretched laminar and turbulent flames in Part II. The complete FGM model is derived first and the use of FGM in practice is reviewed. The FGM model is then validated by studying effects of flame stretch, heat loss, and changes in elements, as well as NO formation. The application to direct numerical simulations of turbulent flames is subsequently studied and validated using the strong stretch theory. It is shown that the generalized flamelet model still holds even in case of strong stretch and curvature effects, at least as long as the reaction layer is dominated by reaction and diffusion phenomena and not perturbed too much by stretch related perturbations. The FGM model then still performs very well with a low number of control variables. Turbulent flames with strong preferential diffusion effects can also be modeled efficiently with an FGM model using a single additional control variable for the changes in element mass fractions and enthalpy. Finally FGM is applied to the modeling of turbulent flames using LES and RANS flow solvers. For these cases, the flame front structure is not resolved anymore and unresolved terms need to be modeled. A common approach to include unresolved turbulent fluctuations is the presumed probability density function (PDF) approach. The validity of this FGM-PDF approach is discussed for a few test cases with increasing level of complexity.}
+}
+
