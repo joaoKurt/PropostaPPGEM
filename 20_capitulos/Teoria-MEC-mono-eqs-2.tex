@@ -1,0 +1,62 @@
+Naturalmente, os primeiros MECs a serem desenvolvidos consideravam gotas esféricas \textbf{monocomponentes} com interior homogêneo.
+
+O primerio MEC foi desenvolvido por Fuchs \cite{Fuchs1959} na década de 1960. 
+Esse modelo considera apenas e transporte por difusão e obtem a seguinte expressão para a taxa de variação de massa
+\begin{equation}
+    \dot m_A = 2 \pi r_s \rho D \Sh (Y_{A,\infty} - Y_{A,s}) \label{eq:maxwell}
+\end{equation}
+em que $r_s$ é o raio da superfície da gota, $\rho$ e $D$ sãp a densidade e a difusividade mássica do gás, $\Sh$ é o número de Sherwood ($\Sh=2$ para gotas em ambiente quiescente) e $Y_A$ é a fração mássica da espécie $A$ da gota.
+Esse modelo é baseado na hipótese de que a temperatura da gota já está na sua temperatura equilíbrio de regime quasi-estacionário.
+Assim, o fluxo de calor líquido para a gota, resultado do calor recebido por  difusão, i.e. condução, e o calor perdido pela evaporação, é dado nulo.
+Tem-se
+% Analogamente, considerando apenas transporte de calor por difusão, i.e. condução, o fluxo de calor é dado por 
+\begin{equation}
+    \dot Q_\net = 2 \pi r_s \frac{\lambda}{c_p} \Nu (T_{A,\infty} - T_{A,s}) - \dot m_A L_v \mbeq 0
+    \label{eq:maxwell_T}
+\end{equation}
+em que $\lambda$ e $c_p$ são a condutividade térmica e o calor específico do gas, $\Nu$ é o número de Nusselt ($\Sh=2$ para gotas em ambiente quiescente) e $T$ é a temperatura do gás.
+
+A consideração do transporte por convecção em MECs, chamado de escoamento de Stefan (\emph{Stefan flow}), leva ao modelo de Stefan-Fuchs \cite{Law1978}.
+A taxa de variação de massa da partícula nesse modelo pode ser dada tanto a partir do transporte de massa, quando do transporte de energia, de acordo com
+\begin{align}
+    \dot m_{A} &= 2 \pi r_s \Sh \rho D 
+        \ln{\left(1 + \frac{Y_{A,s} - Y_{A,\infty}}{1 - Y_{A,s}}\right)}
+        \label{eq:m_evap_BM} \\
+    \dot m_A   &= 2 \pi r_s \Nu \frac{\lambda}{c_p} 
+        \ln{\left(1 + \frac{c_p (T_\infty - T_s)}{L_v}\right)}, 
+        \label{eq:m_evap_BT}
+\end{align}
+onde as razões dentros dos logarítmandos são chamadas de número de transporte de Spalding de temperatura e de massa, respectivamente, representados por $B_M$ e $B_T$, e $L_v$ é o calor latente de vaporização do líquido $A$.
+Esse modelo também faz a hipótese de que a gota está na sua temperatura de equilíbrio no regime quasi-estacionário, não havendo modelo para o fluxo líquido de calor para a gota.
+
+A hipótese de ambiente quiescente pode ser relaxada utilizando correlações experimentais para os números de Nusselt e de Sherwood, como as relações de Ranz-Marshall \source{} e Froessling \source{}. 
+A adaptação dessas correlações para uma gota com escoamento de Stefan foi considerada no modelo de Abramzon-Sirignano \cite{Sirignano1989}, que também modelou o período de aquecimento da partícula, desfazendo-se da hipótese de temperatura de equilíbrio quasi-estacionária.
+
+Uma hipótese realizada em todos os modelos supracitados é a de equilíbrio termodinâmico na interface líquido-vapor.
+O relaxamento dessa hipótese deu origem ao modelo de Bellan-Harstad \cite{BellanJ1987}.
+Ambos modelos foram combinados em uma única formulação matemática por Miller~et.~al em \cite{MillerR1998}.
+As taxas de transferência de calor e massa nessa formulação são
+\begin{equation}
+    \frac{d T_d}{d t} 
+    = 
+    \frac{f_2}{3} \frac{\mathrm{Nu}}{\mathrm{Pr}} \frac{\theta_1}{\tau_d} (T_\infty - T_d) +
+    \left(\frac{L_v}{c_l}\right)\frac{\dot m_d}{m_d},
+\end{equation}
+\begin{equation}
+    \frac{d m_p}{d t} = - \frac{\mathrm{Sh}}{3\mathrm{Sc}} \left(\frac{m_p}{\tau_p}\right) H_M,
+\end{equation}
+em que $f_2$ é um fator de correção devido ao escoamento de Stefan, $\Pr$ é o número de Prandtl, $\theta_1$ é uma razão entre calores específicos, $\tau_d=\rho_d d_p^2/18\mu$ é o tempo de relaxamento da gota e $H_M$ é o potencial que promove a transferência de massa.
+Ambos modelos tem formulações diferentes para os termos $f_2$, $H_M$ e $\theta_1$, conforme a Tabela \ref{tab:Miller}.
+\begin{table}
+    \centering
+    \caption{Tabela}
+    \begin{tabular}{cccc}
+        \toprule
+        Modelo & $f_2$                                                                             & $H_M$                  & $\theta_1$          \\
+        \midrule
+        A-S & $\frac{\beta}{\exp(\beta) - 1}$                                                   & $\ln{(1 + B_{M,neq})}$ & $\frac{c_p,G}{c_l}$ \\
+        B-L & $\frac{- \dot m_p}{m_p B_T}\left[\frac{3\tau_p \mathrm{Pr}}{\mathrm{Nu}} \right]$ & $\ln{(1 + B_{M,neq})}$ & $\frac{c_p,v}{c_l}$ \\
+        \bottomrule
+    \end{tabular}
+    \label{tab:Miller}
+\end{table}

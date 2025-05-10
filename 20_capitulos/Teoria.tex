@@ -21,17 +21,21 @@
 \subsection{Combustão Turbulenta de Sprays} \label{sec:teoria}
 
 A combustão turbulenta de sprays é caracterizada pela competição de vários processos físicos e químicos, fortemente acoplados e em diferentes escalas de tempo e comprimento. 
-Na formação de um spray turbulento, um jato de combustível líquido se quebra devido às instabiliades hidrodinâmica de Kevin-Helmholz e Rayleigh-Taylor, formando gotas que se dispersam, deformam e atomizam devido às forças aerodinâmicas superando as tensões superficiais da gota \cite{JennyB2012}.
-Isso forma o {regime denso} do spray, onde ocorrem também outros fenômenos como colisões, coalescência e interferência por esteira aerodinâmica, por turbulência ou por alteração da concentração de vapor de combustível devido à evaporação.
-A medida que o jato se atomiza em gotas menores e dispersas, as gotas deixam de interferir umas nas outras e o regime é chamado de disperso ou diluído. 
+Na formação de um spray turbulento, um jato de combustível líquido se quebra devido às instabiliades hidrodinâmicas de Kevin-Helmholz e Rayleigh-Taylor, formando gotas que se dispersam, deformam e atomizam devido às forças aerodinâmicas superando as tensões superficiais da gota \cite{JennyB2012}.
+Isso forma o \textbf{regime denso} do spray, onde ocorrem também outros fenômenos como colisões, coalescência e interferência por esteira aerodinâmica, por turbulência ou por alteração da concentração de vapor de combustível devido à evaporação.
+A medida que o jato se atomiza em gotas menores e dispersas, as gotas deixam de interferir umas nas outras e o regime é chamado de \textbf{disperso} ou \textbf{diluído}. 
 Desde a sua formação, as gotas de combustível evaporam, fornecendo vapor combustível para a chama, que por sua vez influencia e é influenciada pelas próprias gotas e pela turbulência local.
 Revisões detalhadas e com mais referências para processos e interações na combustão turbulenta de sprays podem ser encontradas em \cite{JennyB2012, MasriA2016, SanchezA2015, ZhouL2021} \source{JiangX2010}.
 
-O foco deste trabalho é na modelagem das escalas da gota (micro) e do spray e da chama (macro) na região diluida de um spray de combustível líquido.
+O foco deste trabalho é na modelagem das escalas da gota (escala micro), para que seja utilizada em simulações CFD do spray e da chama (escala macro), considerando apenas a região diluida de um spray de combustível líquido.
 Modelar a escala macro requer um modelo para a fase contínua, gasosa, um modelo para as reações químicas e um modelo para a fase dispersa, as gotas.
-Dois exemplos de modelos para a fase contínua e para a química, escolhidos por relevância e experiência no grupo de pesquisa, serão apresentadas nas próximas Subseções \ref{sec:gas} e \ref{sec:chem}.
-Atenção especial será dada para a modelagem da gota, uma vez que o foco desse trabalho é desenvolver novos modelos para essa escala e investigar os efeitos na escala da chama.
-Modelos de transferência de calor e massa em gotas são discutidos nas Seções \ref{sec:MEC}. 
+A modelagem da fase gasosa é discutida na Seção \ref{sec:gas} e um modelo, utilizado para simulações laminares reativas unidimensionais, é apresentado.
+Duas abordagens para tratar a modelagem das reações químicas são discutidas na Seção \ref{sec:chem}.
+As equações de evolução da gota são apresentadas na Seção \ref{sec:gotas} e os modelos de gota que preveem essa evolução são discutidos nas seções seguintes.
+% \todo{Corregir esse link depois.}
+% Dois exemplos de modelos para a fase contínua e para a química, escolhidos por relevância e experiência no grupo de pesquisa, serão apresentadas nas próximas Subseções \ref{sec:gas} e \ref{sec:chem}.
+% Atenção especial será dada para a modelagem da gota, uma vez que o foco desse trabalho é desenvolver novos modelos para essa escala e investigar os efeitos na escala da chama.
+% Modelos de transferência de calor e massa em gotas são discutidos nas Seções \ref{sec:MEC}. 
 
 % Na abordagem macro, há duas fases nesse sistema: a fase contínua (gasosa) e a fase líquida (gotas); e ambas precisam de modelagem termo-física e química.
 % Para a fase contínua, gasosa, isso se traduz nas equações de transporte, adequadas ao modelo de turbulência escolhido, e em uma modelagem química, que serão resolvidas durante a simulação.
@@ -47,99 +51,148 @@ Modelos de transferência de calor e massa em gotas são discutidos nas Seções
 \subsubsection{Modelagem da Fase Contínua} \label{sec:gas}
 
 As equações que governam a fase contínua são as equações de conservação de espécie, quantidade de movimento e energia, junto com as condições de contorno para a interface gás-líquido e relações termodinâmicas necessárias para o fechamento do problema.
-Derivações desse conjunto de equações podem ser encontradas por exemplo nos livro-texto \cite{Williams1985,Kuo2005,Law2006}.
+Derivações desse conjunto de equações podem ser encontradas por exemplo nos livro-texto \cite{Williams1985,Kuo2005,Law2006,Glassman2008}.
 
-Para as simulações na escala da chama de spray, em que não é viável resolver a interface das gotas, dado que elas estão em outra escala de comprimento, muito menor que a chama, as gotas são representadas como pontos infinitamente pequenos.
-A sua influência na fase contínua se dá, então, através de termos fonte obtidos a partir de modelos analíticos na escala da gota. 
-Essa abordagem é denominada PSIC - (\emph{Particle Source in Cell}) e a aproximação feita para uma partícula ponutal é chamada de \emph{point particle approximation}.
-As equações de transporte resultantes estão descritas abaixo, \emph{cf.} \cite{JennyB2012}.
+Entretanto, utilizar essas equações requer resolver a interface das gotas, o  que não é viável em simulações de chama de spray devido à diferença de escalas de comprimento entre as gotas e a chama.
+Assim, uma abordagem para a simulação CFD de combustão de spray é representar as gotas como pontos infinitamente pequenos, cuja evolução no tempo e no espaço é acompanhada ao logo da simulação, a partir dos modelos de gota implementados.
+Essa abordagem, de tratar a fase gasosa como contínua e as gotas como elementos pontuais no tempo e no espaço é chamada de \emph{Euler-Lagrange}.
 
-\begin{equation}
-    \frac{\partial \rho Y^\beta}{\partial t} + 
-    \frac{\partial \rho Y^\beta U_j}{\partial x_j} =
-    - \frac{\partial J_j^\beta}{\partial x_j} +
-    S^\beta -
-    \dot \rho^{\beta^D}
-\end{equation}
-\begin{equation}
-    \frac{\partial \rho U_i}{\partial t} + 
-    \frac{\partial \rho U_i U_j}{\partial x_j} =
-    - \frac{\partial p}{\partial x_i} +
-    \frac{\partial \tau_{ij}}{\partial x_j} -
-    \rho g\frac{\partial z}{\partial x_i} -
-    \dot M_i^D -
-    f_i^D
-\end{equation}
-\begin{equation}
-    \frac{\partial \rho E}{\partial t} + 
-    \frac{\partial \rho H U_j}{\partial x_j} =
-    \frac{\partial J_j^h}{\partial x_j} +
-    \rho U_i g \frac{\partial z}{\partial x_i} +
-    Q -
-    \dot Q^D -
-    \dot q^D
-\end{equation}
+A influência das gotas na fase contínua se dá, então, através de termos fonte, que inserem os efeitos do conjunto de gotas na célula em que elas estão inseridas, usando os modelos de gota. 
+Essa abordagem é denominada PSIC - (\emph{Particle Source in Cell}) e a aproximação de uma partícula por um ponto é chamada de \emph{point particle approximation}.
 
-Essas equações de transporte são respectivamente da fração mássica da espécie $\beta$, $Y^\beta$, da quantidade de momento na direção $i$, $\rho U_i$ e da energia $E=e+(1/2)U_iU_i+zg$. 
-Os termos de interação entre fases são aqueles com o sobrescrito $D$ (de \emph{droplet} - gota).
-Com excessão dos termos, $\dot M_i^D$ e $f_i^D$, que correspondem às trocas de momentum e força, os termos restantes, $\dot \rho^{\beta^D}$, $\dot Q^D$ e $\dot q^D$ são oriundos dos modelos de transferência de calor e massa, detalhados na Seção \ref{sec:MEC} e \ref{sec:MCGI}. 
-% A notação acima segue o padrão utilizado por \cite{JennyB2012}, consulte-o para mais explicações.
-% São esses termos que precisam ser modelados pelos modelos de gota, descritos na Seção
-% $J_j^\beta$ é o fluxo de massa especie
+Diferentes tratamentos matemáticos sobre as equações que descrevem a fase gasosa dão origem aos métodos DNS (\emph{Direct Numerical Simulation}), LES ( \emph{Large Eddy Simulation}) e RANS (\emph{Reynolds Averaged Navier-Stokes equations}). 
+Cada um desses métodos aborda de maneira diferente a modelagem da turbulência e permite a simulação de escoamentos reativos turbulentos.
 
-O groupo de pesquisa tem experiência com simulações de largas escalas (LES - \emph{Large Eddy Simulations}), nas quais as equações de transporte são decompostas entre sub-escala e escala, $\psi = \widetilde\psi + \psi^"$, e filtradas espacialmente e de forma ponderada com a densidade, $\widetilde\psi = \overline{\rho\psi}/\overline\rho$, em que $\psi$ corresponde a uma variável qualquer. 
-Em uma formulação compressível para baixos números de Mach, as equações de continuidade e de quantidade de movimento são (\emph{cf}. \cite{SacomanoF2017CF})
-% #TODO Usar forma do sacomanoF2020CF
+No que tange ao desenvolvimento de modelos para essas aplicações, é relevante testá-los em situações simplificadas, como em escoamentos reativos laminares primeiro.
+O software unidimensional de escoamentos reativos CHEM1D \cite{Sommers1994PhD} é utilizado pelo grupo de pesquisa com esse propósito \cite{SacomanoF2018CTM,SacomanoF2019IJHMT,SacomanoF2021Fluids,SacomanoF2024CF,SacomanoF2025CF}.
+Utilizando a formulação compressível para baixos números de Mach, as equações de conservação de massa, espécie e entalpia em uma dimensão 
+\cite{SacomanoF2018CTM,SacomanoF2021Fluids,vanOijen2002CTM,vanOijen2016PECS}
+são
 \begin{equation}
-\frac{\partial \bar \rho}{\partial t} + 
-\frac{\partial \bar \rho \widetilde u_i}{\partial x_i} = 
-\overline S_v
+    \frac{\diff \dot m}{\diff x} = \sum_k S_k,
 \end{equation}
 \begin{equation}
-\frac{\partial \bar\rho \widetilde u_i}{\partial t} + 
-\frac{\partial \bar\rho \widetilde u_i \widetilde u_j}{\partial x_j} =
-\frac{\partial }{\partial x_j} \left(
-	2\bar\mu \widetilde S_{ij} -
-	\frac{2}{3}\bar\mu \frac{\partial \widetilde u_k}{\partial x_k} \delta_{ij} -
-	\bar\rho \tau_{ij}^{\text{sgs}}
-\right) -
-\frac{\partial \bar p}{\partial x_i} +
-\bar p g_i + 
-\overline S_{u,i}
-\end{equation}
-em que os termos $\overline S_v$ e $\overline S_{u,i}$ são os termos de acoplamento de fase de massa e de momento.
-Essa formulação foi utilizada em \cite{SacomanoF2017PhD, SacomanoF2017CF, SacomanoF2020CF} junto com a abordagem química FGM (\emph{Flamelet Generated Manifold}), explicada na próxima Seção, no desenvolvimento de um método de espessamento de chama dinâmico (ATF - \emph{Artificially Thickened Flame}).
-
-Essas são as simulações mais completas de combustão turbulenta de sprays, que podem ser utilizadas em cenário reais.%, inclusive para simular cenários realizados também em experimentos, para validação dos métodos numérocos utilizados, como em \source{}.
-Entretando, também é relevate realizar simulações laminares em configurações mais simples, canônicas, para investigar alguns aspectos da modelagem individualmente. 
-Para isso, a configuração de chama de propagação livre laminar em uma névoa de gotas foi simulada pelo grupo de pesquisa em \cite{SacomanoF2018CTM, SacomanoF2019IJHMT} no software CHEM1D \cite{Sommers1994PhD}.
-Nesse caso, as equações de conservação de massa, espécie e entalpia escritas também em uma formulação compressível para baixos números de Mach, são \cite{SacomanoF2018CTM,SacomanoF2021Fluids,vanOijen2002CTM,vanOijen2016PECS}
-\begin{equation}
-    \frac{d \dot m}{d s} = \dot S_V^L
-\end{equation}
-\begin{equation}
-    \frac{\partial(\dot m Y_i)}{\partial s} -
-    \frac{\partial}{\partial s} \left(
-        \frac{\lambda}{\mathrm{Le}_i c_p} \frac{\partial Y_i}{\partial s}
+    \frac{\diff(\dot m Y_i)}{\diff x} -
+    \frac{\diff}{\diff x} \left(
+        \rho Y_i V_i
+         %\frac{\lambda}{\mathrm{Le}_i c_p} \frac{\diff Y_i}{\diff x}
     \right) =
-    \dot \omega_i + \delta_{ik}S_V^L
+    \dot \omega_i + \delta_{ik} S_k,
 \end{equation}
 \begin{equation}
-    \frac{\partial(\dot m h)}{\partial s}
+    \frac{\diff(\dot m h)}{\diff x}
     -
-    \frac{\partial}{\partial s} \left(\frac{\lambda}{c_p} \frac{\partial h}{\partial s} \right)
-    =
-    \frac{\partial}{\partial s} \left(
-            \frac{\lambda}{c_p}\sum_{i=1}^{N_s}
-            \left(\frac{1}{\mathrm{Le}_i}-1\right)
-            h_i \frac{\partial Y_i}{\partial s} 
+    \frac{\diff}{\diff x} 
+        \left(
+        \lambda %\frac{\lambda}{c_p} 
+        \frac{\diff T}{\diff x} 
         \right)
-        +
-    S_h^L
+    =
+    \frac{\diff}{\diff x}
+    \left[
+        \rho \sum_{i=1}^N Y_i h_i V_i
+        - R T \sum_{i=1}^N \frac{D_i^T}{X_i M_i}
+        \frac{\diff X_i}{\diff x}
+    \right]
+    +
+    S_h^L.
 \end{equation}
-em que $\dot S_V^L$ e $S_h^L$ são os termos de acoplamento de fase de massa e entalpia.
-Em 2018, Sacomano~et.~al \cite{SacomanoF2018CTM} resolvem a química com o método FGM para explorar as capacidades e limitações desse método.
-Em 2019, \cite{SacomanoF2019IJHMT}, os autores utilizam química detalhada para mostrar que é possivel representar a mistura gasosa com um subconjunto reduzido de espécies.  
+Na primeira equação, $\dot m = \rho u$ é o fluxo de massa da mistura, $\rho$ a sua densidade e $u$ a sua velocidade na direção $x$, a coordenada espacial e $S_k$ é o termo de acoplamento de massa entre fases da espécie $k$.
+A segunda equação refere-se a espécie $i$: $Y_i$ é a fração mássica da espécie, $V_i$ a velocidade de difusão, $\dot \omega_i$ a taxa de produção/consumo e $\delta_{ik}$ o delta de Kronecker. 
+A terceira equação é a da entalpia absoluta da mistura, $h$, em que $\lambda$ é a condutividade térmica da mistura, $T$ a sua temperatura. 
+$h_i$ e $V_i$ são respectivamente a entalpia absoluta e a velocidade de difusão da espécie $i$, cuja fração mássica é $X_i$, a massa molar, $M_i$, e o coeficiente de difusão térmica, $D_i^T$.
+$S_h$ é o termo de acoplamento entre fases da entalpia.
+
+Os termos de acoplamento de fases $S_k$ e $S_h$ são termos fonte de massa de vapor da espécie $k$ e de entalpia, respectivamente.
+Esses termos utilizam os modelos de gota, expostos nas Seções \ref{sec:MEC} e \ref{sec:MCGI}.
+
+% a configuração de chama de propagação livre laminar em uma névoa de gotas foi simulada pelo grupo de pesquisa em \cite{SacomanoF2018CTM, SacomanoF2019IJHMT} no software CHEM1D \cite{Sommers1994PhD}.
+
+% As equações de transporte resultantes estão descritas abaixo, \emph{cf.} \cite{JennyB2012}.
+
+% \begin{equation}
+%     \frac{\partial \rho Y^\beta}{\partial t} + 
+%     \frac{\partial \rho Y^\beta U_j}{\partial x_j} =
+%     - \frac{\partial J_j^\beta}{\partial x_j} +
+%     S^\beta -
+%     \dot \rho^{\beta^D}
+% \end{equation}
+% \begin{equation}
+%     \frac{\partial \rho U_i}{\partial t} + 
+%     \frac{\partial \rho U_i U_j}{\partial x_j} =
+%     - \frac{\partial p}{\partial x_i} +
+%     \frac{\partial \tau_{ij}}{\partial x_j} -
+%     \rho g\frac{\partial z}{\partial x_i} -
+%     \dot M_i^D -
+%     f_i^D
+% \end{equation}
+% \begin{equation}
+%     \frac{\partial \rho E}{\partial t} + 
+%     \frac{\partial \rho H U_j}{\partial x_j} =
+%     \frac{\partial J_j^h}{\partial x_j} +
+%     \rho U_i g \frac{\partial z}{\partial x_i} +
+%     Q -
+%     \dot Q^D -
+%     \dot q^D
+% \end{equation}
+
+% Essas equações de transporte são respectivamente da fração mássica da espécie $\beta$, $Y^\beta$, da quantidade de momento na direção $i$, $\rho U_i$ e da energia $E=e+(1/2)U_iU_i+zg$. 
+% Os termos de interação entre fases são aqueles com o sobrescrito $D$ (de \emph{droplet} - gota).
+% Com excessão dos termos, $\dot M_i^D$ e $f_i^D$, que correspondem às trocas de momentum e força, os termos restantes, $\dot \rho^{\beta^D}$, $\dot Q^D$ e $\dot q^D$ são oriundos dos modelos de transferência de calor e massa, detalhados na Seção \ref{sec:MEC} e \ref{sec:MCGI}. 
+
+% O groupo de pesquisa tem experiência com simulações de largas escalas (LES - \emph{Large Eddy Simulations}), nas quais as equações de transporte são decompostas entre sub-escala e escala, $\psi = \widetilde\psi + \psi^"$, e filtradas espacialmente e de forma ponderada com a densidade, $\widetilde\psi = \overline{\rho\psi}/\overline\rho$, em que $\psi$ corresponde a uma variável qualquer. 
+% Em uma formulação compressível para baixos números de Mach, as equações de continuidade e de quantidade de movimento são (\emph{cf}. \cite{SacomanoF2017CF})
+% % #TODO Usar forma do SacomanoF2020CF
+% \begin{equation}
+% \frac{\partial \bar \rho}{\partial t} + 
+% \frac{\partial \bar \rho \widetilde u_i}{\partial x_i} = 
+% \overline S_v
+% \end{equation}
+% \begin{equation}
+% \frac{\partial \bar\rho \widetilde u_i}{\partial t} + 
+% \frac{\partial \bar\rho \widetilde u_i \widetilde u_j}{\partial x_j} =
+% \frac{\partial }{\partial x_j} \left(
+% 	2\bar\mu \widetilde S_{ij} -
+% 	\frac{2}{3}\bar\mu \frac{\partial \widetilde u_k}{\partial x_k} \delta_{ij} -
+% 	\bar\rho \tau_{ij}^{\text{sgs}}
+% \right) -
+% \frac{\partial \bar p}{\partial x_i} +
+% \bar p g_i + 
+% \overline S_{u,i}
+% \end{equation}
+% em que os termos $\overline S_v$ e $\overline S_{u,i}$ são os termos de acoplamento de fase de massa e de momento.
+% Essa formulação foi utilizada em \cite{SacomanoF2017PhD, SacomanoF2017CF, SacomanoF2020CF} junto com a abordagem química FGM (\emph{Flamelet Generated Manifold}), explicada na próxima Seção, no desenvolvimento de um método de espessamento de chama dinâmico (ATF - \emph{Artificially Thickened Flame}).
+
+% Essas são as simulações mais completas de combustão turbulenta de sprays, que podem ser utilizadas em cenário reais.%, inclusive para simular cenários realizados também em experimentos, para validação dos métodos numérocos utilizados, como em \source{}.
+% Entretando, também é relevate realizar simulações laminares em configurações mais simples, canônicas, para investigar alguns aspectos da modelagem individualmente. 
+% Para isso, a configuração de chama de propagação livre laminar em uma névoa de gotas foi simulada pelo grupo de pesquisa em \cite{SacomanoF2018CTM, SacomanoF2019IJHMT} no software CHEM1D \cite{Sommers1994PhD}.
+% Nesse caso, as equações de conservação de massa, espécie e entalpia escritas também em uma formulação compressível para baixos números de Mach, são \cite{SacomanoF2018CTM,SacomanoF2021Fluids,vanOijen2002CTM,vanOijen2016PECS}
+% \begin{equation}
+%     \frac{d \dot m}{d s} = \dot S_V^L
+% \end{equation}
+% \begin{equation}
+%     \frac{\partial(\dot m Y_i)}{\partial s} -
+%     \frac{\partial}{\partial s} \left(
+%         \frac{\lambda}{\mathrm{Le}_i c_p} \frac{\partial Y_i}{\partial s}
+%     \right) =
+%     \dot \omega_i + \delta_{ik}S_V^L
+% \end{equation}
+% \begin{equation}
+%     \frac{\partial(\dot m h)}{\partial s}
+%     -
+%     \frac{\partial}{\partial s} \left(\frac{\lambda}{c_p} \frac{\partial h}{\partial s} \right)
+%     =
+%     \frac{\partial}{\partial s} \left(
+%             \frac{\lambda}{c_p}\sum_{i=1}^{N_s}
+%             \left(\frac{1}{\mathrm{Le}_i}-1\right)
+%             h_i \frac{\partial Y_i}{\partial s} 
+%         \right)
+%         +
+%     S_h^L
+% \end{equation}
+% em que $\dot S_V^L$ e $S_h^L$ são os termos de acoplamento de fase de massa e entalpia.
+% Em 2018, Sacomano~et.~al \cite{SacomanoF2018CTM} resolvem a química com o método FGM para explorar as capacidades e limitações desse método.
+% Em 2019, \cite{SacomanoF2019IJHMT}, os autores utilizam química detalhada para mostrar que é possivel representar a mistura gasosa com um subconjunto reduzido de espécies.  
 
 % Modelagem CHEM1D. 
 % Modelagem LES.
@@ -147,46 +200,86 @@ Em 2019, \cite{SacomanoF2019IJHMT}, os autores utilizam química detalhada para 
 
 \subsubsection{Modelagem Química} \label{sec:chem}
 
-A modelagem química de maior fidelidade é chamada de química detalhada.
+A modelagem química de maior fidelidade é chamada de química detalhada (DC - \emph{Detailed Chemistry}).
 Essa abordagem utiliza um mecanismo químico com várias espécies e reações elementares, cada uma com uma taxa de reação modelada, por exemplo, com uma equação de Ahrrenius, para calcular as taxas de consumo ou produção das espécies principais e a formação de poluentes.
 Os mecanismos podem ter dezenas de espécies e centenas de reações, o que torna esse método caro computacionalmente.
 
 Uma alternativa para reduzir o custo computacional é o método FGM (\emph{Flamelet Generated Manifold}). 
 Nesse método, a química detalhada é calculada previamente em vários cenários diferentes e uma biblioteca é construída, a qual conecta uma situação inicial, determinada por variáveis de controle, a uma situação final, pós combustão.
-Ambos os métodos mencionados são oriundos da combustão gasosa, de forma que dois parâmetros de controle são necessários para descrever completamente o \emph{manifold} \cite{PetersN2000}.
-Entretanto, Sacomano~et.~al em 2018 \cite{SacomanoF2018CTM}, usam três variáveis de controle, pois o efeito não adiabáticos  são considerados  na tabulação.
-Assim, além da fração de mistura $z$ e da váriável de progresso da reação $Y_{RPV}$,
-definida como uma combinação linear de $Y_{\text{CO}_2}$, $ Y_{\text H_2 \text O}$ e $ Y_{\text{CO}}$,
-% definida como $Y_{RPV}= Y_{\text{CO}_2} / {M_{\text{CO}_2}}+  Y_{\text H_2 \text O} / {2.5 M_{\text H_2 \text O}} + Y_{\text{CO}} / {1.5 M_{\text{CO}}}$,
-é utilizado também a entalpia $h$ como variável de acesso.
-As equações de transporte para as variáveis de controle tem a forma da equação abaixo, onde $\psi \in \lbrace z, Y_{RPV}, h\rbrace$ (\emph{cf.} \cite{SacomanoF2018CTM}).
-\begin{equation}
-    \frac{\partial \rho\psi}{\partial t} +
-    \frac{\partial \rho u \psi}{\partial s} =
-    \frac{\partial}{\partial s} \left(
-        \Gamma_\psi \frac{\partial \psi}{\partial s}
-        \right) +
-    \dot\omega_\psi +
-    S_h^L
-\end{equation} 
+Tradicionalmente, duas variáveis de acesso são necessárias para determinar o espaço de variáveis (\emph{manifold}) do FGM, a fração de mistura %$Z=m_f/(m_f+m_{ox})$
+e uma variável de progresso da reação \cite{PetersN2000}.
+Em alguns trabalhos, como Sacomano~et.~al (2018) \cite{SacomanoF2018CTM}, a cosnideração de efeitos não adiabáticos força o uso da entalpia $h$ como uma terceira variável de acesso.
+% usam três variáveis de controle, pois o efeito não adiabáticos  são considerados  na tabulação.
+% Assim, além da fração de mistura $z$ e da váriável de progresso da reação $Y_{RPV}$,
+% definida como uma combinação linear de $Y_{\text{CO}_2}$, $ Y_{\text H_2 \text O}$ e $ Y_{\text{CO}}$,
+% % definida como $Y_{RPV}= Y_{\text{CO}_2} / {M_{\text{CO}_2}}+  Y_{\text H_2 \text O} / {2.5 M_{\text H_2 \text O}} + Y_{\text{CO}} / {1.5 M_{\text{CO}}}$,
+% é utilizado também a entalpia $h$ como variável de acesso.
+% As equações de transporte para as variáveis de controle tem a forma da equação abaixo, onde $\psi \in \lbrace z, Y_{RPV}, h\rbrace$ (\emph{cf.} \cite{SacomanoF2018CTM}).
+% \begin{equation}
+%     \frac{\partial \rho\psi}{\partial t} +
+%     \frac{\partial \rho u \psi}{\partial s} =
+%     \frac{\partial}{\partial s} \left(
+%         \Gamma_\psi \frac{\partial \psi}{\partial s}
+%         \right) +
+%     \dot\omega_\psi +
+%     S_h^L
+% \end{equation} 
 
-Outro esforço para reduzir o custo computacional é o espessamento artificial de chama (ATF - \emph{Artificially Thickened Flame}), utilizada em simulações LES para reduzir o refino de malha necessário na frente de chama.
-Essa metodologia foi desenvolvida em \cite{SacomanoF2017PhD} e aprimorada nos artigos seguintes \cite{SacomanoF2017CF, SacomanoF2020CF}.
-Em \cite{SacomanoF2017CF}, inclui-se o espessamento baseado nas propriedades da mistura e uma correção para a taxa de evaporação de gota durante atravessia da frente chama.
-Já em \cite{SacomanoF2020CF}, inclui-se o cálculo dinâmico de um termo para a interação chama turbulência.
-Nesses trabalhos, o tabelamento FGM é considerado adiabático e utiliza apenas duas vairáveis de controle: $z$ e $Y_{RPV}$.
-A equação de transporte dessas variáveis é modificada para o 
-espessamento da chama, tendo a forma dada pela equação abaixo, com $\psi \in \lbrace z, Y_{RPV}\rbrace$, (veja e.g. \cite{SacomanoF2017CF} para mais detalhes).
+Outra estratégia para reduzir o custo computacional é o espessamento artificial de chama (ATF - \emph{Artificially Thickened Flame}), utilizada em simulações LES para reduzir o refino de malha necessário na frente de chama.
+Essa metodologia foi desenvolvida em \cite{SacomanoF2017PhD} e aprimorada nos artigos seguintes \cite{SacomanoF2017CF, SacomanoF2020CF} para incluir o espessamento dinâmico, um efeito de interação chama-turbulência e a ampliação da taxa de evaporação de gotas atravessando a frente de chama.
+% Em \cite{SacomanoF2017CF}, inclui-se o espessamento baseado nas propriedades da mistura e uma correção para a taxa de evaporação de gota durante atravessia da frente chama.
+% Já em \cite{SacomanoF2020CF}, inclui-se o cálculo dinâmico de um termo para a interação chama turbulência.
+% Nesses trabalhos, o tabelamento FGM é considerado adiabático e utiliza apenas duas vairáveis de controle: $z$ e $Y_{RPV}$.
+% A equação de transporte dessas variáveis é modificada para o 
+% espessamento da chama, tendo a forma dada pela equação abaixo, com $\psi \in \lbrace z, Y_{RPV}\rbrace$, (veja e.g. \cite{SacomanoF2017CF} para mais detalhes).
+% \begin{equation}
+%     \frac{\partial \bar \rho \widetilde \psi}{\partial t} + 
+%     \frac{\partial \bar \rho \widetilde \psi \overline u_j}{\partial x_j} =
+%     \frac{\partial }{\partial x_j} \left[ \left(
+%     FE \frac{\bar\mu}{Sc_\psi} + (1-\Omega)\frac{\mu_t}{Sc_{t,\psi}}
+%     \right) \frac{\partial \widetilde \psi}{\partial x_j}
+%     \right] +
+%     \frac{E}{F}\widetilde{\dot{\omega}_\psi} + 
+%     \overline S_{\psi,\nu'}^{\text{Eul}}
+% \end{equation}
+
+
+\subsubsection{Modelagem Da Fase Discreta} \label{sec:gotas}
+
+A evolução das gotas na abordagem Euler-Lagrange com aproximação de gotas pontuais (\emph{point-particle approximation}) é regida por equações diferenciais ordinárias (EDOs) no tempo para a posição da gota, a sua massa e a sua entalpia ou temperatura.
+
+Considere uma única gota, de índice $k$, dentro do spray, composta por $i=1,\ldots,n-1$ espécies (componentes).
+Sua posição é dada pelo seu centro de massa $\mathbf X^k$, sua massa por $m^k = \sum_{i=1}^{n-1} m_{i}^k$ e sua entalpia por $h\sum_{i=1}^{n-1} h_{i}^k$, em que 
+$m_i^k$ e $h_ik$ são a massa e a entalpia da espécie $i$ na gota $k$.
+A evolução da gota $k$ é então regida pelas EDOs \cite{JennyB2012}
 \begin{equation}
-    \frac{\partial \bar \rho \widetilde \psi}{\partial t} + 
-    \frac{\partial \bar \rho \widetilde \psi \overline u_j}{\partial x_j} =
-    \frac{\partial }{\partial x_j} \left[ \left(
-    FE \frac{\bar\mu}{Sc_\psi} + (1-\Omega)\frac{\mu_t}{Sc_{t,\psi}}
-    \right) \frac{\partial \widetilde \psi}{\partial x_j}
-    \right] +
-    \frac{E}{F}\widetilde{\dot{\omega}_\psi} + 
-    \overline S_{\psi,\nu'}^{\text{Eul}}
+    \frac{\diff^2 \mathbf X^k}{\diff t^2} =
+    % \frac{\diff \mathbf U^k}{\diff t} = 
+    \frac{\mathbf f^k}{ m^{k}} -
+    g \frac{\partial z}{\partial \mathbf x}
+    \label{eq:Xd}
 \end{equation}
+\begin{equation}
+    \frac{\diff m^{k}_i}{\diff t} = \dot m^{k}_i
+    \label{eq:md}
+\end{equation}
+\begin{equation}
+    \frac{\diff h^{k}_i}{\diff t} = \dot h^{k}_i
+    % m_i^k c_{p,i} \frac{\diff T^{k}}{\diff t} = \dot Q_\net
+    \label{eq:Td}
+\end{equation}
+em que $f^k$ representa as forças resultantes da fase gasosa na gota $k$, $g$ é a constante da gravidade e $\dot m^{k}_i$ e $\dot h^{k}_i$ as a taxa de variação de massa e de entalpia da espécie $i$ na gota $k$.
+\question{Usar $h$ e $\dot h^{k}_i$ ou $T$ e $ \dot Q_\net$?}
+Os termos $f^k$, $\dot m^{k}_i$ e $\dot h^{k}_i$ são termos de acoplamento entre as fases na escala da gota, ou seja, representam a interação entre as fases líquida e gasosa na interface da gota.
+Enquanto o primeiro termo é geralmente substituído por uma expressão semi-empírica para o arrasto e um termo de flutuação (\emph{c.f.} \cite[p. 16]{JennyB2012}), os dois últimos precisam de um modelo de transferência de calor e massa (HMT - \emph{Heat and Mass Transfer}).
+
+O modelo HMT pode descrever, por exemplo, a evaporação do combustível líquido e vapor de combustível, que é então queimado utilizando um dos modelos de química como DC ou FGM.
+O mesmo modelo pode descrever também, a condensação de uma espécie de volta para a gota, como o próprio combustível ou a água, no caso de combustíveis hidrofílicos como os álcoois (e.g. metanol e etanol).
+Nesse cenário, o modelo HMT é denominado de Modelo de Evaporação e Condensação (MEC).
+
+O uso de um MEC junto de um modelo de combustão gasosa como DC ou FGM representa uma chama de spray no modo de combustão de grupo externa ou interna ou combustão externa em lâmina (tradução livre de \emph{external sheet combustion}), de acordo com a classificação de Chiu \source{Chiu1977, Chiu1982}
+Entretanto, não representa a combustão de gota isolada, já que, nesse cenário, a combustão ocorre na mesma escala que a gota.
+Para modelar a combustão de gota isolada, é necessário um novo modelo HMT para a gota, que inclua uma frente de chama envolvendo a gota, denominado Modelo de Combustão de Gota Isolada (MCGI). 
 
 
 \subsection{Modelos de Evaporação e Condensação (MEC)} \label{sec:MEC}
@@ -195,52 +288,54 @@ espessamento da chama, tendo a forma dada pela equação abaixo, com $\psi \in \
 
 Na escala de uma gota, o problema pode ser dividido em duas regiões segregadas: a gota, líquida; e o gás ambiente circundante. 
 Cada região é governada por um conjunto de equações.
-Ambas regiões podem ser resolvidas numericamente (simuladas) ou representadas por um resultado analítico do modelo.
-Ambas regiões podem ser modeladas com diferentes graus de fidelidade.
+Ambas regiões podem ser resolvidas numericamente (simuladas) ou representadas por um resultado analítico do modelo, com diferentes graus de fidelidade.
 Trabalhos que resolvem numericamente tanto o interior quanto o exterior da gota são capazes de simular muitos efeitos físicos a um elevado custo computacional. %(veja \source{Resolved evap small scale.}).
-Por viabilizar o uso em simulações na escala da chama de spray, mais comuns são modelos que usam um modelo analítico em uma região e simulam a outra.
+Mais comuns são modelos que usam um modelo analítico em uma região e simulam a outra, reduzindo o custo computacional e viabilizando o uso em simulações na escala da chama de spray.
 Geralmente, uma solução analítica é utilizada para a descrição espacial da fase gasosa e as propriedades da gota são integradas no tempo. 
 
-No que tange a região líquida, do interior da gota, assumida esférica, a hipótese mais simples é assumir uma distribuição homogênea de temperatura e espécie no interior da gota e negligenciar recirculação.
-Isso elimina a necessidade de modelar o interior da gota.
-Para a região gasosa, é comum assumir que a escala de tempo dos efeitos de transporte nessa região é muito mais rápida que a escala de tempo da mudança de temperatura da partícula, ou seja, efeitos transitórios na fase gasosa não são considerados relevantes e o problema é quasi-estacionário.  
+Isso é possível devido a hipótese de que a escala de tempo dos efeitos de transporte na região gasosa é muito mais rápida que a escala de tempo da mudança de temperatura da partícula.
+Assim, efeitos transitórios na fase gasosa são desconsiderados e a evolução temporal da temperatura da partícula é desacoplada da transitóriedade da fase gasosa, que atinge estado permanente a cada instante da partícula.
+Essa é a hipótese de regime quasi-estacionário.
 Dessa forma, a fase gasosa pode ser resolvida analíticamente e a evolução da gota integrada no tempo.
-Essa é a base para os modelos apresentados na Seção \ref{sec:RMM}.
 
-Diferentes abordagem existem para considerar o interior da partícula.
-Algumas são discutidas na Seção \ref{sec:int}.
+% Para a região gasosa, é comum assumir que a escala de tempo dos efeitos de transporte nessa região é muito mais rápida que a escala de tempo da mudança de temperatura da partícula, ou seja, efeitos transitórios na fase gasosa não são considerados relevantes e o problema é quasi-estacionário.  
+
+No que tange a região líquida, do interior da gota, geralmente assumida esférica, a hipótese mais simples é assumir uma distribuição homogênea de temperatura e espécie no interior da gota e negligenciar recirculação.
+Isso elimina a necessidade de modelar o interior da gota.
+Vale ressaltar que essas duas hipóteses, a de regime quasi-estacionário e a de interior de gota homogêneo, já foram utilizadas nas Equações \eqref{eq:md} e \eqref{eq:Td}.
+
+Essa é a base para os modelos apresentados na Seção \ref{sec:RMM}.
+Diferentes abordagem existem para considerar o interior da partícula; algumas são discutidas na Seção \ref{sec:int}.
+
+
 
 
 \subsubsection{Modelos com Interior de Gota Homogêneo} \label{sec:RMM}
 
-\input{20_capitulos/Teoria-MEC-mono-resumo.tex}
-% \input{20_capitulos/Teoria-MEC-mono-eqs.tex}
+Naturalmente, os primeiros MECs a serem desenvolvidos consideravam gotas esféricas, \textbf{monocomponentes},com interior homogêneo, estacionárias em ambiente quiescente.
+Uma curta revisão dos MEC monocomponentes é apresentada sem detalhes, 
+Como os MECs multicomponente decaem para os MECs monocomponentes quando uma única espécie é utilizada, uma curta revisão histórica dos modelos monocomponentes é realizada, antes de apresentar um modelo multicomponente em detalhe.
+\todo{Melhorar essa merda.}
 
-A modelagem de MEC \textbf{multicomponente} está intrinsicamente ligada ao tópico da difusão diferencial.
-Essa modelagem vem sido desenvolvida pelo grupo de pesquisa nos últimos anos.
+O primerio MEC foi desenvolvido por Fuchs \cite{Fuchs1959} na década de 1960. 
+Esse modelo considera apenas e transporte por difusão e assume que temperatura da gota já está na sua temperatura equilíbrio de regime quasi-estacionário.
+Assim, esse modelo não é capaz de representar o período de aquecimento da gota.
 
-Sacomano~et.~al \cite{SacomanoF2021Fluids} estuda a influência da difusão diferencial gasosa na oxi-combustão de metano diluído em vapor d'água. 
-Foram comparados três modelos diferentes para o fluxo de calor e de espécie.
-O combustível nesse caso é gasoso, porém o vapor d'água pode se condensar em zonas frias ou evaporar em zonas quentes, constituindo uma fase dispersa.
-Para esta fase foi utilizado o modelo de Abramzon-Sirignano \cite{Sirignano1989} na formulação de Miller \cite{MillerR1998}.
+A consideração do transporte por convecção em MECs, chamado de escoamento de Stefan (\emph{Stefan flow}), leva ao modelo de Stefan-Fuchs \cite{Law1978}.
+A taxa de variação de massa da partícula nesse modelo pode ser dada tanto a partir do transporte de massa, quando do transporte de energia, de usando os chamados número de transporte de Spalding.
+Esse modelo também faz a hipótese de que a gota está na sua temperatura de equilíbrio no regime quasi-estacionário, não havendo modelo para o fluxo líquido de calor para a gota.
 
-No ano seguinte, uma formulação rigorosa e robusta para a troca de calor e massa em gotas multicomponente foi derivada a partir das equações fundamentais em \cite{SacomanoF2022IJHMT}.
-Essa formulação inclui efeitos de difusão diferencial de forma detalhada, ao custo de exigir um solver iterativo para resolver um conjunto de equações não linear para o MEC.
-Incluiu também efeitos de mistura não ideal, utilizado modelos como \todo{modelos não ideal}.
-O aspecto da difusão diferencial modelo baseou-se em trabalhos como \cite{ToniniS2015IJTS, ZhangL2012Fuel}. 
+A hipótese de ambiente quiescente pode ser relaxada utilizando correlações experimentais para os números de Nusselt e de Sherwood, como as relações de Ranz-Marshall \source{} e Froessling \source{}. 
+A adaptação dessas correlações para uma gota com escoamento de Stefan foi considerada no modelo de Abramzon-Sirignano \cite{Sirignano1989}, que também modelou o período de aquecimento da partícula, desfazendo-se da hipótese de temperatura de equilíbrio quasi-estacionária.
 
-Esse modelo foi testado em \cite{SacomanoF2024CF} para a combustão de névoa quiescente de etanol anidro em atmosfera úmida, formando uma chama lisa e laminar, no CHEM1D \cite{Sommers1994PhD}.
-A consideração dos efeitos inclusos nesse modelo se mostrou relevante até para o etanol anidro, já que o ar úmido pode condensar na gota de etanol.
+Uma hipótese realizada em todos os modelos supracitados é a de equilíbrio termodinâmico na interface líquido-vapor.
+O relaxamento dessa hipótese deu origem ao modelo de Bellan-Harstad \cite{BellanJ1987}.
+Ambos modelos foram combinados em uma única formulação matemática por Miller~et.~al em \cite{MillerR1998}.
 
-Em \cite{SacomanoF2025CF}, o modelo completo, chamado "Full-DD" (DD - \emph{differential diffusion}), foi comparado com um modelo intermediário desenvolvido por Wang \cite{WangC2013CF}, chamado "Partial-DD" e com o modelo clássico de Stefan-Fuchs, para avaliar o compromisso fidelidade versus custo computacional.
-\todo{Encontrou-se}.
+Fugindo da metodologia da mecânica do contínuo, o modelo de Hertz-Knudsen-Langmuir \source{Langmuir} modela a taxa de variação da massa da gota baseada em cinética das partículas.
 
-O modelo completo foi extendido mais ainda por \cite{SantosA2024IJHMT} utilizando a equação de Maxwell-Stefan para a difusão, ao invés da difusão de Fick utilizada em todos os outros trabalhos mencionados até agora.
-Esse modelo baseou-se por exemplo em \cite{ToniniS2015IJTS}.
-
-Por uma outra perspectiva, foco exclusivo foi dado em \cite{SantosA2023IJHMT} para a equação da temperatura durante o processo de evaporação e condensação.
-Nesse trabalho, os autores mostram que a equação de temperatura é independente do modelo utilizado para a transferência de massa, podendo estes serem modelados de desacoplada.
-Cosntatou-se também que efeitos multicomponentes, enquanto mais complicados na transferência de massa por causa da difusão diferencial, na transferência de calor podem ser considerados diretamente por meio de calores específicos adequados.
+Os MECs \textbf{multicomponente} são naturalmente baseados nos MEC monocomponentes.
+O modelo desenvolvido por Sacomano~et.~al em 2022 \cite{SacomanoF2022IJHMT} e o modelo de Wang~et.~al \source{WangC2013CF} serão apresentados aqui.
 
 Quanto ao aspecto \textbf{não ideal da mistura}, \cite{SacomanoF2022IJHMT} usou os métodos 
 
@@ -252,24 +347,31 @@ Quanto ao aspecto \textbf{não ideal da mistura}, \cite{SacomanoF2022IJHMT} usou
 
 \subsection{Modelos de Combustão Homogênea de Gota Isolada (MCGI)} \label{sec:MCGI}
 
-Em MCGI, as hipóteses de combustão homogênea em fase gasosa, com uma reação em uma única etapa, e infinitamente rápida, removem o problema da cinética e permite que a chama seja controlada apenas pela difusão do combustível -- da gota para a chama -- e do oxidante -- do ambiente para a chama.
-Dessa forma, a chama se forma onde o fluxo de massa do combustível está em proporção estequiométrica com o fluxo de oxidante, vindo de sentido contrário. 
+Em MCGI, as hipóteses de combustão homogênea em fase gasosa, com uma reação infinitamente rápida em uma única etapa, removem o problema da cinética química e permite que a chama seja controlada apenas pela difusão do combustível -- da gota para a chama -- e do oxidante -- do ambiente para a chama.
+Dessa forma, a chama se ocorre onde o fluxo de massa do combustível está em proporção estequiométrica com o fluxo de oxidante, vindo de sentido contrário. 
 Os fluxos de combustível e de oxidante, por sua vez, vem de MECs.
 Portanto, os MCGIs se baseiam nos modelos de evaporação e condensação já desenvolvidos.
 
 Assim, as mesmas hipóteses realizadas para MECs são utilizadas em MCGIs também, como regime quasi-estacionário e interior de gota homogêneo.
-Também os mesmos problemas e aprimoramentos já mencionados se fazem necessários em MCGIs, como descrição multi-componente, comportamento não ideal de mistura, condição de não equilíbrio termodinâmico na interface líquido-vapor, além de uma descrição dos efeitos oriundos do interior da gota.
+Também os mesmos problemas e aprimoramentos já mencionados se fazem necessários em MCGIs, como descrição multicomponente, comportamento não ideal de mistura, condição de não equilíbrio termodinâmico na interface líquido-vapor, além de uma descrição dos efeitos oriundos do interior da gota.
 
-Entretanto, devido à maior complexidade analítica da combustão homogênea de gota isolada, os modelos analíticos para essa situação consideram muito menos efeitos que os MECs.
+Entretanto, devido à maior complexidade analítica dos modelos de combustão homogênea de gota isolada, os modelos analíticos para essa situação consideram muito menos efeitos que os MECs.
 % Por exemplo, não foram encontrados MCGIs analíticos de combustíveis líquidos que considerassem gotas multicomponentes.
 
-O modelo clássico foi desenvolvido por Godsave-Spalding, \todo{...}
+O modelo clássico foi desenvolvido por Godsave-Spalding, baseado no MEC de Stefan-Fuchs \cite{Glassman2008,Law2006,Turns2000}.
 Uma perspectiva histórica dos esforço para relaxar as hipóteses realizadas no modelo inicial pode ser encontrada em \cite{FachiniF1999}, assim como um modelo considerando \todo{...}.
 Um exemplo desse esforço é \source{Ulzama2006}, que relaxou a hipótese de regime quasi-estacionário na fase gasosa e criou um modelo misto quasi-estacionário-transiente com resultados semelhantes ao modelo clássico.
 
-O autor dessa proposta tem experiência com MCGI devido ao seu trabalho em combustão de partículas de pó de alumínio \source{meu MT}.
-Acredita-se que partículas de alumínio queimem em combustão homogênea gasosa, com metal vaporizado da gota de alumínio líquido \source{}.
-Portanto, considerando apenas a etapa de combustão homegênea, o processo é essencialmente o mesmo que em gotas de combustível líquido.
+MCGIs também são estudados para a combustão de pós metálicos que queimam em combustão homogênea \source{}, como o alumínio \cite{HenningsJ2024MT}.
+Alguns trabalhos nessa área se destacam pela sua descrição multicomponente. 
+Zhang\etal \cite{Zhang2022_Coflow,Zhang2022_Counterflow}, por exemplo, obteram uma solução analítica para um modelo extedido de Godsave-Spalding, incluindo um produto da reação de fase gasosa.
+Esse produto, alumina ($\qAlAlOOO$) no trabalho deles, é produzido na frente de chama e pode ser transportado tanto para a partícula quanto para o ambiente.
+Um desenvolvimento semelhante foi realizado por DesJardin\etal \cite{DesJardin2005}
+Isso é relevante para o etanol por exemplo, cuja combustão produz vapor que pode voltar a se condensar sobre a gota.
+
+% O autor dessa proposta tem experiência com MCGI devido ao seu trabalho em combustão de partículas de pó de alumínio \cite{HenningsJ2024MT}.
+% Acredita-se que partículas de alumínio queimem em combustão homogênea gasosa, com metal vaporizado da gota de alumínio líquido \source{}.
+% Portanto, considerando apenas a etapa de combustão homegênea, o processo é essencialmente o mesmo que em gotas de combustível líquido.
 
 % O modelo clássico de Godsave-Spalding é utilizado em alguns trabalhos nessa área \source{}.
 % Os únicos trabalhos que consideram gotas \textbf{multicomponentes} em MCGIs foram encontrados nessa área.

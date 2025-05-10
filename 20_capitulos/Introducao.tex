@@ -28,26 +28,28 @@ Além do setor de transporte, combustíveis líquidos são importantes para algu
 Por fim, uma análise histórica indica que a transição para fontes renováveis se dará ao longo de décadas \cite{MasriA2021}.
 
 % São exemplos de combustíveis líquidos a gasolina, o etanol, o diesel, o kerosene, o kerosene de aviação, etc. 
-% O etanol, em particular, é de grande relevância para o Brasil.
+% O etanol, em particular, é de grande relevância para o Brasil e para a India.
 
-Nota-se que processos de combustão continuarão relevates nas próximas décadas.
-Em especial, todas as aplicações mencionadas baseam-se na combustão turbulenta de sprays líquidos.
-Assim, soluções devem ser procuradas para concicliar essa tecnologia com os esforços de transição energética e descarbonização da economia.
+Nota-se que processos de combustão continuarão relevantes nas próximas décadas.
+Em especial, todas as aplicações mencionadas baseiam-se na combustão turbulenta de sprays líquidos.
+Assim, soluções devem ser procuradas para conciliar essa tecnologia com os esforços de transição energética e descarbonização da economia.
 A comunidade científica busca, então, três caminhos: \textbf{(i)} novos combustíveis; \textbf{(ii)} novas origens para os mesmos combustíveis; \textbf{(iii)} melhorar a eficiência dos motores a combustão e reduzir a formação de poluentes.
+
+% Mencionar objetivo ser o desenvolvimento de modelos robustos e eficientes para aplicação em CFD. 
 
 Independente da origem do combustível, o processo de combustão deve ser compreendido para que motores e queimadores eficientes e com baixa emissão de poluentes sejam desenvolvidos.
 Para tanto é necessário pesquisa em combustão, que pode ser estruturada em trabalhos experimentais ou trabalhos de modelagem.
 A modelagem da combustão turbulenta de sprays, foco desse trabalho, deve ser capaz de representar diferentes combustíveis líquidos, incluindo combustíveis oriundos das demandas (i) e (ii).
-Deve também representar os diferentes fenômenos envolvidos nesse processo, como ignição e formação de poluentes, de forma a atender a demanda (iii).
+Deve também representar os diferentes fenômenos envolvidos nesse processo, como ignição e formação de poluentes, para atender a demanda (iii).
 No âmbito da combustão turbulenta de sprays, é de extrema importância o modelo de transferência de calor e massa da gota (líquida) para a fase gasosa, ou seja, o modelo de evaporação e condensação das gotas do spray.
-É conhecido que essa modelagem tem enorme influência na chama como um todo \cite{JennyB2012}, influenciando a sua estrutura, temperatura, geometria e, por consequência, formação de poluentes também.
+É conhecido que essa modelagem tem enorme influência na chama \cite{JennyB2012}, influenciando a sua estrutura, temperatura, geometria e, por consequência, formação de poluentes também.
 
 Nesse sentido, revisando a literatura mais recente, nota-se a necessidade de maior desenvolvimento desses modelos de evaporação e condensação (MEC) para representar corretamente diferentes combustíveis.
 Por exemplo, modelos monocomponentes com equilíbrio termodinâmico não são capazes de representar todos os fenômenos associados, por exemplo, à combustão de etanol.
-Em especial, nota-se uma demanda pela aplicação de modelos complexos, desenvolvidos e testados na escala de uma única gota, em simulações de larga escala da chama como um todo.
+Em especial, nota-se uma demanda pela aplicação de modelos complexos, desenvolvidos e testados na escala de uma única gota, em simulações de combustão de larga escala.
 Para representar combustíveis como o etanol, anidro ou hidratado, é necessário uma modelar a gota de forma \textbf{multicomponente}, considerando \textbf{termodinâmica de mistura não-ideal} e os efeitos de transferência de calor e massa no \textbf{interior da gota}.
 
-No modelo HMT descrito acima, a reação química é resolvida separadamente do modelo da gota.
+No modelo descrito acima, a reação química é resolvida separadamente do modelo da gota. %#TODO rever essa ligação aqui.
 Isso corresponde a uma chama longe e não presa a gota, em que a chama é alimentada pelo vapor de combustível oriundo de várias gotas evaporando. 
 Em contraste, é possível que ocorra a combustão de uma gota isolada, com uma frente de chama próxima e circundante à gota, a uma distância na mesma ordem de grandeza que o diâmetro da gota.
 Isso é chamado \textbf{combustão de gota isolada}.
