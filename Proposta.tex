@@ -11,7 +11,6 @@
 \usepackage{booktabs}
 \usepackage[normalem]{ulem}
 % \useunder{\uline}{\ul}{}
-\usepackage{booktabs}
 \usepackage{multirow}
 \usepackage[table,xcdraw]{xcolor}
 \usepackage{systeme}
@@ -37,8 +36,9 @@
 
 %% Line spacing
 \usepackage{geometry}
-\geometry{a4paper,portrait,hmargin={3cm,1.5cm}}
+\geometry{a4paper,portrait,hmargin={2cm,2cm}}
 \renewcommand{\baselinestretch}{1.5}
+\usepackage{setspace}
 
 %% Fonstize set at line 1
 
@@ -55,20 +55,31 @@
 %% Include References in toc
 \usepackage[nottoc]{tocbibind}
 
+%% Dummy text
+\usepackage{lipsum}
+
 
 % \title{\textbf{Multi-Scale Investigations For Reacting Multi-Phase Dispersed Spray Flows}}
 \title{\textbf{Investigações Multi-Escala para Escoamentos Multifásicos Dispersos Reativos}}
 \author{João Vinícius Hennings de Lara}
-\date{April 2025}
+\date{Junho 2025}
 
 
 
 \begin{document}
 
+\pagenumbering{roman}
+
 \maketitle
+\input{20_capitulos/Resumo.tex}
+
 \newpage
 \tableofcontents
 \newpage
+
+\newcounter{savecounter} 
+\setcounter{savecounter}{\value{page}} 
+\pagenumbering{arabic} 
 
 \input{20_capitulos/Introducao}    % Introdução Justificativa e síntese da bibliografia fundamental
 \input{20_capitulos/Teoria}        % Fundamentação Teórica
@@ -77,7 +88,11 @@
 \input{20_capitulos/Plano}         % Plano de Trabalho e Cronograma de Excecução
 \input{20_capitulos/Resultados}    % Resultados Esperados // Forma de análise dos resultados
 
+
 \newpage
+\newpage
+\pagenumbering{Roman}
+\setcounter{page}{\value{savecounter}}
 % \bibliographystyle{abntex2-alf}
 \bibliographystyle{plain}
 \bibliography{bibliography,bibliography2}

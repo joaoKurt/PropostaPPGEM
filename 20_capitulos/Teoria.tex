@@ -248,30 +248,30 @@ Essa metodologia foi desenvolvida em \cite{SacomanoF2017PhD} e aprimorada nos ar
 
 A evolução das gotas na abordagem Euler-Lagrange com aproximação de gotas pontuais (\emph{point-particle approximation}) é regida por equações diferenciais ordinárias (EDOs) no tempo para a posição da gota, a sua massa e a sua entalpia ou temperatura.
 
-Considere uma única gota, de índice $k$, dentro do spray, composta por $i=1,\ldots,n-1$ espécies (componentes).
-Sua posição é dada pelo seu centro de massa $\mathbf X^k$, sua massa por $m^k = \sum_{i=1}^{n-1} m_{i}^k$ e sua entalpia por $h\sum_{i=1}^{n-1} h_{i}^k$, em que 
-$m_i^k$ e $h_ik$ são a massa e a entalpia da espécie $i$ na gota $k$.
+Considere uma única gota dentro do spray, composta por $k=1,\ldots,n-1$ espécies (componentes).
+Sua posição é dada pelo seu centro de massa $\mathbf X_d$, sua massa por $m_d = \sum_{i=1}^{n-1} m_{i}^k$ e sua temperatura, assumida uniforme em seu interior, por $T_d$.
 A evolução da gota $k$ é então regida pelas EDOs \cite{JennyB2012}
 \begin{equation}
     \frac{\diff^2 \mathbf X^k}{\diff t^2} =
-    % \frac{\diff \mathbf U^k}{\diff t} = 
-    \frac{\mathbf f^k}{ m^{k}} -
+    \frac{\mathbf f_k}{ m_{d,k}} -
     g \frac{\partial z}{\partial \mathbf x}
     \label{eq:Xd}
 \end{equation}
 \begin{equation}
-    \frac{\diff m^{k}_i}{\diff t} = \dot m^{k}_i
+    \frac{\diff m_{d}}{\diff t} = \sum_{k} \dot m_{d,k}
     \label{eq:md}
 \end{equation}
 \begin{equation}
-    \frac{\diff h^{k}_i}{\diff t} = \dot h^{k}_i
-    % m_i^k c_{p,i} \frac{\diff T^{k}}{\diff t} = \dot Q_\net
+    % \frac{\diff h^{k}_i}{\diff t} = \dot h^{k}_i
+    m_i^k c_{L,k} \frac{\diff T_d}{\diff t} = \dot q_d
     \label{eq:Td}
 \end{equation}
-em que $f^k$ representa as forças resultantes da fase gasosa na gota $k$, $g$ é a constante da gravidade e $\dot m^{k}_i$ e $\dot h^{k}_i$ as a taxa de variação de massa e de entalpia da espécie $i$ na gota $k$.
-\question{Usar $h$ e $\dot h^{k}_i$ ou $T$ e $ \dot Q_\net$?}
-Os termos $f^k$, $\dot m^{k}_i$ e $\dot h^{k}_i$ são termos de acoplamento entre as fases na escala da gota, ou seja, representam a interação entre as fases líquida e gasosa na interface da gota.
-Enquanto o primeiro termo é geralmente substituído por uma expressão semi-empírica para o arrasto e um termo de flutuação (\emph{c.f.} \cite[p. 16]{JennyB2012}), os dois últimos precisam de um modelo de transferência de calor e massa (HMT - \emph{Heat and Mass Transfer}).
+em que $f^k$ representa as forças resultantes da fase gasosa na gota $k$, $g$ é a constante da gravidade e $\dot m_{d,k}$ a taxa de variação de massa da espécie $k$ na gota $n$ e o $\dot q_d$ fluxo líquido de calor para a gota.
+$ m_d \sum_k Y_{L,k} c_{L,k}$ é a capacidade térmica da gota, em que 
+$Y_{L,k}$ e $C_{L,k}$ são a fração mássica e o calor específico da  espécie $i$ na fase líquida.
+% \question{Usar $h$ e $\dot h^{k}_i$ ou $T$ e $ \dot Q_\net$?}
+Os termos $f_k$, $\dot m_{d,k}$ e $\dot q$ são termos de acoplamento entre as fases na escala da gota, ou seja, representam a interação entre as fases líquida e gasosa na interface da gota.
+Enquanto o primeiro termo é geralmente substituído por uma expressão semi-empírica para o arrasto e o segundo por um termo de flutuação (\emph{c.f.} \cite[p. 16]{JennyB2012}), os dois últimos precisam de um modelo de transferência de calor e massa (HMT - \emph{Heat and Mass Transfer}).
 
 O modelo HMT pode descrever, por exemplo, a evaporação do combustível líquido e vapor de combustível, que é então queimado utilizando um dos modelos de química como DC ou FGM.
 O mesmo modelo pode descrever também, a condensação de uma espécie de volta para a gota, como o próprio combustível ou a água, no caso de combustíveis hidrofílicos como os álcoois (e.g. metanol e etanol).
@@ -313,19 +313,20 @@ Diferentes abordagem existem para considerar o interior da partícula; algumas s
 \subsubsection{Modelos com Interior de Gota Homogêneo} \label{sec:RMM}
 
 Naturalmente, os primeiros MECs a serem desenvolvidos consideravam gotas esféricas, \textbf{monocomponentes},com interior homogêneo, estacionárias em ambiente quiescente.
-Uma curta revisão dos MEC monocomponentes é apresentada sem detalhes, 
-Como os MECs multicomponente decaem para os MECs monocomponentes quando uma única espécie é utilizada, uma curta revisão histórica dos modelos monocomponentes é realizada, antes de apresentar um modelo multicomponente em detalhe.
-\todo{Melhorar essa merda.}
+Nessa Seção, uma curta revisão dos MEC monocomponentes é apresentada brevemente, seguida pela apresentação do modelo multicomponente desenvolvido em \cite{SacomanoF2022IJHMT}.
+A seção se encerra com alguns comentários sobre termodinâmica de mistura  não ideal.
+% Como os MECs multicomponente decaem para os MECs monocomponentes quando uma única espécie é utilizada, uma curta revisão histórica dos modelos monocomponentes é realizada, antes de apresentar um modelo multicomponente em detalhe.
+% \todo{Melhorar essa merda.}
 
 O primerio MEC foi desenvolvido por Fuchs \cite{Fuchs1959} na década de 1960. 
 Esse modelo considera apenas e transporte por difusão e assume que temperatura da gota já está na sua temperatura equilíbrio de regime quasi-estacionário.
-Assim, esse modelo não é capaz de representar o período de aquecimento da gota.
+Assim, esse modelo não é capaz de representar o período de aquecimento da gota e gravemente subestima a taxa de variação de massa por considerar apenas o transporte por difusão.
 
 A consideração do transporte por convecção em MECs, chamado de escoamento de Stefan (\emph{Stefan flow}), leva ao modelo de Stefan-Fuchs \cite{Law1978}.
 A taxa de variação de massa da partícula nesse modelo pode ser dada tanto a partir do transporte de massa, quando do transporte de energia, de usando os chamados número de transporte de Spalding.
 Esse modelo também faz a hipótese de que a gota está na sua temperatura de equilíbrio no regime quasi-estacionário, não havendo modelo para o fluxo líquido de calor para a gota.
 
-A hipótese de ambiente quiescente pode ser relaxada utilizando correlações experimentais para os números de Nusselt e de Sherwood, como as relações de Ranz-Marshall \source{} e Froessling \source{}. 
+A hipótese de ambiente quiescente pode ser relaxada utilizando correlações experimentais para os números de Nusselt e de Sherwood, como as relações de Ranz-Marshall e Froessling \cite{Bird2002}. 
 A adaptação dessas correlações para uma gota com escoamento de Stefan foi considerada no modelo de Abramzon-Sirignano \cite{Sirignano1989}, que também modelou o período de aquecimento da partícula, desfazendo-se da hipótese de temperatura de equilíbrio quasi-estacionária.
 
 Uma hipótese realizada em todos os modelos supracitados é a de equilíbrio termodinâmico na interface líquido-vapor.
@@ -335,7 +336,34 @@ Ambos modelos foram combinados em uma única formulação matemática por Miller
 Fugindo da metodologia da mecânica do contínuo, o modelo de Hertz-Knudsen-Langmuir \source{Langmuir} modela a taxa de variação da massa da gota baseada em cinética das partículas.
 
 Os MECs \textbf{multicomponente} são naturalmente baseados nos MEC monocomponentes.
-O modelo desenvolvido por Sacomano~et.~al em 2022 \cite{SacomanoF2022IJHMT} e o modelo de Wang~et.~al \source{WangC2013CF} serão apresentados aqui.
+O modelo desenvolvido por Sacomano~et.~al em 2022 \cite{SacomanoF2022IJHMT} considera tanto a gota quanto os gases ambientes como componentes, considera também a difusão diferencial das espécies, uma mistura não ideal e a condição de não equilíbrio termodinâmico na interface líquido-vapor.
+% e o modelo de Wang~et.~al \source{WangC2013CF} serão apresentados aqui.
+Nesse modelo, o fluxo de calor e de massa na interface da gota são dados por 
+\begin{align}
+    \dot q_d =& 4\pi R \lambda \frac{\Nu}{2}(T_\infty - T_s) + \sum_k \dot m_{d,k} L_k \label{eq:dmd} \\
+    \dot m_d =& -4 \pi R \rho \mathcal D_k \frac{\Sh_K}{2}B_{M,k} \label{eq:dqd}
+\end{align}
+em que $R$ é o raio da gota, $\lambda$ a condutividade térmica do gás ao redor da gota, $T_\infty$ a temperatura ambiente e $T_s$ a temperatura da superfície da gota. 
+O subscrito $d$ se refere à gota (\emph{droplet} em inglês) e $k$ à espécie, sendo $\dot m_{d,k}$ a taxa de variação de massa da espécie $k$ na gota e $L_k$ o calor latente de vaporização da espécie $k$.
+$\rho$ é a densidade do gas circundante, $\Nu$ e $\Sh$ são os número de Nusselt e Sherwood, respectivamente, $\mathcal D_k$ é o coeficiente de difusão multicomponente da espécie $k$ e $B_{M,k}$ é o número de transferência de Spalding de massa para a espécie $k$.
+Os números de transferência de Spalding de temperatura e de massa nesse cenário são dados por
+\begin{align}
+    B_T =& \frac
+        {(T_\infty - T_s) \sum_k c_{p,k}\dot m_{d,k}}
+        {\dot q_d - \sum_k \dot m_{d,k} L_k} \label{eq:B_T}\\
+    B_{M,k} =& \frac
+        {\dot m_D Y_{k,s} - \dot m_d Y_{k,\infty}}
+        {\dot m_{d,k} - \dot m_d Y_{k,s}}\label{eq:B_Mk}
+\end{align}
+onde, novamente os subíndices $s$ e $\infty$ se referem à superfície da gota e ao ambiente, $Y$ refere-se à fração mássica e, agora, $c_{p,k}$ refere-se ao calor específico a pressão constate da espécie $k$ na fase gasosa.
+Nas equações \eqref{eq:dmd} e \eqref{eq:dqd}, os números de Nusselt e Sherwood podem ser utilizados para representar os efeitos de ambientes convectivos.
+Porém, o fluxo de Stefan altera a troca de calor e massa da partícula, de modo que as correlações experimentais para gotas não evaporantes precisam ser adaptadas, como mostraram Abramzon e Sirignano \cite{Sirignano1989}.
+A correção para utilizar as correlações empíricas para esses adimensionais  (\emph{c.f.} \cite[eqs. (8) e (9)]{SacomanoF2025CF}), representadas aqui nos símbolos $\Nu^0$ e $\Sh^0$, são
+\begin{align}
+    \Nu =& \frac{\ln \left|B_T + 1\right|}{B_T} \\
+    \Sh =& \frac{\ln \left|B_{M,k} + 1\right|}{B_{M,k}}.
+\end{align}
+
 
 Quanto ao aspecto \textbf{não ideal da mistura}, \cite{SacomanoF2022IJHMT} usou os métodos 
 
@@ -359,15 +387,40 @@ Entretanto, devido à maior complexidade analítica dos modelos de combustão ho
 % Por exemplo, não foram encontrados MCGIs analíticos de combustíveis líquidos que considerassem gotas multicomponentes.
 
 O modelo clássico foi desenvolvido por Godsave-Spalding, baseado no MEC de Stefan-Fuchs \cite{Glassman2008,Law2006,Turns2000}.
-Uma perspectiva histórica dos esforço para relaxar as hipóteses realizadas no modelo inicial pode ser encontrada em \cite{FachiniF1999}, assim como um modelo considerando \todo{...}.
+Nesse modelo, a taxa de variação de massa é dada por
+\begin{equation}
+    \dot m_{d,f} = A_d \frac{\Sh}{2R} \rho D \ln{(1 + B)} \label{eq:m_evap_B_M_2}
+\end{equation}
+em que $m_{d,f}$ é a massa de combustível (assumido o único componente) na gota, $A_d$ é a área da gota e $\rho D$ pode ser substituido por $\lambda/c_p$ devido à hipótese de $\Le=1$.
+Nos modelos MCGI existem três números de transferência de Spalding $B$, devido à resolução de três equações de transporte--de energia, de massa do combustível e do combustível--acopladas dois a dois.
+Os números $B$ são
+\begin{align}
+    B_{f-T}  &= \frac{c_p(T_\infty - T_s) - Y_{f,s} h_C}{h_C(Y_{f,s} - 1) + L_v - \dot q_{\net}/\dot m_{d,f}} \label{eq:B_fq}\\
+    B_{ox-T} &= \frac{c_p(T_\infty - T_s) + \nu Y_{ox,\infty}h_C}{L_v  - \dot q_{\net}/\dot m_{d,f}} \label{eq:B_oq}\\
+    B_{f-ox} &= \frac{\nu Y_{o,\infty} + Y_{f,s}}{1 - Y_{f,s}} \label{eq:B_fo}
+\end{align}
+em que $nu$ é a razão ar-combustível em massa, $h_C=h^0_{F,f} + \nu h^0_{F,ox} - (1+\nu)h^0_{F,pr}$ é a entalpia liberada pela combustão, saldo das entalpias de formação dos reagentes menos a dos produtos.
+Qualquer um dos números de transferência pode ser utilizado para calcular a taxa de variação de massa da gota.
+
+Entretanto, $B_{f-T}$ e $B_{ox-T}$ possuem o termo ainda desconhecido $\dot q_\net$, que é a taxa líquida de calor que provoca o aquecimento da gota.
+Esse termo é negligenciado por alguns livro-texto \cite{Glassman2008,Williams1985}, o que corresponde a assumir que a gota tem inércia térmica desprezível \cite{Turns2000}. 
+Esses modelos que não incluem, portanto, a capacidade de representar o  período de aquecimento da gota.
+Outros, sugerem modelos conceituais como o modelo de "pele de cebola" \cite[cpt. 10]{Turns2000}, porém o autor dessa proposta mostrou em \cite{HenningsJ2024MT} que esse modelo superestima absurdamente o período de aquecimento da gota.
+No mesmo trabalho, o autor propõe utilizar $\dot q_\net$ como o saldo do calor trocado com a chama menos o calor perdido pela evaporação, com bons resultados.
+
+Essa abordagem acopla a solução da evaporação ao saldo do fluxo de calor para a gota, resolvendo aos dois juntos, como sugerido por Abramzon e Sirignano \cite{Sirignano1989}, e feito pelo modelo de Sacomano\etal \cite{SacomanoF2022IJHMT} na equação \eqref{eq:B_T} (vide o termo $\dot q_d$) para o caso de MECs.
+Turns \cite{Turns2000} chama essa abordagem de \emph{slumped parameter.}
+
+Uma perspectiva histórica dos esforço para relaxar as hipóteses realizadas no modelo de Godsave-Spalding pode ser encontrada em \cite{FachiniF1999}, assim como um modelo considerando a dependência da temperatura nos coeficientes de transporte e número de Lewis não unitário.
 Um exemplo desse esforço é \source{Ulzama2006}, que relaxou a hipótese de regime quasi-estacionário na fase gasosa e criou um modelo misto quasi-estacionário-transiente com resultados semelhantes ao modelo clássico.
 
-MCGIs também são estudados para a combustão de pós metálicos que queimam em combustão homogênea \source{}, como o alumínio \cite{HenningsJ2024MT}.
+MCGIs também são estudados para a combustão de pós metálicos que queimam em combustão homogênea, como o alumínio \cite[p. 7]{Bergthorson2015}.
 Alguns trabalhos nessa área se destacam pela sua descrição multicomponente. 
-Zhang\etal \cite{Zhang2022_Coflow,Zhang2022_Counterflow}, por exemplo, obteram uma solução analítica para um modelo extedido de Godsave-Spalding, incluindo um produto da reação de fase gasosa.
+Zhang\etal \cite{Zhang2022_Coflow,Zhang2022_Counterflow}, por exemplo, obtiveram uma solução analítica para um modelo extedido de Godsave-Spalding, incluindo um produto da reação de fase gasosa.
 Esse produto, alumina ($\qAlAlOOO$) no trabalho deles, é produzido na frente de chama e pode ser transportado tanto para a partícula quanto para o ambiente.
-Um desenvolvimento semelhante foi realizado por DesJardin\etal \cite{DesJardin2005}
+Um desenvolvimento semelhante foi realizado por DesJardin\etal \cite{DesJardin2005}.
 Isso é relevante para o etanol por exemplo, cuja combustão produz vapor que pode voltar a se condensar sobre a gota.
+A diferença é que o alumínio e o seu óxido, ambos em estado líquido, são insolúveis, enquanto a água e o álcool são infinitamente solúveis. \source{}.
 
 % O autor dessa proposta tem experiência com MCGI devido ao seu trabalho em combustão de partículas de pó de alumínio \cite{HenningsJ2024MT}.
 % Acredita-se que partículas de alumínio queimem em combustão homogênea gasosa, com metal vaporizado da gota de alumínio líquido \source{}.
