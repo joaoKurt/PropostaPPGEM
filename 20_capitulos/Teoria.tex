@@ -252,8 +252,8 @@ Considere uma única gota dentro do spray, composta por $k=1,\ldots,n-1$ espéci
 Sua posição é dada pelo seu centro de massa $\mathbf X_d$, sua massa por $m_d = \sum_{i=1}^{n-1} m_{i}^k$ e sua temperatura, assumida uniforme em seu interior, por $T_d$.
 A evolução da gota $k$ é então regida pelas EDOs \cite{JennyB2012}
 \begin{equation}
-    \frac{\diff^2 \mathbf X^k}{\diff t^2} =
-    \frac{\mathbf f_k}{ m_{d,k}} -
+    \frac{\diff^2 \mathbf X}{\diff t^2} =
+    \frac{\mathbf f}{ m_{d,k}} -
     g \frac{\partial z}{\partial \mathbf x}
     \label{eq:Xd}
 \end{equation}
@@ -277,9 +277,11 @@ O modelo HMT pode descrever, por exemplo, a evaporação do combustível líquid
 O mesmo modelo pode descrever também, a condensação de uma espécie de volta para a gota, como o próprio combustível ou a água, no caso de combustíveis hidrofílicos como os álcoois (e.g. metanol e etanol).
 Nesse cenário, o modelo HMT é denominado de Modelo de Evaporação e Condensação (MEC).
 
-O uso de um MEC junto de um modelo de combustão gasosa como DC ou FGM representa uma chama de spray no modo de combustão de grupo externa ou interna ou combustão externa em lâmina (tradução livre de \emph{external sheet combustion}), de acordo com a classificação de Chiu \source{Chiu1977, Chiu1982}
-Entretanto, não representa a combustão de gota isolada, já que, nesse cenário, a combustão ocorre na mesma escala que a gota.
-Para modelar a combustão de gota isolada, é necessário um novo modelo HMT para a gota, que inclua uma frente de chama envolvendo a gota, denominado Modelo de Combustão de Gota Isolada (MCGI). 
+O uso de um MEC junto de um modelo de combustão gasosa como DC ou FGM representa uma chama de spray no modo de combustão de grupo externa ou combustão externa com frente de chama, onde as gotas evaporam e fornecem vapor combustível para frente de chama, que não está acoplada a nenhuma gota individualmente.
+Ao contrário, a chama pode estar circundando uma única gota, na chamada combustão de gota isolada.
+% de acordo com a classificação de Chiu \source{Chiu1977, Chiu1982}
+% Entretanto, não representa a combustão de gota isolada, já que, nesse cenário, a combustão ocorre na mesma escala que a gota.
+Para modelar a combustão de gota isolada, é necessário um novo modelo HMT para a gota, que inclua essa frente de chama envolvente, denominado Modelo de Combustão de Gota Isolada (MCGI). 
 
 
 \subsection{Modelos de Evaporação e Condensação (MEC)} \label{sec:MEC}
@@ -313,16 +315,16 @@ Diferentes abordagem existem para considerar o interior da partícula; algumas s
 \subsubsection{Modelos com Interior de Gota Homogêneo} \label{sec:RMM}
 
 Naturalmente, os primeiros MECs a serem desenvolvidos consideravam gotas esféricas, \textbf{monocomponentes},com interior homogêneo, estacionárias em ambiente quiescente.
-Nessa Seção, uma curta revisão dos MEC monocomponentes é apresentada brevemente, seguida pela apresentação do modelo multicomponente desenvolvido em \cite{SacomanoF2022IJHMT}.
-A seção se encerra com alguns comentários sobre termodinâmica de mistura  não ideal.
+Nessa Seção, uma curta revisão dos MEC monocomponentes é apresentada, seguida pela apresentação do modelo multicomponente desenvolvido em \cite{SacomanoF2022IJHMT}.
+A seção se encerra com alguns comentários sobre termodinâmica de mistura não ideal.
 % Como os MECs multicomponente decaem para os MECs monocomponentes quando uma única espécie é utilizada, uma curta revisão histórica dos modelos monocomponentes é realizada, antes de apresentar um modelo multicomponente em detalhe.
 % \todo{Melhorar essa merda.}
 
-O primerio MEC foi desenvolvido por Fuchs \cite{Fuchs1959} na década de 1960. 
+O primerio MEC foi desenvolvido por Fuchs \cite{Fuchs1959} na década de 1960 e é também chamado de modelo de Maxwell.
 Esse modelo considera apenas e transporte por difusão e assume que temperatura da gota já está na sua temperatura equilíbrio de regime quasi-estacionário.
 Assim, esse modelo não é capaz de representar o período de aquecimento da gota e gravemente subestima a taxa de variação de massa por considerar apenas o transporte por difusão.
 
-A consideração do transporte por convecção em MECs, chamado de escoamento de Stefan (\emph{Stefan flow}), leva ao modelo de Stefan-Fuchs \cite{Law1978}.
+A consideração do transporte por convecção em MECs, chamado de escoamento de Stefan (\emph{Stefan flow}), leva ao modelo de Stefan-Maxwell \cite{Law1978}.
 A taxa de variação de massa da partícula nesse modelo pode ser dada tanto a partir do transporte de massa, quando do transporte de energia, de usando os chamados número de transporte de Spalding.
 Esse modelo também faz a hipótese de que a gota está na sua temperatura de equilíbrio no regime quasi-estacionário, não havendo modelo para o fluxo líquido de calor para a gota.
 
@@ -336,23 +338,23 @@ Ambos modelos foram combinados em uma única formulação matemática por Miller
 Fugindo da metodologia da mecânica do contínuo, o modelo de Hertz-Knudsen-Langmuir \source{Langmuir} modela a taxa de variação da massa da gota baseada em cinética das partículas.
 
 Os MECs \textbf{multicomponente} são naturalmente baseados nos MEC monocomponentes.
-O modelo desenvolvido por Sacomano~et.~al em 2022 \cite{SacomanoF2022IJHMT} considera tanto a gota quanto os gases ambientes como componentes, considera também a difusão diferencial das espécies, uma mistura não ideal e a condição de não equilíbrio termodinâmico na interface líquido-vapor.
+O modelo desenvolvido por Sacomano~et.~al em 2022 \cite{SacomanoF2022IJHMT} considera tanto a gota quanto os gases ambientes como multicomponentes, assim como a difusão diferencial das espécies e um comportamento de mistura não ideal.% e a condição de não equilíbrio termodinâmico na interface líquido-vapor.
 % e o modelo de Wang~et.~al \source{WangC2013CF} serão apresentados aqui.
-Nesse modelo, o fluxo de calor e de massa na interface da gota são dados por 
+Nesse modelo, a taxa de transferência de calor e de massa na interface da gota são dados por 
 \begin{align}
     \dot q_d =& 4\pi R \lambda \frac{\Nu}{2}(T_\infty - T_s) + \sum_k \dot m_{d,k} L_k \label{eq:dmd} \\
-    \dot m_d =& -4 \pi R \rho \mathcal D_k \frac{\Sh_K}{2}B_{M,k} \label{eq:dqd}
+    \dot m_d =& -4 \pi R \rho D_k \frac{\Sh_k}{2}B_{M,k} \label{eq:dqd}
 \end{align}
 em que $R$ é o raio da gota, $\lambda$ a condutividade térmica do gás ao redor da gota, $T_\infty$ a temperatura ambiente e $T_s$ a temperatura da superfície da gota. 
 O subscrito $d$ se refere à gota (\emph{droplet} em inglês) e $k$ à espécie, sendo $\dot m_{d,k}$ a taxa de variação de massa da espécie $k$ na gota e $L_k$ o calor latente de vaporização da espécie $k$.
-$\rho$ é a densidade do gas circundante, $\Nu$ e $\Sh$ são os número de Nusselt e Sherwood, respectivamente, $\mathcal D_k$ é o coeficiente de difusão multicomponente da espécie $k$ e $B_{M,k}$ é o número de transferência de Spalding de massa para a espécie $k$.
-Os números de transferência de Spalding de temperatura e de massa nesse cenário são dados por
+$\rho$ é a densidade do gas circundante, $\Nu$ e $\Sh$ são os número de Nusselt e Sherwood, respectivamente, $D_k$ é o coeficiente de difusão multicomponente da espécie $k$ e $B_{M,k}$ é o número de transferência de Spalding de massa para a espécie $k$.
+Os números de transferência de Spalding de energia e de massa nesse cenário são dados por
 \begin{align}
     B_T =& \frac
         {(T_\infty - T_s) \sum_k c_{p,k}\dot m_{d,k}}
         {\dot q_d - \sum_k \dot m_{d,k} L_k} \label{eq:B_T}\\
     B_{M,k} =& \frac
-        {\dot m_D Y_{k,s} - \dot m_d Y_{k,\infty}}
+        {\dot m_d Y_{k,s} - \dot m_d Y_{k,\infty}}
         {\dot m_{d,k} - \dot m_d Y_{k,s}}\label{eq:B_Mk}
 \end{align}
 onde, novamente os subíndices $s$ e $\infty$ se referem à superfície da gota e ao ambiente, $Y$ refere-se à fração mássica e, agora, $c_{p,k}$ refere-se ao calor específico a pressão constate da espécie $k$ na fase gasosa.
@@ -364,29 +366,49 @@ A correção para utilizar as correlações empíricas para esses adimensionais 
     \Sh =& \frac{\ln \left|B_{M,k} + 1\right|}{B_{M,k}}.
 \end{align}
 
+No cálculo de $B_{M,k}$, é necessário conhecer a fração mássica do vapor da espécie $k$ na superfície da gota.
+Para misturas ideais, isso é feito pela Lei de Raoult, que dita $X_{k,s}=P^v_{k,s}/P_s$, onde $P^v_{k,s}$ é a pressão de vapor e $X_{k,s}$ é a fração molar de vapor da espécie $k$, relacionada a fração mássica pelas massas molares dos componentes da mistura gasosa \cite{Peters2010}.
+A pressão de vapor pode ser obtida pela equação de Clapeyron, pela equação de Wagner ou pela equação de Antoine.
+Uma comparação dos diferentes modelos para a pressão de vapor foi realizado por \cite{SacomanoF2019IJHMT}.
 
-Quanto ao aspecto \textbf{não ideal da mistura}, \cite{SacomanoF2022IJHMT} usou os métodos 
+% O aspecto \textbf{não ideal da mistura} se manifesta em um desvio da Lei de Raoult, usada para calcular a fração molar de vapor de uma espécie a partir da pressão de vapor dessa espécie e da pressão total, todas na superfície da gota. 
+Já em uma \textbf{mistura não ideal}, há um desvio da Lei de Raoult. 
+A fração molar de vapor pode então ser calculada por uma equação de estado não ideal ou através do cálculo dos coeficientes de atividade de cada espécie para representar a sua fugacidade \cite{Bird2002}.
+\cite{SacomanoF2022IJHMT} utilzaram os métodos de  Raoult (ideal) e UNIFAC (não-ideal) para calcular os coeficientes de fugacidade, enquanto \cite{SacomanoF2025CF} utilizou o método de van Laar.
+\cite{ZanuttoC2019} utilizou o método UNIFAC para os coeficientes de atividade da fase líquida e a equação de estado real Virial para a fase gasosa.
+% Os trabalho de Sacomano\etal utilizam utilizam a abordagem de representar a fugacidade de cada espécie em termos dos seus coefientes de atividade . Em \cite{SacomanoF2022IJHMT}, os coeficientes de atividade 
 
 
 \subsubsection{Modelos para o Interor da Gota} \label{sec:int}
 
-\source{ChenL2016IJHMT, ZanuttoC2019, MacquaC2008}
+Em todos os modelos apresentados até agora, a temperatura e composição do interior da gota foram considerados ou (1) uniforme e contante (modelos que não representam o período de aquecimento da gota); (2) uniforme e variando no tempo (modelos com condutividade térmica e difusividade mássica da fase líquida infinitas).
+Esses são os dois primeiros graus de complexidade da representação do interior da gota.
+Os próximos são: (3) modelos com difusividade térmica e mássica finitas, mas sem recirculação; (4) modelos que consideram a recirculação em um fator de correção para as diffusividades térmica e mássica (chamados modelos de condutividade/difusividade efetiva); (5) nodelos que descrevem a recirculação dentro da gota usando dinâmica de vórtices (modelos de vórtice); (6) modelos que resolvem o interior da gota (Navier-Stokes completo, i.e. DNS). \cite{Sazhin2006}
+
+As abordagens (1)-(4) são as mais usadas para aplicação CFD por serem robustas e computacionalmente baratas. 
+A abordagem (5) é por vezes  utilizada para desenvolver um modelo de condutividade/diffusividade efetiva, como fizeram Abramzon e Sirignano em \cite{Sirignano1989}.
+Já a abordagem (6) só é viável computacionalmente na escala de uma (ou poucas) gotas, de modo que é relevante para estudar a modelagem de diferentes fenômenos físicos, assim como para fornecer material para a validação de modelos de gotas masi simples.
+
+
+% \source{ChenL2016IJHMT,ZanuttoC2019,MacquaC2008}
 
 
 \subsection{Modelos de Combustão Homogênea de Gota Isolada (MCGI)} \label{sec:MCGI}
 
-Em MCGI, as hipóteses de combustão homogênea em fase gasosa, com uma reação infinitamente rápida em uma única etapa, removem o problema da cinética química e permite que a chama seja controlada apenas pela difusão do combustível -- da gota para a chama -- e do oxidante -- do ambiente para a chama.
-Dessa forma, a chama se ocorre onde o fluxo de massa do combustível está em proporção estequiométrica com o fluxo de oxidante, vindo de sentido contrário. 
+Em MCGI, as hipóteses de combustão homogênea em fase gasosa, com uma reação infinitamente rápida em uma única etapa, removem o problema da cinética química e permitem que a chama seja controlada apenas pela difusão do combustível -- da gota para a chama -- e do oxidante -- do ambiente para a chama.
+Dessa forma, a chama ocorre onde o fluxo de massa do combustível está em proporção estequiométrica com o fluxo de oxidante, vindo de sentido contrário. 
 Os fluxos de combustível e de oxidante, por sua vez, vem de MECs.
 Portanto, os MCGIs se baseiam nos modelos de evaporação e condensação já desenvolvidos.
 
 Assim, as mesmas hipóteses realizadas para MECs são utilizadas em MCGIs também, como regime quasi-estacionário e interior de gota homogêneo.
-Também os mesmos problemas e aprimoramentos já mencionados se fazem necessários em MCGIs, como descrição multicomponente, comportamento não ideal de mistura, condição de não equilíbrio termodinâmico na interface líquido-vapor, além de uma descrição dos efeitos oriundos do interior da gota.
+Também os mesmos problemas e aprimoramentos já mencionados se fazem necessários em MCGIs, como descrição multicomponente, comportamento não ideal de mistura e  
+descrição dos efeitos oriundos do interior da gota.
+% condição de não equilíbrio termodinâmico na interface líquido-vapor, 
 
-Entretanto, devido à maior complexidade analítica dos modelos de combustão homogênea de gota isolada, os modelos analíticos para essa situação consideram muito menos efeitos que os MECs.
+Entretanto, devido à maior complexidade analítica dos modelos de combustão homogênea de gota isolada, os modelos analíticos encontrados na literatura consideram muito menos efeitos que os MECs.
 % Por exemplo, não foram encontrados MCGIs analíticos de combustíveis líquidos que considerassem gotas multicomponentes.
 
-O modelo clássico foi desenvolvido por Godsave-Spalding, baseado no MEC de Stefan-Fuchs \cite{Glassman2008,Law2006,Turns2000}.
+O modelo clássico foi desenvolvido por Godsave-Spalding, baseado no MEC de Stefan-Maxwell \cite{Glassman2008,Law2006,Turns2000}.
 Nesse modelo, a taxa de variação de massa é dada por
 \begin{equation}
     \dot m_{d,f} = A_d \frac{\Sh}{2R} \rho D \ln{(1 + B)} \label{eq:m_evap_B_M_2}
@@ -434,7 +456,7 @@ A diferença é que o alumínio e o seu óxido, ambos em estado líquido, são i
 % Modelo de multi-sheet \cite{King2009} e \cite{Wang2021}.
  
 
-% Por outro lado, outros desenvolvimentos na decáda de 1980 e 1990 focaram em reduzir as hipóteses presentes no modelo de Stefan-Fuchs, principalmente no tange à dependência dos coeficientes de transporte na temperatura em em números de Lewis não unitários.
+% Por outro lado, outros desenvolvimentos na decáda de 1980 e 1990 focaram em reduzir as hipóteses presentes no modelo de Stefan-Maxwell, principalmente no tange à dependência dos coeficientes de transporte na temperatura em em números de Lewis não unitários.
 % Um desses trabalhos é Fachini \source{ FachiniF1999}.
 
 % Já Ulzama \source{Ulzama2006} considerou efeitos transitórios na modelagem da fase gasosa, criando um modelo misto transitório-quasi-estacionário.
@@ -442,6 +464,26 @@ A diferença é que o alumínio e o seu óxido, ambos em estado líquido, são i
 
 \subsubsection{Modelos de Modo de Combustão de Gotas}
 
-Mencionar relevância para ignição de sprays e \cite{AggarwalS2014}.
-\source{UmemuraA1994} com asymptothic theory.
-\source{BorghesiG2013CF} com DNS para detectar.
+Mencionou-se, no final da Seção \ref{sec:gotas}, que a combustão de spray pode ocorrer com diferentes modos, como a combustão de grupo externa e a combustão de gota isolada.
+Existem, entretanto, outros modos de combustão de spray.
+Não há consenso na literatura sobre como classificar os diferentes comportamentos, nem como prevê-los.
+Um modelo bem recebido é o modelo de Chiu e Liu \source{ChiuH1977, ChiuH1982}, que cria o parâmetro de combustão de grupo $G\propto N^{2/3}/S$, em que $N$ é o número de gotas e $S\propto l/D$ é o espaçamento médio normalizado pelo o diâmetro médio das gotas.
+Com $G$, os autores delimitam os diferentes modos de combustão: combustão de gota isolada, combustão de grupo interna, combustão de grupo externa e combustão em frente externa.
+
+% Dessa forma, a identificação de quando ocorre a combustão de gota isolada está relacionado ao estudo de combustão em grupo de gotas.
+
+Diferentes modos de combustão de spray, incluindo a combustão de gota isolada, já foram observados em experimentos (e.g. \source{ChenG1996CF,CandelS1999,SinghG2020,ZhouH2024}) e em simulações DNS (e.g. \source{BorghesiG2013CF}) e LES (e.g.\source{Paulhiac}).
+Revisões sobre combustão em grupo podem ser encontradas em \cite{Annamalai1992,SirignanoW2014}.
+
+Como mencionado também, a combustão de gota isolada está relacionada ao fenômeno de ignição de sprays \cite{AggarwalS2014}.
+Dessa forma, trabalhos sobre esse tema são relevantes para identificar modelos de modos de combustão de gotas.
+Por exemplo a revisão \source{ZhangY2023ECM} e os modelos \source{ZhouH2021,ZhouH2021CAF}. 
+
+% Diferentes modelos foram desenvolvidos para a combustão de 
+
+% Mencionar relevância para ignição de sprays e \cite{AggarwalS2014}.
+% \source{UmemuraA1994} com asymptothic theory.
+% \source{BorghesiG2013CF} com DNS para detectar.
+% \source{Annamalai1992}
+
+
