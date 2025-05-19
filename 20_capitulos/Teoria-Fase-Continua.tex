@@ -1,0 +1,90 @@
+
+As equações de transporte resultantes estão descritas abaixo, \emph{cf.} \cite{JennyB2012}.
+
+\begin{equation}
+    \frac{\partial \rho Y^\beta}{\partial t} + 
+    \frac{\partial \rho Y^\beta U_j}{\partial x_j} =
+    - \frac{\partial J_j^\beta}{\partial x_j} +
+    S^\beta -
+    \dot \rho^{\beta^D}
+\end{equation}
+\begin{equation}
+    \frac{\partial \rho U_i}{\partial t} + 
+    \frac{\partial \rho U_i U_j}{\partial x_j} =
+    - \frac{\partial p}{\partial x_i} +
+    \frac{\partial \tau_{ij}}{\partial x_j} -
+    \rho g\frac{\partial z}{\partial x_i} -
+    \dot M_i^D -
+    f_i^D
+\end{equation}
+\begin{equation}
+    \frac{\partial \rho E}{\partial t} + 
+    \frac{\partial \rho H U_j}{\partial x_j} =
+    \frac{\partial J_j^h}{\partial x_j} +
+    \rho U_i g \frac{\partial z}{\partial x_i} +
+    Q -
+    \dot Q^D -
+    \dot q^D
+\end{equation}
+
+Essas equações de transporte são respectivamente da fração mássica da espécie $\beta$, $Y^\beta$, da quantidade de momento na direção $i$, $\rho U_i$ e da energia $E=e+(1/2)U_iU_i+zg$. 
+Os termos de interação entre fases são aqueles com o sobrescrito $D$ (de \emph{droplet} - gota).
+Com excessão dos termos, $\dot M_i^D$ e $f_i^D$, que correspondem às trocas de momentum e força, os termos restantes, $\dot \rho^{\beta^D}$, $\dot Q^D$ e $\dot q^D$ são oriundos dos modelos de transferência de calor e massa, detalhados na Seção \ref{sec:MEC} e \ref{sec:MCGI}. 
+
+O groupo de pesquisa tem experiência com simulações de largas escalas (LES - \emph{Large Eddy Simulations}), nas quais as equações de transporte são decompostas entre sub-escala e escala, $\psi = \widetilde\psi + \psi^"$, e filtradas espacialmente e de forma ponderada com a densidade, $\widetilde\psi = \overline{\rho\psi}/\overline\rho$, em que $\psi$ corresponde a uma variável qualquer. 
+Em uma formulação compressível para baixos números de Mach, as equações de continuidade e de quantidade de movimento são (\emph{cf}. \cite{SacomanoF2017CF})
+% Usar forma do SacomanoF2020CF #DONE
+\begin{equation}
+\frac{\partial \bar \rho}{\partial t} + 
+\frac{\partial \bar \rho \widetilde u_i}{\partial x_i} = 
+\overline S_v
+\end{equation}
+\begin{equation}
+\frac{\partial \bar\rho \widetilde u_i}{\partial t} + 
+\frac{\partial \bar\rho \widetilde u_i \widetilde u_j}{\partial x_j} =
+\frac{\partial }{\partial x_j} \left(
+	2\bar\mu \widetilde S_{ij} -
+	\frac{2}{3}\bar\mu \frac{\partial \widetilde u_k}{\partial x_k} \delta_{ij} -
+	\bar\rho \tau_{ij}^{\text{sgs}}
+\right) -
+\frac{\partial \bar p}{\partial x_i} +
+\bar p g_i + 
+\overline S_{u,i}
+\end{equation}
+em que os termos $\overline S_v$ e $\overline S_{u,i}$ são os termos de acoplamento de fase de massa e de momento.
+Essa formulação foi utilizada em \cite{SacomanoF2017PhD, SacomanoF2017CF, SacomanoF2020CF} junto com a abordagem química FGM (\emph{Flamelet Generated Manifold}), explicada na próxima Seção, no desenvolvimento de um método de espessamento de chama dinâmico (ATF - \emph{Artificially Thickened Flame}).
+
+Essas são as simulações mais completas de combustão turbulenta de sprays, que podem ser utilizadas em cenário reais.%, inclusive para simular cenários realizados também em experimentos, para validação dos métodos numérocos utilizados, como em \source{}.
+Entretando, também é relevate realizar simulações laminares em configurações mais simples, canônicas, para investigar alguns aspectos da modelagem individualmente. 
+Para isso, a configuração de chama de propagação livre laminar em uma névoa de gotas foi simulada pelo grupo de pesquisa em \cite{SacomanoF2018CTM, SacomanoF2019IJHMT} no software CHEM1D \cite{Sommers1994PhD}.
+Nesse caso, as equações de conservação de massa, espécie e entalpia escritas também em uma formulação compressível para baixos números de Mach, são \cite{SacomanoF2018CTM,SacomanoF2021Fluids,vanOijen2002CTM,vanOijen2016PECS}
+\begin{equation}
+    \frac{d \dot m}{d s} = \dot S_V^L
+\end{equation}
+\begin{equation}
+    \frac{\partial(\dot m Y_i)}{\partial s} -
+    \frac{\partial}{\partial s} \left(
+        \frac{\lambda}{\mathrm{Le}_i c_p} \frac{\partial Y_i}{\partial s}
+    \right) =
+    \dot \omega_i + \delta_{ik}S_V^L
+\end{equation}
+\begin{equation}
+    \frac{\partial(\dot m h)}{\partial s}
+    -
+    \frac{\partial}{\partial s} \left(\frac{\lambda}{c_p} \frac{\partial h}{\partial s} \right)
+    =
+    \frac{\partial}{\partial s} \left(
+            \frac{\lambda}{c_p}\sum_{i=1}^{N_s}
+            \left(\frac{1}{\mathrm{Le}_i}-1\right)
+            h_i \frac{\partial Y_i}{\partial s} 
+        \right)
+        +
+    S_h^L
+\end{equation}
+em que $\dot S_V^L$ e $S_h^L$ são os termos de acoplamento de fase de massa e entalpia.
+Em 2018, Sacomano~et.~al \cite{SacomanoF2018CTM} resolvem a química com o método FGM para explorar as capacidades e limitações desse método.
+Em 2019, \cite{SacomanoF2019IJHMT}, os autores utilizam química detalhada para mostrar que é possivel representar a mistura gasosa com um subconjunto reduzido de espécies.  
+
+% Modelagem CHEM1D. 
+% Modelagem LES.
+% Experiência com DTF.

@@ -23,42 +23,47 @@
 A demanda pela transição energética e pela descarbonização da economia busca alternativas para substituição dos combustíveis fósseis nos setores de energia, transporte, indústria. 
 Alguns setores, como o energético e o de transportes urbano de baixa carga, têm mostrado grande progresso no uso de energias renováveis e na eletrificação, respectivamente \cite{MasriA2021}. 
 Porém, combustíveis fósseis são extremamente difíceis de substituir em outros setores, especialmente os combustíveis líquidos.
-São estes os que possuem maior energia específica e densidade energética \cite{Bergthorson2017,Julien2017}, logo mais adequados para aplicações de transporte, como no setor automotivo de cargas pesadas, naval e aeronáutico \cite{MasriA2021}.
-Além do setor de transporte, combustíveis líquidos são importantes para algumas indústrias como aço e cimento, para algumas termoelétricas e até para máquinas de pequeno porte, portáteis, movidas a motor de combustão interna (MCI).
-Por fim, uma análise histórica indica que a transição para fontes renováveis se dará ao longo de décadas \cite{MasriA2021}.
+Estes possuem maior energia específica e densidade energética \cite{Bergthorson2017,Julien2017}, assim adequados para aplicações de transporte, como no setor automotivo de cargas pesadas, naval e aeronáutico \cite{MasriA2021}.
+Combustíveis líquidos são importantes também para algumas indústrias como aço e cimento, para algumas termoelétricas e até para máquinas de pequeno porte portáteis movidas a motor de combustão interna (MCI).
+Soma-se a isso uma análise histórica que indica que a transição para fontes renováveis se dará ao longo de décadas \cite{MasriA2021}.
 
-% São exemplos de combustíveis líquidos a gasolina, o etanol, o diesel, o kerosene, o kerosene de aviação, etc. 
-% O etanol, em particular, é de grande relevância para o Brasil e para a India.
+% #TODO 4 O etanol, em particular, é de grande relevância para o Brasil e para a India. 
 
 Nota-se que processos de combustão continuarão relevantes nas próximas décadas.
 Em especial, todas as aplicações mencionadas baseiam-se na combustão turbulenta de sprays líquidos.
 Assim, soluções devem ser procuradas para conciliar essa tecnologia com os esforços de transição energética e descarbonização da economia.
-A comunidade científica busca, então, três caminhos: \textbf{(i)} novos combustíveis; \textbf{(ii)} novas origens para os mesmos combustíveis; \textbf{(iii)} melhorar a eficiência dos motores a combustão e reduzir a formação de poluentes.
-
-% Mencionar objetivo ser o desenvolvimento de modelos robustos e eficientes para aplicação em CFD. 
+A comunidade científica busca, então, três caminhos: \textbf{(i)} desenvolver novos combustíveis; \textbf{(ii)} desenvolver novas origens para os mesmos combustíveis; \textbf{(iii)} melhorar a eficiência dos motores a combustão e reduzir a formação de poluentes.
 
 Independente da origem do combustível, o processo de combustão deve ser compreendido para que motores e queimadores eficientes e com baixa emissão de poluentes sejam desenvolvidos.
-Para tanto é necessário pesquisa em combustão, que pode ser estruturada em trabalhos experimentais ou trabalhos de modelagem.
+Para tanto é necessário pesquisa em combustão, que pode ser estruturada em trabalhos experimentais e trabalhos de modelagem.
 A modelagem da combustão turbulenta de sprays, foco desse trabalho, deve ser capaz de representar diferentes combustíveis líquidos, incluindo combustíveis oriundos das demandas (i) e (ii).
 Deve também representar os diferentes fenômenos envolvidos nesse processo, como ignição e formação de poluentes, para atender a demanda (iii).
-No âmbito da combustão turbulenta de sprays, é de extrema importância o modelo de transferência de calor e massa da gota (líquida) para a fase gasosa, ou seja, o modelo de evaporação e condensação das gotas do spray.
-É conhecido que essa modelagem tem enorme influência na chama \cite{JennyB2012}, influenciando a sua estrutura, temperatura, geometria e, por consequência, formação de poluentes também.
+No âmbito da combustão turbulenta de sprays, é de extrema importância o modelo de transferência de calor e massa da gota (líquida) para a fase gasosa (HMT -\emph{Heat and Mass Transfer})
+Esse modelo rege, dentre outros aspectos, a taxa de vaporização do combustível das gotas do spray.
+É conhecido que essa modelagem tem enorme influência na chama \cite{JennyB2012}, influenciando a sua estrutura, temperatura, geometria e formação de poluentes.
 
-Nesse sentido, revisando a literatura mais recente, nota-se a necessidade de maior desenvolvimento desses modelos de evaporação e condensação (MEC) para representar corretamente diferentes combustíveis.
+% #TODO 1 revisar ligação aqui (ver review, parte roxa)
+Nesse sentido, revisando a literatura mais recente, nota-se a necessidade de maior desenvolvimento de modelos de evaporação e condensação (MEC) para representar corretamente diferentes combustíveis.
 Por exemplo, modelos monocomponentes com equilíbrio termodinâmico não são capazes de representar todos os fenômenos associados, por exemplo, à combustão de etanol.
 Em especial, nota-se uma demanda pela aplicação de modelos complexos, desenvolvidos e testados na escala de uma única gota, em simulações de combustão de larga escala.
-Para representar combustíveis como o etanol, anidro ou hidratado, é necessário uma modelar a gota de forma \textbf{multicomponente}, considerando \textbf{termodinâmica de mistura não-ideal} e os efeitos de transferência de calor e massa no \textbf{interior da gota}.
+Para representar combustíveis como o etanol, combustível de importância estratégica para o Brasil, é necessário uma modelar a gota de forma \textbf{multicomponente}, considerando \textbf{termodinâmica de mistura não-ideal} e os efeitos de transferência de calor e massa no \textbf{interior da gota}.
 
-No modelo descrito acima, a reação química é resolvida separadamente do modelo da gota. %#TODO rever essa ligação aqui.
-Isso corresponde a uma chama longe e não presa a gota, em que a chama é alimentada pelo vapor de combustível oriundo de várias gotas evaporando. 
-Em contraste, é possível que ocorra a combustão de uma gota isolada, com uma frente de chama próxima e circundante à gota, a uma distância na mesma ordem de grandeza que o diâmetro da gota.
-Isso é chamado \textbf{combustão de gota isolada}.
-Revisando a literatura, constatou-se que não é muito claro quando a combustão de gota isolada ocorre \source{}, nem o seu efeito na chama em larga escala.
+% No modelo descrito acima, a reação química é resolvida separadamente do modelo da gota. 
+% Isso corresponde a uma chama longe e não presa a gota, em que a chama é alimentada pelo vapor de combustível oriundo de várias gotas evaporando.
+% Em contraste, é possível que ocorra a combustão de uma gota isolada, com uma frente de chama próxima e circundante à gota, a uma distância na mesma ordem de grandeza que o diâmetro da gota.
+Em MECs, a evaporação da gota fornece vapor de combustível que alimenta a chama.
+Nessa abordagem, a chama não está atrelada a nenhuma gota específica, mas queima com o vapor fornecido pelo spray. 
+Em contraste, é possível que as gotas entrem em combustão individualmente, com a evaporação de combustível alimentando uma frente de chama próxima e circundante à cada gota, a uma distância na mesma ordem de grandeza que o diâmetro da gota.
+Isso é chamado \textbf{combustão de gota isolada} e sua modelagem também constitui um modelo de HMT para as gotas.
+Revisando a literatura, constatou-se que não é muito claro quando a combustão de gota isolada ocorre \cite[p. 8]{JennyB2012}, nem o seu efeito na chama em larga escala.
 Sabe-se que a combustão de gota isolada é importante para a ignição do spray \cite{AggarwalS2014}, mas não foram encontrados estudos sobre o seu impacto na estrutura da chama.
+Notou-se também a necessidade de desenvolver modelos de combustão de gota isolada (MCGI) capazes de representar corretamente diferentes combustíveis, ou seja, MCGIs com as mesmas capacidades que os MECs.
+% Mencionar objetivo ser o desenvolvimento de modelos robustos e eficientes para aplicação em CFD.  #DONE
+
 
 \subsection{Objetivos} \label{sec:objetivos}
 
-Com isso em vista, a presente tese visa estudar e desenvolver modelos analíticos para a transferência de calor e masssa em gotas em dois cenários: 
+Com isso em vista, a presente tese visa estudar a viabilidade de desenvolver modelos analíticos para a transferência de calor e masssa em gotas em dois cenários: 
 \begin{enumerate}
     \item[\textbf{A.}] Modelo de Evaporaçào e Condensação (MEC); e 
     \item[\textbf{B.}] Modelo de Combustão de Gota Isolada (MCDI).
@@ -66,15 +71,16 @@ Com isso em vista, a presente tese visa estudar e desenvolver modelos analítico
 Esses modelos devem considerar os seguintes aspectos: 
 \begin{enumerate}
     \item[\textbf{1.}] Descrição multicomponente da gota; 
-    \item[\textbf{2.}] Mistura com termodinâmica não-ideal; 
-    \item[\textbf{3.}] Efeitos de transferência	de calor e massa no interior da gota. 
+    \item[\textbf{2.}] Gota com termodinâmica de mistura não-ideal; 
+    \item[\textbf{3.}] Consideração dos feitos de transferência	de calor e massa no interior da gota. 
 \end{enumerate}
 O objetivo é desenvolver simulações de larga escala com ambos modelos, {A} e {B}, com a capacidade:
 \begin{enumerate}
     \item[\textbf{4.}] Determinação de quando ocorre a combustão de gota isolada;
 \end{enumerate}
-ou seja, de determinar se utiliza modelo {A} ou o modelo {B}.
+ou seja, de determinar se a gota se encontra no cenário  {A} ou {B} e escolher o modelo apropriado.
 Dessa forma, o autor visa investigar o efeito de cosiderar a combustao de gota isolada, e dos aspectos {1}, {2} e {3}, na estrutura da chama.
+Os modelos desenvolvidos devem ser robustos e computacionalmente eficientes para aplicação em simulações CFD (\emph{Computational Fluid Dynamics}).
 A investigação da estrutura da chama inclui a investigação de aspectos como destribuição de temperatura e concentraçoes de espécies, o que é essencial para a determinação da ignição, da eficiência de combustão e das emissões de poluentes.
 
 
