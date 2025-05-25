@@ -9,35 +9,25 @@ Como apresentado nas Seções \ref{sec:MEC} e \ref{sec:MCGI}, algumas dessas fun
 \yellow{A principal estratégia} para modelar o HMT de gotas nos cenários {A} e {B} com as funcionalidades desejadas será pelo desenvolvimento de modelos integrais.
 Esse desenvolvimento tomará como base os modelos já existentes na literatura e se dará de forma gradual e incremental.
 O desenvolvimento se dará por meio dos seguintes métodos.
-% Dada a complexidade dos assuntos, o desenvolvimento será feito de forma  gradual e incremental, aumentando as funcionalidades do modelo fenômeno por fenômeno.
 
 \textbf{Revisão de literatura}. 
 A revisão de literatura visa levantar e aprofundar a compreensão sobre os modelos já  existentes de evaporação e condensação e de combustão de gota isolada, assim como o dos aspectos multicomponente, de mistura não ideal, consideração do interior da gota e o estudo de quando ocorre a combustão de gota isolada.
 Vários modelos nos diferentes temas compreendidos por essa proposta já foram apresentados nas Seções \ref{sec:MEC} e \ref{sec:MCGI}.
 Eles abrangem diferentes aspectos e abordagens para a modelagem dos problemas propostos e constituem uma boa base inicial para essa pesquisa. 
-% Em alguns aspectos, essa tarefa consiste do estudo detalhado dos modelos já encontrados, como os modelos de Abramzon-Sirignano \cite{Sirignano1989}, de Bellan-Harstad \citeyear{BellanJ1987} e da formulação de Miller \cite{MillerR1998}, na área de MEC monocomponente.
-% Em outras ou dos desenevolvimentos da equipe de pesquisa na área de MEC multicomponente \cite{SacomanoF2022IJHMT,SacomanoF2025CF,SantosA2024IJHMT}
-% Em alguns temas, como MEC monocomponente, já foram encontrados vários modelos. Dessa forma, esta tarefa compreende 
 
 \textbf{Desenvolvimento de modelos integrais}.
 Após a revisão de literatura sobre um ou mais temas, deverá ser analisada a viabilidade de construção de um novo modelo \yellow{integral}, tomando como base a combinação de modelos \yellow{integrais} pré-existentes.
 Por exemplo, constatou-se que os MECs incluem muito mais fenômenos físicos do que o MCGIs encontrados. 
 Assim, será analisada, por exemplo, a viabilidade de transformar MECs em MCGIs com as mesmas capacidades.
 Para tanto, é necessário primeiro, o bom entendimento das hipóteses e derivações dos modelos já existentes, o que virá da revisão de literatura.   
-% Assim, será analisada, como exemplo, a viabilidade de incorporar a formulação de Miller \cite{MillerR1998} no modelo de Godsave-Spalding de combustao de gota isolada \cite{Law1978}, o que dará origem a um novo modelo de combustão de gota isolada.
 
 A experiência do grupo de pesquisa com MEC multicomponente, incluindo descrição de mistura não ideal, e discretização do interior da gota será muito importante para auxiliar nesse entendimento.
 Certamente, a experiência prévia do candidato a bolsa com modelagem de transferência de calor e massa em gotas \cite{HenningsJ2024MT} e com modelagem de fenômenos de transporte \cite{HenningsJ2023BT,DokozaT2024,DokozaT2025,DeBroeckL2025} fornece maior garantia no comprimento dos objetivos propostos. %o qual já tem familiaridade com os modelos monocomponente Stefan-Maxwell \cite{Glassman2008} e Abramzon-Sirignano \cite{Sirignano1989} e Godsave-Spalding \cite{Law1978}.
-% Isso inclui compreender a derivação e as hipóteses 
-% Mencionar que em alguns casos, não se sabe se é possível combinar esses modelos. Trata-se portanto de uma análise de viabilidade.
-% Isso vale principalmente para o MEC multicomponente, descrição de mistura não ideal e 
 
 \textbf{Teste do modelo isolado}.
 Com o desenvolvimento do novo modelo, as suas capacidades e limitações devem ser testadas através da simulação deste modelo isoladamente, isto é, da simulação da evolução temporal de uma única gota.
 Esse teste é essencial para compreender as capacidades preditivas do modelo e já possui valor científico. Também é necessário para avaliar a robustez e eficiência do modelo desenvolvido, tendo em vista a sua aplicação em simulações CFD de grandes escalas.
 A consequente avaliação dos resultados permite que eventuais erros de implementação ou de modelo sejam identificados e corrigidos logo no início do processo de desenvolvimento.
-% \todo{Mencionar ser simulação 0D de evolução temporal.}
-% \todo{* link para avaliação dos resultados, teste de sensibilidade}
 
 O ambiente de programação Python foi selecionado para essa etapa, devido à experiência prévia do autor da proposta com a linguagem e inclusive com simulação de gota isolada nessa linguagem \cite{HenningsJ2024MT}.
 Ademais, a simplicidade da linguagem facilita a implementação em código e a correção de erros, o que facilita a implementação posterior do modelo em outras linguagens.
@@ -47,21 +37,16 @@ Antes de testar o modelo validado em simulações de gota isolada em simulaçõe
 O modelo desenvolvido será um mecanismo de seleção que determinará há ou não uma chama envolvente em torno da gota, alternando assim o modelo HMT da gota entre o MEC e o MCGI.
 Isso permitirá simular uma chama de spray ambos modelos simultaneamente, representando tanto a combustão com frente de chama externa quanto a combustão de gota isolada.
 Nessa etapa será importante a revisão de literatura feita anteriormente, já que o modelo a ser desenvolvido construirá em cima dos modelos já existentes.
-% O uso desse mecanismo nas simulações descritas a seguir pode levar a novos entendimentos sobre ignição de sprays, emissão de fuligem, velocidade e estrutura da chama.\question{ Tiro essa frase?}.
-% Isso porque uma chama de spray de combustível líquido não ocorre apenas com a combustão de gota isolada, mas também como combustão de grupo e combustão externa. 
 
 
 \textbf{Teste do modelo em ambiente simplificado com descrição detalhada da química}.
 Com o modelo validado em simulações de gota isolada, é de interesse conhecer a influência do MEC/MCGI desenvolvido em chamas unidimensionais se propagando em névoas de gota utilizando química detalhada.
 Para tanto, o modelo será implementado no software CHEM1D \cite{Sommers1994PhD}, onde já existe uma infraestrutura para simulações 1D laminares de spray (v. \cite{Sommers1994PhD,vanOijen2002CTM,vanOijen2016PECS, SacomanoF2018CTM,SacomanoF2021Fluids}) e com o qual o grupo de pesquisa já tem experiência (v. \cite{SacomanoF2018CTM,SacomanoF2019IJHMT,SacomanoF2021Fluids,SacomanoF2024CF,SacomanoF2025CF}).
-% Tal experiência será útil para acelerar o aprendizado de como utilizar e implementar modelos nesse software, tarefas que fazem parte dessa etapa.
 
 Isso permitirá, por exemplo, a simulação de uma chama 1D laminar em uma névoa de spray utilizando o novo modelo.
 Assim, o efeito do uso combinado de MECs e MCGIs na transferência de calor e massa nas gotas do spray será investigado, incluindo aspectos como ignição do spray, emissão de fuligem e velocidade de chama laminar.
 Essa etapa do trabalho deve fornecer uma importante contribuição científica para a comunidade de combustão de sprays.
-% Os resultados obtidos desse empreendimento serão de grande valor científico.% \question{Da para tirar que informações?}
 
-% \todo{Mencionar mais chama tridimensional turbulenta. Essa etapa vai demorar.}
 
 \textbf{Uso do modelo em simulação multidimensional turbulenta}.
 O próximo passo é o uso do MEC/MCGI desenvolvido em simulações de chama turbulenta multidimensionais.
@@ -75,35 +60,3 @@ Utilizando um MCGI, essa investigação mostrará o efeito da combustão de uma 
 Os métodos apresentados nessa seção para a elaboração do trabalho \yellow{dessa tese proposta} referem-se ao desenvolvimento analítico e numérico de MECs, MCGI, e de um modelo de modo de combustão, tomando como base modelos pré-existentes na literatura e as experiências prévias do grupo de pesquisa e do aluno.
 A aplicação desses métodos para os modelos e capacidades no escopo dessa tese dá origem ao plano de trabalho, organizado em tarefas e em um cronograma de execução e detalhado na próxima Seção.
 
-
-% \begin{itemize}
-%     \item Revisão da literatura
-%     \begin{itemize}
-%         \item Complementar a busca por modelos existentes já realizada.
-%         \item Categorizar os modelos de acordo com hipóteses assumidas, objetivos e capacidades.
-%     \end{itemize}
-%     \item Desenvolvimento de modelos analíticos
-%     \begin{itemize}
-%         \item Analisar a viabilidade de combinar dois aspectos em um modelo (exemplo: discretizaçao do interior da gota com descrição multicomponente.)
-%         \item Desenvolvimento analítico do novo modelo
-%     \end{itemize}
-%     \item Testar o modelo isoladamente
-%     \begin{itemize}
-%         \item Implementação em Python
-%         \item Simulação da gota ( aquecimento e evaporação ou combustão) em atmosfera quiescente
-%         \item Análise dos resultados
-%         \item Análise de sensibilidade: composição da gota e da atmosfera, temperatura inicial da gota e da atmosfera, diâmetro da gota
-%     \end{itemize}
-%     \item Testar o modelo em simulação simplificada
-%     \begin{itemize}
-%         \item Implementação no CHEM1D
-%         \item Simulação de combustão laminar de névoa de spray quiescente
-%         \item Análise dos resultados
-%     \end{itemize}
-%     \item Testar o modelo em simulação completa
-%     \begin{itemize}
-%         \item Implementação no OpenFOAM
-%         \item Simulação de combustão turbulenta 3D de grandes escalas
-%         \item Análise dos resultados
-%     \end{itemize}
-% \end{itemize}
