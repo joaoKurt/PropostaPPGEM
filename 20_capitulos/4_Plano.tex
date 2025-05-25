@@ -12,18 +12,19 @@ As tarefas para essa proposta estão expostas a seguir.
 
 
 Considerando inicialmente gotas monocomponentes, o trabalho proposto se iniciará com o estudo aprofundado sobre MEC e MCGI monocomponentes pré-existentes na literatura (tarefa \textbf{T1}), o que dará base para o desenvolvimento de modelo integral de combustão de gota isolada monocomponente com modelo detalhado de evaporação (tarefa \textbf{T2}).
-Em sequência virá o estudo aprofundado de modelos pre-existentes para a modelagem analítica de \yellow{de fenômenos de transporte no} interior de gota (tarefa \textbf{T3}), seguido pela avaliação da viabilidade de acoplamento de modelos monocomponente de combustão de gota isolada com discretização no interior da gota (tarefa \textbf{T4}).
+Em sequência virá o estudo aprofundado de modelos preexistentes para a modelagem analítica de \yellow{de fenômenos de} \yellow{transporte no interior de gota} (tarefa \textbf{T3}), seguido pela avaliação da viabilidade de acoplamento de modelos monocomponente de combustão de gota isolada com discretização no interior da gota (tarefa \textbf{T4}).
 A mesma sequência de tarefas procede para gotas multicomponentes, originando as tarefas (\textbf{T5}), (\textbf{T6}), (\textbf{T7}) e (\textbf{T8}). 
 
-Visando utilizar o MCGI desenvolvido em simulações de combustão de spray, faz-se necessário então o estudo aprofundado de modelos de modo de combustão de sprays (\textbf{T9}), focando no modo de combustão de gota isolada e de combustão esterna. Segue desenvolvimento de um modelo dentre os estudados, para determinar se a gota utiliza um MEC ou MCGI (\textbf{T10}).
+Visando utilizar o MCGI desenvolvido em simulações de combustão de spray, faz-se necessário então o estudo aprofundado de modelos de modo de combustão de sprays (\textbf{T9}), focando no modo de combustão de gota isolada e de combustão externa. Em seguida virá o desenvolvimento de um modelo para determinar se a gota utiliza um MEC ou MCGI, baseado nos modelos preexistentes na literatura. (\textbf{T10}).
 
 Para simular os modelos desenvolvidos, é necessário implementá-los no programa a ser utilizado.
-Assim, cabe estudo aprofundado dos softwares e das linguagens de programação neles utilizados. 
-Para a simulação em ambiente simplificado, estão o aprofundamento em CHEM1D e Fortran (\textbf{T11}). Já para a simulação turbulenta multidimensional, estão o aprofundamento em OpenFOAM e C++ (\textbf{T12}).
+Assim, torna-se fundamental o estudo aprofundado dos softwares e das linguagens de programação empregadas. 
+No caso da simulação em ambiente simplificado, isso envolve o software CHEM1D e a linguagem Fortran (\textbf{T11}).
+Já para a simulação turbulenta multidimensional, envolve o software OpenFOAM e a linguagem C++ (\textbf{T12}).
 % Em ambos os casos, o aprofundamento na linguagem de programação visa a implementação do modelo desenvolvido no software utilizado.
 
 Dessa forma, as próximas tarefas abordam a implementação dos MEC e MCGIs desenvolvidos: na linguagem Python  (\textbf{T13}), no  CHEM1D à  (\textbf{T14}) e no OpenFOAM  (\textbf{T16}).
-Nos dois últimos, é necessário também implementar o algorítimo de seleção entre MEC e MCGI, originando (\textbf{T15}) e (\textbf{T15}).  
+Nos dois últimos, é necessário também implementar o algorítimo de seleção entre MEC e MCGI, originando (\textbf{T15}) e (\textbf{T17}).  
 % As tarefas (\textbf{T15}) e (\textbf{T17}) referem-se à implementação do algorítmo do modelo de modo de combustão, que fará a escolha entre MEC e MCGI, nos softwares CHEM1D e OpenFOAM respectivamente.
 
 As primeiras simulações dos modelos desenvolvidos são simulações 0D de evolução temporal de gota isolada em Python (\textbf{T18}). 
@@ -33,7 +34,7 @@ As tarefas de simulação detalhadas aqui incluem o pré-processamento, o tempo 
 As ferramentas utilizadas para a análise dos resultados em cada uma das atividades de simulação são discutidas na Seção \ref{sec:resultados}.
 
 O Programa de Pós-Graduação em Engenharia Mecânica (PPGEM) da EPUSP exige que 9 disciplinas sejam cursadas para doutorado direto.
-Elas são representadas pelas tarefas (\textbf{T20}) e (\textbf{T21}).
+Elas são representadas pela tarefa (\textbf{T21}).
 Algumas disciplinas se destacam devido a sua relevância para o tópico deste projeto \yellow{e foram selecionadas}: Fundamentos de Combustão I (PME5228), Fundamentos de Escoamentos Turbulentos Reativos  (PME5411), Sistemas Particulados (PQI5848), Termodinâmica Avançada I (PME5014), Introdução à Mecânica dos Meios Contínuos (PME5011) e Modelagem de Turbulência para CFD (PME5418).
 Demais disciplinas serão definidas ao longo do desenvolvimento deste trabalho.
 Por fim, a redação da dissertação é representada pela tarefa (\textbf{T22}).
@@ -44,12 +45,12 @@ Por fim, a redação da dissertação é representada pela tarefa (\textbf{T22})
 % \setlength{\itemsep}{0cm}
 % \item[\textbf{T1}] Estudo aprofundado sobre MEC e MCGI monocomponentes pré-existentes na literatura.% Sobre o MEC, estão incluidos o estudo da derivação dos modelos de Abramzon-Sirignano \cite{Sirignano1989}, a formulação de Miller \cite{MillerR1998}, \todo{...}, No que tange a MCGIs, revisitar o modelo de Godsave-Spalding \cite{Law1978,HenningsJ2024MT}, estudar o artigo do Fachini \cite{FachiniF1999}, suas referências e citações, \todo{...} 
 % \item[\textbf{T2}] Modelagem analítica de combustão de gota isolada monocomponente com modelo detalhado de evaporação. % Essa tarefa baseia-se na incorporação do modelo de Abramzon-Sirignano \cite{Sirignano1989} ou da formulação de Miller \cite{MillerR1998} no modelo de Godsave-Spalding \cite{Law1978}. %Como todos os modelos citados baseiam-se em soluções analíticas, é visto como provável que 
-% \item[\textbf{T3}] Estudo de modelos pre-existentes para a modelagem  analítica de discretização do interior de gota monocomponente.% São exemplos de literatura relevante para essa tarefa \source{}.
+% \item[\textbf{T3}] Estudo de modelos preexistentes para a modelagem  analítica de discretização do interior de gota monocomponente.% São exemplos de literatura relevante para essa tarefa \source{}.
 % \item[\textbf{T4}] Avaliação da viabilidade de acoplamento de modelos monocomponente de combustão de gota isolada com discretização no interior da gota.% Como os modelos de discretização de interior de gota podem envolver soluções numéricas, se será possível desenvolver uma solução analítica para esse problema. Uma solução acoplada numérica-analítica, interna e externamente gota, respectivamente, precisa ser robusta e computacionalmente eficiente para servir em aplicações CFD. 
 
-% \item[\textbf{T5}] Estudo de modelos MEC e MCGI multicomponente pre-existentes na literatura.% Exemplos de trabalhos relevantes de MEC multicomponente incluem \source{}.
+% \item[\textbf{T5}] Estudo de modelos MEC e MCGI multicomponente preexistentes na literatura.% Exemplos de trabalhos relevantes de MEC multicomponente incluem \source{}.
 % \item[\textbf{T6}] Modelagem analítica de combustão de gota isolada multicomponente com modelo avançado de evaporação. % Essa tarefa baseia-se na incorporação dos modelos de Sacomano \cite{SacomanoF2022IJHMT} ou de Wang \source{WangC2012} no modelo de Godsave-Spalding \cite{Law1978}.
-% \item[\textbf{T7}] Estudo de modelos pre-existentes para a modelagem analítica de discretização do interior de gota multicomponente.% São exemplos de literatura relevante para essa tarefa \source{}
+% \item[\textbf{T7}] Estudo de modelos preexistentes para a modelagem analítica de discretização do interior de gota multicomponente.% São exemplos de literatura relevante para essa tarefa \source{}
 % \item[\textbf{T8}] Avaliação da viabilidade de acoplamento de modelos multicomponente de combustão de gota isolada com discretização no interior da gota. 
 
 % \item[\textbf{T9}] Estudo de modelos de determinação de modos de combustão de gotas de spray, focando no modo de combustão isolada.% São exemplos de literatura relevante para essa tarefa \cite{AggarwalS2014}, \source{}

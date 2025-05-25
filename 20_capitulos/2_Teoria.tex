@@ -69,7 +69,7 @@ Existem diferentes abordagens para modelar com a interação chama-turbulência,
 Dentre as abordagens determinísticas, se destaca o espessamento artificial da chama (ATF), que vem sendo utilizado pelo grupo de pesquisa.
 O ATF aborda a interação chama-turbulência de duas maneiras: o espessamento artificial da chama e o amarrotamento da frente de chama causado pela turbulência.
 O espessamento artificial da chama traz o efeito da interação chama-turbulência para as grandes escalas, permitindo que a resolução da chama em células típicas de LES.
-O amarrotamento da frente da frente de chama, no contexto do ATF, é considerado por uma função de eficiência que acelera a velocidade da frente de chama.
+O amarrotamento da frente de chama, no contexto do ATF, é considerado por uma função de eficiência que acelera a velocidade da frente de chama.
 O efeito do espessamento artificial e do amarrotamento de chama se manifestam na equação de transporte de um escalar $\psi$ através dos fatores de espessamento $F$ e da função de eficiência $E$.
 A equação de transporte para os escalares  $\psi=\lbrace h, Z\rbrace$, ou seja, para a energia (na forma da entalpia total) e para a fração da mistura, tem a forma, em uma formulação de densidade variável para baixos números de Mach,
 \begin{equation}
@@ -89,14 +89,13 @@ $\text{Sc}_{\psi}$ e $\text{Sc}_{\psi,t}$ são os números de Schmidt laminar e 
 $S_{\psi,\nu}$ é o termo de acoplamento entre as fases representando a fonte de vapor oriunda da fase dispersa, sendo não nulo apenas na equação da fração de mistura, i.e. quando $\psi=Z$.
 
 $\Omega$ é o sensor da chama, que permite aplicar o espessamento apenas nas regiões onde a chama está presente (\emph{espessamento dinâmico}).
-Nos trabalhos do grupo de pesquisa, o fator de espessamento $F$ varia de acordo com as propriedades da mistura $Z$ e $h$ e com o tamanho da malha \cite{SacomanoF2017PhD,SacomanoF2017CF}.
+Nos trabalhos do grupo de pesquisa do candidato, o LETE (Laboratório de Engenharia Térmica e Ambiental), utiliza-se o fator de espessamento $F$ variável de acordo com as propriedades da mistura $Z$ e $h$ e com o tamanho da malha \cite{SacomanoF2017PhD,SacomanoF2017CF}.
 A função de eficiência $E$ baseia-se na função de potência de Charlette \cite{CharletteF2002}, cujo com expoente $\beta$ pode ser assumido constante (como em \cite{SacomanoF2017PhD,SacomanoF2017CF,SacomanoF2019IJHMT,ShastryV2023,SekularacN2024}) ou variável de acordo com as propriedades da mistura (como em \cite{SacomanoF2020CF}).
 
 No contexto do trabalho do grupo de pesquisa, a taxa de reação $\dot \omega_\psi$ vem do método de química pré-tabelada chamado \emph{Flamelet Generated Manifold} (FGM).
 Nessa abordagem, os estados termoquímicos da mistura são calculados antecipadamente, mapeados e salvos, para serem acessados por variáveis de acesso transportadas durante a simulação.
 Nos trabalhos do grupo de pesquisa, as tabelas químicas são geradas por simulações de chamas livres, unidimensionais, laminares e pré-mixadas, os chamados \emph{flamelets}.
-Dessa forma, duas variáveis de acesso são suficientes: a fração de mistura $Z$ e uma variável de progresso da reação $Y_{pv}$.
-A variável de progresso da reação é uma combinação linear de frações mássicas de algumas espécies e suas massas molares \cite{SacomanoF2018CTM}.    
+Dessa forma, duas variáveis de acesso são suficientes: a fração de mistura $Z$ e uma variável de progresso da reação $Y_{pv}$, definida como uma combinação linear de frações mássicas de algumas espécies e suas massas molares \cite{SacomanoF2018CTM}.    
     
 
 \subsubsection{Modelagem Da Fase Discreta} \label{sec:gotas}
@@ -221,7 +220,7 @@ Zanutto\etal{} \cite{ZanuttoC2019} utilizaram o método UNIFAC para os coeficien
 \subsubsection{Modelos para o Interor da Gota} \label{sec:int}
 
 Em todos os modelos apresentados até agora, a temperatura e composição do interior da gota foram considerados ou (1) uniforme e contante (modelos que não representam o período de aquecimento da gota); (2) uniforme e variando no tempo (modelos com condutividade térmica e difusividade mássica da fase líquida infinitas).
-Esses são as formas mais simples de representar o interior da gota.
+Essas são as formas mais simples de representar o interior da gota.
 Representações mais descritivas são: (3) modelos com difusividade térmica e mássica finitas, mas sem recirculação; (4) modelos que consideram a recirculação em um fator de correção para as difusividades térmica e mássica (chamados modelos de condutividade/difusividade efetiva); (5) modelos que descrevem a recirculação dentro da gota usando dinâmica de vórtices (modelos de vórtice); (6) modelos que resolvem o interior da gota (Navier-Stokes completo, i.e. DNS). \cite{Sazhin2006}
 
 Nota-se que os modelos (1) e (2) desconsideram completamente a transferência de calor e massa na fase líquida, i.e. no interior da gota.
@@ -263,7 +262,7 @@ Qualquer um dos números de transferência pode ser utilizado para calcular a ta
 Entretanto, $B_{f-T}$ e $B_{ox-T}$ possuem o termo ainda desconhecido $\dot q_\net$.
 Esse termo é negligenciado por alguns livro-texto \cite{Glassman2008,Williams1985} ao assumirem que a gota tem temperatura constante. 
 A temperatura da gota nesse caso é a temperatura de equilíbrio quasi-estacionário, de modo que negligenciar a fase de aquecimento da partícula equivale a assumir que esta possui inércia térmica desprezível (exemplo \cite{Turns2000,Glassman2008}). 
-Esses modelos que não incluem, portanto, a capacidade de representar o  período de aquecimento da gota.
+Esses modelos não incluem, portanto, a capacidade de representar o  período de aquecimento da gota.
 Outros, sugerem modelos conceituais como o modelo de "casca de cebola" (exemplo \cite[p. 385]{Turns2000}), porém o autor dessa proposta mostrou em \cite{HenningsJ2024MT} que esse modelo superestima significativamente o período de aquecimento da gota.
 No mesmo trabalho, o autor propõe utilizar $\dot q_\net$ como o saldo do calor trocado com a chama menos o calor perdido pela evaporação, obtendo bons resultados.
 
