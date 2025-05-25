@@ -3,7 +3,7 @@
 
 \section{Materiais e Métodos} \label{sec:metod}
 
-A presente proposta trata de desenvolver estratégias para simular HMT em gotas nos cenários {A} e {B} (MEC e MCGI), com as funcionalidades {1}, {2} e {3} (multi-componente, mistura não ideal e \yellow{fenômenos HMT no interior da gota}), e incluí-los em simulações CFD de combustão turbulenta de srpays com a capacidade 4 (escolher quando usar MEC ou MCGI), conforme exposto na Seção \hyperref[sec:objetivos]{Objetivos}.
+A presente proposta trata de desenvolver estratégias para simular HMT em gotas nos cenários {A} e {B} (MEC e MCGI), com as funcionalidades {1}, {2} e {3} (multi-componente, mistura não ideal e \yellow{fenômenos HMT no interior da gota}), e incluí-los em simulações CFD de combustão turbulenta de sprays com a capacidade 4 (escolher quando usar MEC ou MCGI), conforme exposto na Seção \hyperref[sec:objetivos]{Objetivos}.
 
 Como apresentado nas Seções \ref{sec:MEC} e \ref{sec:MCGI}, algumas dessas funcionalidades já existem na literatura, inclusive com contribuições do presente grupo de pesquisa.
 \yellow{A principal estratégia} para modelar o HMT de gotas nos cenários {A} e {B} com as funcionalidades desejadas será pelo desenvolvimento de modelos integrais.
@@ -40,20 +40,20 @@ A consequente avaliação dos resultados permite que eventuais erros de implemen
 % \todo{* link para avaliação dos resultados, teste de sensibilidade}
 
 O ambiente de programação Python foi selecionado para essa etapa, devido à experiência prévia do autor da proposta com a linguagem e inclusive com simulação de gota isolada nessa linguagem \cite{HenningsJ2024MT}.
-Ademais, a simplicidade da linguagem facilita a implementação em código e a correção de erros, o que facilita a implementação posterior do modelo em outras liguagens.
+Ademais, a simplicidade da linguagem facilita a implementação em código e a correção de erros, o que facilita a implementação posterior do modelo em outras linguagens.
 
 \textbf{Desenvolvimento do modelo de determinação de modo de combustão}.
 Antes de testar o modelo validado em simulações de gota isolada em simulações de chama de spray, é necessário desenvolver o modelo de determinação do modo de combustão do spray.
 O modelo desenvolvido será um mecanismo de seleção que determinará há ou não uma chama envolvente em torno da gota, alternando assim o modelo HMT da gota entre o MEC e o MCGI.
-Isso permitirá simular uma chama de spray ambos modelos simulataneamente, representando tanto a combustão com frente de chama externa quanto a combustão de gota isolada.
+Isso permitirá simular uma chama de spray ambos modelos simultaneamente, representando tanto a combustão com frente de chama externa quanto a combustão de gota isolada.
 Nessa etapa será importante a revisão de literatura feita anteriormente, já que o modelo a ser desenvolvido construirá em cima dos modelos já existentes.
 % O uso desse mecanismo nas simulações descritas a seguir pode levar a novos entendimentos sobre ignição de sprays, emissão de fuligem, velocidade e estrutura da chama.\question{ Tiro essa frase?}.
 % Isso porque uma chama de spray de combustível líquido não ocorre apenas com a combustão de gota isolada, mas também como combustão de grupo e combustão externa. 
 
 
 \textbf{Teste do modelo em ambiente simplificado com descrição detalhada da química}.
-Com o modelo validado em simulações de gota isolada, é de interesse conhecer a influência do MEC/MCGI desenvolvido em chamas unidimensonais se propagando em névoas de gota utilizando química detalhada.
-Para tanto, o modelo será implementado no software CHEM1D \cite{Sommers1994PhD}, onde já existe uma infraestrura para simulações 1D laminares de spray (v. \cite{Sommers1994PhD,vanOijen2002CTM,vanOijen2016PECS, SacomanoF2018CTM,SacomanoF2021Fluids}) e com o qual o grupo de pesquisa já tem experiência (v. \cite{SacomanoF2018CTM,SacomanoF2019IJHMT,SacomanoF2021Fluids,SacomanoF2024CF,SacomanoF2025CF}).
+Com o modelo validado em simulações de gota isolada, é de interesse conhecer a influência do MEC/MCGI desenvolvido em chamas unidimensionais se propagando em névoas de gota utilizando química detalhada.
+Para tanto, o modelo será implementado no software CHEM1D \cite{Sommers1994PhD}, onde já existe uma infraestrutura para simulações 1D laminares de spray (v. \cite{Sommers1994PhD,vanOijen2002CTM,vanOijen2016PECS, SacomanoF2018CTM,SacomanoF2021Fluids}) e com o qual o grupo de pesquisa já tem experiência (v. \cite{SacomanoF2018CTM,SacomanoF2019IJHMT,SacomanoF2021Fluids,SacomanoF2024CF,SacomanoF2025CF}).
 % Tal experiência será útil para acelerar o aprendizado de como utilizar e implementar modelos nesse software, tarefas que fazem parte dessa etapa.
 
 Isso permitirá, por exemplo, a simulação de uma chama 1D laminar em uma névoa de spray utilizando o novo modelo.
@@ -64,7 +64,7 @@ Essa etapa do trabalho deve fornecer uma importante contribuição científica p
 % \todo{Mencionar mais chama tridimensional turbulenta. Essa etapa vai demorar.}
 
 \textbf{Uso do modelo em simulação multidimensional turbulenta}.
-O próximo passo é o uso do MEC/MCGI desenvolvido em simulações de chama turbulenta multimensionais.
+O próximo passo é o uso do MEC/MCGI desenvolvido em simulações de chama turbulenta multidimensionais.
 Isso será feito no software OpenFOAM \cite{JasakOpenFOAM}, onde o grupo de pesquisa já tem experiência e infraestrura para realizar simulações das grandes escalas (LES) com métodos FGM e ATF \cite{SacomanoF2017PhD,SacomanoF2017CF,SacomanoF2020CF}.
 Para tanto, será necessário estudar C++ e desenvolvimento de software no OpenFOAM, para implementar os modelos desenvolvidos.
 Ênfase será dada também na implementação do modelo ATF e na interação do modelo desenvolvido com a interação chama-turbulência, representada pela função de eficiência proposta por Charlette \cite{CharletteF2002} com expoente $\beta$ inicialmente constante nesse trabalho. 
@@ -73,7 +73,7 @@ A capacidade de simulação multidimensional turbulenta permitirá investigar o 
 Utilizando um MCGI, essa investigação mostrará o efeito da combustão de uma gota isolada na estrutura da chama, um dos objetivos desta proposta.
 
 Os métodos apresentados nessa seção para a elaboração do trabalho \yellow{dessa tese proposta} referem-se ao desenvolvimento analítico e numérico de MECs, MCGI, e de um modelo de modo de combustão, tomando como base modelos pré-existentes na literatura e as experiências prévias do grupo de pesquisa e do aluno.
-A aplicação desses métodos para os modelos e capacidades no escopo dessa tese dá origem ao plano de trabalho, organizado em tarefas e em um cronograma de excecução e detalhado na próxima Seção.
+A aplicação desses métodos para os modelos e capacidades no escopo dessa tese dá origem ao plano de trabalho, organizado em tarefas e em um cronograma de execução e detalhado na próxima Seção.
 
 
 % \begin{itemize}

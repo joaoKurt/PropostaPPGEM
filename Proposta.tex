@@ -36,7 +36,7 @@
 
 %% Line spacing
 \usepackage{geometry}
-\geometry{a4paper,portrait,hmargin={2cm,2cm},vmargin={2cm,3cm}}
+\geometry{a4paper,portrait,hmargin={2cm,2cm},vmargin={2cm,2.5cm}}
 \renewcommand{\baselinestretch}{1.5}
 \usepackage{setspace}
 
@@ -58,11 +58,16 @@
 %% Dummy text
 \usepackage{lipsum}
 
+%% Justifying
+\usepackage{ragged2e}
+
 
 % \title{\textbf{Multi-Scale Investigations For Reacting Multi-Phase Dispersed Spray Flows}}
-\title{\textbf{Investigações Multi-Escala para Escoamentos Multifásicos Dispersos Reativos}}
+\title{\textbf{Investigação Numérica dos Efeitos de Chamas Envelopadas em Chamas Turbulentas Diluídas de Sprays Líquidos Multicomponentes}}
 \author{João Vinícius Hennings de Lara}
 \date{Junho 2025}
+
+
 
 
 
@@ -70,7 +75,12 @@
 
 \pagenumbering{roman}
 
-\maketitle
+% \include{10_style/Capa.0}
+% \include{10_style/Capa.1}
+\include{10_style/Capa.2}
+% \include{10_style/Capa.3}
+
+
 \input{20_capitulos/Resumo.tex}
 
 \newpage
