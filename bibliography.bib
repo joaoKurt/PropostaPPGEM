@@ -1307,3 +1307,20 @@
   abstract = {A model of turbulent sub-grid scale flame speed for premixed combustion is proposed and tested in Large Eddy Simulation (LES). The model is based on writing the unresolved flame surface density in terms of a general power-law expression that involves an inner cutoff scale. This scale is derived from an equilibrium assumption of flame-surface production and destruction. The flame-surface production term is modeled using a parameterization of the effective flame stretch, obtained from a spectral superposition of earlier DNS results of single vortex-flame interactions [8]. The model is implemented in a LES combustion code in the context of Thickened Flame LES (TF-LES) using an empirically chosen (non-dynamic) value for the power-law exponent. Three-dimensional simulations of premixed flame embedded in a time decaying isotropic turbulent flow are performed in several different parameter ranges. Comparisons between direct numerical simulation (DNS) and LES using different resolutions and thickness factors show that the LES reproduces the total reaction rate of the DNS quite well and independently on the thickness factor, resolution, and sub-grid scale model used for the turbulent eddy viscosity. Comparisons between the predicted overall turbulent flame speed sT as function of the r.m.s. velocity and experimental data show good agreement over a significant range of parameters.}
 }
 
+@article{NicoudF2011,
+  author   = {Nicoud, Franck and Toda, Hubert Baya and Cabrit, Olivier and Bose, Sanjeeb and Lee, Jungil},
+  title    = {Using singular values to build a subgrid-scale model for large eddy simulations},
+  journal  = {Physics of Fluids},
+  volume   = {23},
+  number   = {8},
+  pages    = {085106},
+  year     = {2011},
+  month    = {08},
+  abstract = {An eddy-viscosity based, subgrid-scale model for large eddy simulations is derived from the analysis of the singular values of the resolved velocity gradient tensor. The proposed σ-model has, by construction, the property to automatically vanish as soon as the resolved field is either two-dimensional or two-component, including the pure shear and solid rotation cases. In addition, the model generates no subgrid-scale viscosity when the resolved scales are in pure axisymmetric or isotropic contraction/expansion. At last, it is shown analytically that it has the appropriate cubic behavior in the vicinity of solid boundaries without requiring any ad-hoc treatment. Results for two classical test cases (decaying isotropic turbulence and periodic channel flow) obtained from three different solvers with a variety of numerics (finite elements, finite differences, or spectral methods) are presented to illustrate the potential of this model. The results obtained with the proposed model are systematically equivalent or slightly better than the results from the Dynamic Smagorinsky model. Still, the σ-model has a low computational cost, is easy to implement, and does not require any homogeneous direction in space or time. It is thus anticipated that it has a high potential for the computation of non-homogeneous, wall-bounded flows.},
+  issn     = {1070-6631},
+  doi      = {10.1063/1.3623274},
+  url      = {https://doi.org/10.1063/1.3623274},
+  eprint   = {https://pubs.aip.org/aip/pof/article-pdf/doi/10.1063/1.3623274/15738045/085106\_1\_online.pdf}
+}
+
+

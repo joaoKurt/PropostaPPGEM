@@ -9,18 +9,24 @@
 {
 \setstretch{1}
 
-\noindent
-A modelagem de chamas turbulentas de sprays diluídos geralmente é modelada utilizando modelos de evaporação e condensação, o que reproduz uma frente de chama externa às gotas.
-No entanto, chamas envelopadas ao redor de gotas isoladas já foram observadas em experimentos e simulações de chamas turbulentas de sprays líquidos.
-Também denominadas combustão de gotas isoladas, essas chamas já foram relacionadas ao processo de ignição de sprays e à formação de fuligem.
-Revisando a literatura, constatou-se a necessidade de incluir a modelagem de chamas envelopadas em simulações turbulentas de sprays diluídos de combustíveis líquidos.
-O desenvolvimento dessa modelagem deve representar efeitos de combustíveis reais, que são misturas de espécies químicas, como o querosene, e/ou hidrofílicos, como o etanol.
+\noindent % Se mudar aqui, lembrar de mudar no SAGE também!
+A modelagem de chamas turbulentas de sprays diluídos geralmente é modelada utilizando modelos de evaporação e condensação, que descrevem uma frente de chama externa às gotas, estabilizada pela mistura vapor-oxidante formada pela evaporação do combustível.
+No entanto, chamas estabilizadas ao redor de gotas individuais são observadas em experimentos e simulações de chamas turbulentas de sprays líquidos.
+Também denominadas combustão de gotas isoladas, essas chamas estão relacionadas ao processo de ignição de sprays e à formação de fuligem.
+Ao revisar a literatura, constata-se a necessidade de incluir a modelagem de chamas envelopadas em simulações turbulentas de sprays diluídos de combustíveis líquidos.
+O desenvolvimento dessa modelagem deve representar efeitos de combustíveis reais, que são misturas de espécies químicas, como o querosene, e/ou hidrofílicos, como o etanol e o metanol.
 Para tanto devem incluir a capacidade de representação de uma mistura multicomponente, a consideração de fenômenos de transporte no interior da gota e a consideração de termodinâmica de mistura não ideal.
 A construção de modelos de combustão de gota isolada (MCGI) passará pela construção de modelos de evaporação e condensação (MEC) com as mesmas funcionalidades, garantindo assim um aumento gradual da sofisticação dos modelos desenvolvidos e baseando-se sempre nos modelos já existentes na literatura.
-A co-utilização de MEC e MCGI em uma simulação deve ser acompanhada por um mecanismo de seleção, também a ser desenvolvido, que escolherá qual modelo utilizar para cada gota.
-Primeiramente, o novo modelo será testado de forma isolada, para garantir o correto funcionamento e implementação. 
-Em seguida, será testado no cenário simplificado de uma chama laminar de névoa quiescente de spray líquido monodisperso.
-Por fim, após aprofundamento em interação chama-turbulência, o modelo será utilizado em simulações multidimensionais turbulentas.
+A co-utilização de MEC e MCGI em uma simulação deve ser acompanhada por um mecanismo de seleção de modos de combustão, também a ser desenvolvido.
+Este mecanismo escolherá qual modelo utilizar para cada gota.
+% #TODO Motivação
+% #TODO Objetivo
+% Primeiramente, o novo modelo será testado de forma isolada, para garantir o correto funcionamento e implementação. 
+% Em seguida, será testado no cenário simplificado de uma chama laminar de névoa quiescente de spray líquido monodisperso.
+% Por fim, após aprofundamento em interação chama-turbulência, o modelo será utilizado em simulações multidimensionais turbulentas.
+% # TODO Resultado e contribuição para comunidade científica
+% Sugestão Sacomano:
+%  O desenvolvimento desse trabalho deve contribuir para o aperfeiçoamento da capacidade preditiva de ... por programas baseados na dinâmica dos fluidos computacional (CFD).
 
 }
 \vspace{1cm}
@@ -32,7 +38,8 @@ Por fim, após aprofundamento em interação chama-turbulência, o modelo será 
 {
 \setstretch{1}
 
-\noindent
+% #TODO Update translation
+\noindent % Se mudar aqui, lembrar de mudar no SAGE também!
 The modeling of turbulent diluted spray flame is usually modelled using evaporation and condensation models, which produces an external flame sheet.
 Nonetheless, enveloped flames around isolated droplets have already been seen in experiments and simulations of turbulent liquid spray flames.
 Also named single or isolated droplet combustion, these flames have already been related to spray ignition processes and formation of soot.
