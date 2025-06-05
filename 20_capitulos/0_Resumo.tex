@@ -10,21 +10,27 @@
 \setstretch{1}
 
 \noindent % Se mudar aqui, lembrar de mudar no SAGE também!
-A modelagem de chamas turbulentas de sprays diluídos geralmente é modelada utilizando modelos de evaporação e condensação, que descrevem uma frente de chama externa às gotas, estabilizada pela mistura vapor-oxidante formada pela evaporação do combustível.
-No entanto, chamas estabilizadas ao redor de gotas individuais são observadas em experimentos e simulações de chamas turbulentas de sprays líquidos.
+A combustão turbulenta de spray é um processo essencial em diversas tecnologias. 
+Sua modelagem e simulação fazem parte do esforço atual de transição energética e descarbonização.
+Simulações de combustão de sprays diluídos, baseadas na dinâmica dos fluidos computacional, geralmente utilizam modelos de evaporação e condensação para as gotas.
+Estes descrevem uma frente de chama externa às gotas, estabilizada pela mistura vapor-oxidante formada pela evaporação do combustível.
+No entanto, chamas estabilizadas ao redor de gotas individuais também são observadas em experimentos e simulações.
 Também denominadas combustão de gotas isoladas, essas chamas estão relacionadas ao processo de ignição de sprays e à formação de fuligem.
-Ao revisar a literatura, constata-se a necessidade de incluir a modelagem de chamas envelopadas em simulações turbulentas de sprays diluídos de combustíveis líquidos.
-O desenvolvimento dessa modelagem deve representar efeitos de combustíveis reais, que são misturas de espécies químicas, como o querosene, e/ou hidrofílicos, como o etanol e o metanol.
-Para tanto devem incluir a capacidade de representação de uma mistura multicomponente, a consideração de fenômenos de transporte no interior da gota e a consideração de termodinâmica de mistura não ideal.
-A construção de modelos de combustão de gota isolada (MCGI) passará pela construção de modelos de evaporação e condensação (MEC) com as mesmas funcionalidades, garantindo assim um aumento gradual da sofisticação dos modelos desenvolvidos e baseando-se sempre nos modelos já existentes na literatura.
-A co-utilização de MEC e MCGI em uma simulação deve ser acompanhada por um mecanismo de seleção de modos de combustão, também a ser desenvolvido.
-Este mecanismo escolherá qual modelo utilizar para cada gota.
-% #TODO Motivação
-% #TODO Objetivo
+No entanto, a sua modelagem é raramente incluída em simulações computacionais.
+Este trabalho visa desenvolver modelos de combustão de gota isolada (MCGI) e incluí-los em simulações de combustão turbulenta multidimensional para investigar a sua influência na combustão de sprays.
+Esse desenvolvimento inclui a elaboração de modelos de evaporação e condensação (MEC).
+Ambos devem ser capazes de representar efeitos de combustíveis comerciais, que são multicomponentes (como a gasolina) e/ou hidrofílicos (como o etanol e o metanol). 
+Para tanto, devem ser considerados também fenômenos de transporte no interior da gota e termodinâmica de mistura não ideal.
+Dessa forma, um segundo objetivo deste trabalho é avaliar os impactos do aumento de capacidade descritiva de modelos de transferência de calor e massa (MEC e MCGI) na combustão de sprays multicomponentes.
+A co-utilização de MEC e MCGI em uma simulação, como proposto, deve ser acompanhada por um mecanismo de seleção de modos de combustão, a ser desenvolvido, que escolherá qual modelo utilizar para cada gota.
+Esse trabalho contribuirá para o aperfeiçoamento da capacidade preditiva de simulações de chama turbulenta multidimensional de sprays multicomponentes.
+% Os modelos desenvolvidos serão testados isoladamente e em uma chama laminar de névoa de spray, quiescente e monodispersa, antes de serem utilizados em simulações de chamas multidimensionais turbulentas. 
+% #DONE Motivação
+% #DONE Objetivo
 % Primeiramente, o novo modelo será testado de forma isolada, para garantir o correto funcionamento e implementação. 
 % Em seguida, será testado no cenário simplificado de uma chama laminar de névoa quiescente de spray líquido monodisperso.
 % Por fim, após aprofundamento em interação chama-turbulência, o modelo será utilizado em simulações multidimensionais turbulentas.
-% # TODO Resultado e contribuição para comunidade científica
+% # DONE Resultado e contribuição para comunidade científica
 % Sugestão Sacomano:
 %  O desenvolvimento desse trabalho deve contribuir para o aperfeiçoamento da capacidade preditiva de ... por programas baseados na dinâmica dos fluidos computacional (CFD).
 
