@@ -3,20 +3,17 @@
 
 \section{Materiais e Métodos} \label{sec:metod}
 
-A presente proposta trata de desenvolver estratégias para simular HMT em gotas nos cenários {A} e {B} (MEC e MCGI), com as funcionalidades {1}, {2} e {3} (multi-componente, mistura não ideal e \yellow{fenômenos HMT no interior da gota}), e incluí-los em simulações CFD de combustão turbulenta de sprays com a capacidade 4 (escolher quando usar MEC ou MCGI), conforme exposto na Seção \hyperref[sec:objetivos]{Objetivos}.
+A presente proposta trata de desenvolver estratégias para simular HMT em gotas nos cenários {A} e {B} (MEC e MCGI), com as funcionalidades {1}, {2} e {3} (multicomponente, mistura não ideal e fenômenos de transporte no interior da gota), e incluí-los em simulações CFD de combustão turbulenta de sprays com a capacidade 4 (escolher quando usar MEC ou MCGI), conforme exposto na Seção \hyperref[sec:objetivos]{Objetivos}.
 
 Como apresentado nas Seções \ref{sec:MEC} e \ref{sec:MCGI}, algumas dessas funcionalidades já existem na literatura, inclusive com contribuições do presente grupo de pesquisa.
-\yellow{A principal estratégia} para modelar o HMT de gotas nos cenários {A} e {B} com as funcionalidades desejadas será pelo desenvolvimento de modelos integrais.
-Esse desenvolvimento tomará como base os modelos já existentes na literatura e se dará de forma gradual e incremental.
-O desenvolvimento se dará por meio dos seguintes método.
+A principal estratégia para atingir esse objetivo será o desenvolvimento, tese e implementação de modelos integrais. Esse trabalho tomará como base os modelos já existentes na literatura e se dará de forma gradual e incremental, de acordo com a metodologia exposta a seguir.
 
 \textbf{Revisão de literatura}. 
 A revisão de literatura visa levantar e aprofundar a compreensão sobre os modelos já  existentes de evaporação e condensação e de combustão de gota isolada, assim como o dos aspectos multicomponente, de mistura não ideal, consideração do interior da gota e o estudo de quando ocorre a combustão de gota isolada.
-Vários modelos nos diferentes temas compreendidos por essa proposta já foram apresentados nas Seções \ref{sec:MEC} e \ref{sec:MCGI}.
-Eles abrangem diferentes aspectos e abordagens para a modelagem dos problemas propostos e constituem uma boa base inicial para essa pesquisa. 
+Os modelos apresentados nas Seções \ref{sec:MEC} e \ref{sec:MCGI} abrangem diferentes aspectos e abordagens para a modelagem dos problemas propostos e constituem uma boa base inicial para essa pesquisa. 
 
 \textbf{Desenvolvimento de modelos integrais}.
-Após a revisão de literatura sobre um ou mais temas, deverá ser analisada a viabilidade de construção de um novo modelo \yellow{integral}, tomando como base a combinação de modelos \yellow{integrais} pré-existentes.
+Após a revisão de literatura, deverá ser analisada a viabilidade de construção de um novo modelo integral, tomando como base a combinação de modelos pré-existentes.
 Por exemplo, constatou-se que os MECs incluem muito mais fenômenos físicos do que o MCGIs encontrados. 
 Assim, será analisada, por exemplo, a viabilidade de transformar MECs em MCGIs com as mesmas capacidades.
 Para tanto, é necessário primeiro, o bom entendimento das hipóteses e derivações dos modelos já existentes, o que virá da revisão de literatura.   
@@ -25,16 +22,16 @@ A experiência do grupo de pesquisa com MEC multicomponente, incluindo descriç�
 Certamente, a experiência prévia do candidato a bolsa com modelagem de transferência de calor e massa em gotas \cite{HenningsJ2024MT} e com modelagem de fenômenos de transporte \cite{HenningsJ2023BT,DokozaT2024,DokozaT2025,DeBroeckL2025} fornece maior garantia no cumprimento dos objetivos propostos. %o qual já tem familiaridade com os modelos monocomponente Stefan-Maxwell \cite{Glassman2008} e Abramzon-Sirignano \cite{Sirignano1989} e Godsave-Spalding \cite{Law1978}.
 
 \textbf{Teste do modelo isolado}.
-Com o desenvolvimento do novo modelo, as suas capacidades e limitações devem ser testadas através da simulação deste modelo isoladamente, isto é, da simulação da evolução temporal de uma única gota. % #TODO de combustão
-Esse teste é essencial para compreender as capacidades preditivas do modelo e já possui valor científico. Também é necessário para avaliar a robustez e eficiência do modelo desenvolvido, tendo em vista a sua aplicação em simulações CFD multidimensionais.
-A consequente avaliação dos resultados permite que eventuais erros de implementação ou de modelo sejam identificados e corrigidos logo no início do processo de desenvolvimento.
+Com o desenvolvimento do novo modelo, as suas capacidades e limitações devem ser testadas através da simulação isolada deste modelo, isto é, da simulação da evolução temporal de uma única gota. % #TODO de combustão
+Esse teste é essencial para compreender as capacidades preditivas do modelo e já possui valor científico. Também é necessário para avaliar a robustez e eficiência do modelo desenvolvido, tendo em vista sua aplicação em simulações CFD multidimensionais.
+A consequente avaliação dos resultados permite a identificação e correção de eventuais erros de implementação ou de modelo logo no início do processo de desenvolvimento.
 
 O ambiente de programação Python foi selecionado para essa etapa, devido à experiência prévia do autor da proposta com a linguagem e inclusive com simulação de gota isolada nessa linguagem \cite{HenningsJ2024MT}.
 Ademais, a simplicidade da linguagem facilita a implementação em código e a correção de erros, o que facilita a implementação posterior do modelo em outras linguagens.
 
-\textbf{Desenvolvimento do modelo de determinação de modo de combustão}.
+\textbf{Desenvolvimento do modelo de determinação de modo de combustão de dispersão de gotas}.
 Antes de testar o modelo validado em simulações de gota isolada em simulações de chama de spray, é necessário desenvolver o modelo de determinação do modo de combustão do spray.
-O modelo desenvolvido será um mecanismo de seleção que determinará se há ou não uma chama envolvente em torno da gota, alternando assim o modelo HMT da gota entre o MEC e o MCGI.
+O modelo desenvolvido será um mecanismo de seleção que determinará se há ou não uma chama estabilizada individualmente por cada gota, alternando assim o modelo HMT de cada gota entre o MEC e o MCGI.
 Isso permitirá simular uma chama de spray ambos modelos simultaneamente, representando tanto a combustão com frente de chama externa quanto a combustão de gota isolada.
 Nessa etapa será importante a revisão de literatura feita anteriormente, já que o modelo a ser desenvolvido tomará como base modelos já existentes.
 
@@ -56,6 +53,6 @@ Para tanto, será necessário estudar C++ e desenvolvimento de software no OpenF
 A capacidade de simulação multidimensional turbulenta permitirá investigar o efeito do modelo desenvolvido na estrutura da chama, o que possui grande importância científica.
 Utilizando um MCGI, essa investigação mostrará o efeito da combustão de uma gota isolada na estrutura da chama, um dos objetivos desta proposta.
 
-Os métodos apresentados nesta Seção para a elaboração deste trabalho proposto referem-se ao desenvolvimento analítico e numérico de MECs, MCGI, e de um modelo de modo de combustão, tomando como base modelos pré-existentes na literatura e as experiências prévias do grupo de pesquisa e do aluno.
+Os métodos apresentados nesta Seção para a elaboração deste trabalho proposto referem-se ao desenvolvimento analítico e numérico de MECs, MCGIs, e de um modelo de modo de combustão, tomando como base modelos pré-existentes na literatura e as experiências prévias do grupo de pesquisa e do aluno.
 A aplicação desses métodos para os modelos e capacidades no escopo desta proposta dá origem ao plano de trabalho, organizado em tarefas e em um cronograma de execução e detalhado na próxima Seção.
 

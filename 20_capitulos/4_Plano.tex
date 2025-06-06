@@ -1,26 +1,27 @@
 \section{Plano de Trabalho e Cronograma de Execução}
 
-O cronograma de execução para essas tarefas ao longo do Doutorado pode ser encontrado na Figura \ref{fig:cronograma}.
-As tarefas para essa proposta estão expostas a seguir.
+% O cronograma de execução para essas tarefas ao longo do Doutorado pode ser encontrado na Figura \ref{fig:cronograma}.
+% As tarefas para essa proposta estão expostas a seguir.
 
 \begin{figure}[ht]
     \centering
     \caption{Cronograma de execução. Siglas: E - estudo aprofundado; D - desenvolvimento de modelo; C - desenvolvimendo (\emph{development}) de código; S - simulação; M - disciplinas; T - dissertação.}
-    \includegraphics[width=0.9\textwidth]{30_images/cronograma-3.png}
+    \includegraphics[width=0.85\textwidth]{30_images/cronograma-3.png}
     \label{fig:cronograma}
 \end{figure}
 
 
+O cronograma de execução para as tarefas estabelecidas para esse trabalho pode ser encontrado na Figura \ref{fig:cronograma}.
 Considerando inicialmente gotas monocomponentes, o trabalho proposto se iniciará com o estudo aprofundado sobre MEC e MCGI monocomponentes pré-existentes na literatura (tarefa \textbf{T1}), o que dará base para o desenvolvimento de modelo integral de combustão de gota isolada monocomponente com modelo detalhado de evaporação (tarefa \textbf{T2}).
-Em sequência virá o estudo aprofundado de modelos preexistentes para a modelagem de \yellow{de fenômenos de} \yellow{transporte no interior de gota} (tarefa \textbf{T3}), seguido pela avaliação da viabilidade de acoplamento de modelos monocomponente de combustão de gota isolada com discretização no interior da gota (tarefa \textbf{T4}).
+Em sequência virá o estudo aprofundado de modelos preexistentes para a consideração de fenômenos de transporte no interior de gota (tarefa \textbf{T3}), seguido pela avaliação da viabilidade de acoplamento de modelos monocomponente de combustão de gota isolada com modelos para o interior da gota (tarefa \textbf{T4}).
 A mesma sequência de tarefas procede para gotas multicomponentes, originando respectivamente as tarefas (\textbf{T5}), (\textbf{T6}), (\textbf{T7}) e (\textbf{T8}). 
 
 Visando utilizar o MCGI desenvolvido em simulações de combustão de spray, faz-se necessário então o estudo aprofundado de modelos de modo de combustão de sprays (\textbf{T9}), focando no modo de combustão de gota isolada e de combustão externa. Em seguida propõe-se o desenvolvimento de um modelo para determinar se a gota utiliza um MEC ou MCGI, baseado nos modelos preexistentes na literatura. (\textbf{T10}).
 
 Para simular os modelos desenvolvidos, é necessário implementá-los no programa a ser utilizado.
-Assim, torna-se fundamental o estudo aprofundado dos softwares e das linguagens de programação empregadas. 
-No caso da simulação em ambiente simplificado, isso envolve o software CHEM1D e a linguagem Fortran (\textbf{T11}).
-Já para a simulação turbulenta multidimensional, envolve o software OpenFOAM e a linguagem C++ (\textbf{T12}).
+Assim, torna-se fundamental o estudo aprofundado dos \emph{softwares} e das linguagens de programação empregadas. 
+No caso da simulação em ambiente simplificado, isso envolve o \emph{software} CHEM1D e a linguagem Fortran (\textbf{T11}).
+Já para a simulação turbulenta multidimensional, envolve o \emph{software} OpenFOAM e a linguagem C++ (\textbf{T12}).
 % Em ambos os casos, o aprofundamento na linguagem de programação visa a implementação do modelo desenvolvido no software utilizado.
 
 Dessa forma, as próximas tarefas abordam a implementação dos MEC e MCGIs desenvolvidos: na linguagem Python  (\textbf{T13}), no  CHEM1D à  (\textbf{T14}) e no OpenFOAM  (\textbf{T16}).

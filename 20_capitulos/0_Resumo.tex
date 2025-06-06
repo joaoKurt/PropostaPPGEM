@@ -8,56 +8,49 @@
 
 {
 \setstretch{1}
+% \linenumbers % Remover
 
 \noindent % Se mudar aqui, lembrar de mudar no SAGE também!
 A combustão turbulenta de spray é um processo comumente encontrado em diversas tecnologias em diversos setores econômicos. 
 O aperfeiçoamento de sua modelagem e simulação faz parte do esforço atual para transição energética e descarbonização.
-Simulações de combustão de sprays diluídos, baseadas na dinâmica dos fluidos computacional, geralmente utilizam modelos de evaporação e condensação para as gotas.
-Estes descrevem uma frente de chama externa às gotas, estabilizada pela mistura vapor-oxidante formada pela evaporação do combustível.
+Simulações de combustão de sprays diluídos, baseadas na dinâmica dos fluidos computacional, geralmente utilizam modelos de evaporação e condensação (MECs) para as gotas, os quais descrevem uma frente de chama externa às gotas.
 No entanto, chamas estabilizadas ao redor de gotas individuais também são observadas em experimentos e simulações.
-Denominadas combustão de gotas isoladas, essas chamas estão relacionadas ao processo de ignição de sprays e à formação de fuligem.
-Contudo, a sua modelagem é raramente incluída em simulações computacionais
-Este trabalho visa desenvolver modelos de combustão de gota isolada (MCGI) e incluí-los em simulações de combustão turbulenta multidimensional para investigar a sua influência na combustão de sprays.
-Esse desenvolvimento inclui a elaboração de modelos de evaporação e condensação (MEC).
-Ambos devem ser capazes de representar efeitos de combustíveis comerciais, os quais são multicomponentes (como a gasolina) e/ou hidrofílicos (como o etanol, o metanol e a amônia). 
+Denominadas combustão de gota isolada, essas chamas estão relacionadas ao processo de ignição de sprays e à formação de fuligem.
+Contudo, a sua modelagem é raramente incluída em simulações computacionais.
+Este trabalho visa desenvolver modelos de combustão de gota isolada (MCGI) e incluí-los em simulações de chamas turbulentas para investigar a sua influência na combustão de sprays.
+Esse desenvolvimento inclui a elaboração de MECs.
+Ambos modelos devem representar efeitos de combustíveis comerciais, os quais são multicomponentes (como a gasolina) e/ou hidrofílicos (como o etanol, o metanol e a amônia). 
 Para tanto, devem ser considerados também fenômenos de transporte no interior da gota e termodinâmica de mistura não ideal.
-Dessa forma, um segundo objetivo deste trabalho é avaliar os impactos do aumento de capacidade descritiva de modelos de transferência de calor e massa (MEC e MCGI) na combustão turbulenta de sprays multicomponentes.
-A co-utilização de MEC e MCGI em uma simulação, como proposto, deve ser acompanhada por um mecanismo de seleção de modos de combustão, a ser desenvolvido, que escolherá qual modelo utilizar para cada gota.
-Esse trabalho contribuirá para o aperfeiçoamento da capacidade preditiva de simulações de chama turbulenta multidimensional de sprays multicomponentes.
-% Os modelos desenvolvidos serão testados isoladamente e em uma chama laminar de névoa de spray, quiescente e monodispersa, antes de serem utilizados em simulações de chamas multidimensionais turbulentas. 
-% #DONE Motivação
-% #DONE Objetivo
-% Primeiramente, o novo modelo será testado de forma isolada, para garantir o correto funcionamento e implementação. 
-% Em seguida, será testado no cenário simplificado de uma chama laminar de névoa quiescente de spray líquido monodisperso.
-% Por fim, após aprofundamento em interação chama-turbulência, o modelo será utilizado em simulações multidimensionais turbulentas.
-% # DONE Resultado e contribuição para comunidade científica
-% Sugestão Sacomano:
-%  O desenvolvimento desse trabalho deve contribuir para o aperfeiçoamento da capacidade preditiva de ... por programas baseados na dinâmica dos fluidos computacional (CFD).
+Dessa forma, um segundo objetivo deste trabalho é avaliar os impactos do aumento de capacidade descritiva de MECs e MCGIs na combustão de sprays.
+A consideração de ambos modos de combustão, de gota isolada e externa, requer o desenvolvimento de um mecanismo de que determine qual cenário considerar em cada gota.
+Esse trabalho contribuirá para o aperfeiçoamento da capacidade preditiva de simulações multidimensionais de chama turbulenta de sprays multicomponentes.
 
 }
-\vspace{.8cm}
 
-% { \Large \textbf{Abstract}}
+\vfil
 
-% \vspace{0.8cm}
+{ \Large \textbf{Abstract}}
 
-% {
-% \setstretch{1}
+\vspace{0.8cm}
 
-% % #TODO Update translation
-% \noindent % Se mudar aqui, lembrar de mudar no SAGE também!
-% Turbulent spray combustion is commonly found in a myriad of technologies across different economic sectors.
-% The improvement of its modeling and simulation is part of the effort towards energy transition and decarbonization.
-% Simulations of diluted spray combustion, based on computational fluid dynamics (CFD), often use droplet condensation and evaporation models.
-% These describe a reaction zone external to the droplets, stabilized by the vapor-oxidizer mixture formed by the evaporation of fuel droplets.
-% However, flames stabilized around individual particles are also observed in experiments and simulations.
-% Named isolated droplet combustion, these flames are related to spray ignition processes and soot formation, yet their modeling is seldom included in simulations. 
-% This work aims to develop models for isolated droplet combustion (MCGI) and include them in turbulent spray combustion simulations.
-% This development includes developing droplet evaporation and condensation models (MEC).
-% Both ought to be able to represent effects of commercial fuels, which are multicomponent (as gasoline) and/or hydrophilic (as ethanol, methanol and amonia).
-% For this purpose, transport phenomena inside the droplet and non-ideal mixture themodynamics must also be considered.
-% Thus a second objetive of this work is to assess the impacts of  increasing the capabilities of droplet heat and mass transport models (MEC and MCGI) in spray combustion simulations.
-% The simultaneous use of MEC and MCGI, as proposed, requires a switch mechanism, also to be developed, to select which model to use in each droplet.
-% This work will contribute to the predictive capabilities of multidimensional simulations of turbulent multicomponent spray combustion.
+{
+\setstretch{1}
+% \resetlinenumber \linenumbers % Remover
 
-% }
+% #TODO Update translation
+\noindent % Se mudar aqui, lembrar de mudar no SAGE também!
+Turbulent spray combustion is commonly found in a myriad of technologies across different economic sectors.
+The improvement of its modeling and simulation is part of the effort towards energy transition and decarbonization.
+Simulations of diluted spray combustion, based on computational fluid dynamics (CFD), often use droplet condensation and evaporation models.
+These describe a reaction zone external to the droplets, stabilized by the vapor-oxidizer mixture formed by the evaporation of fuel droplets.
+However, flames stabilized around individual particles are also observed in experiments and simulations.
+Named isolated droplet combustion, these flames are related to spray ignition processes and soot formation, yet their modeling is seldom included in simulations. 
+This work aims to develop models for isolated droplet combustion (MCGI) and include them in turbulent spray combustion simulations.
+This development includes developing droplet evaporation and condensation models (MEC).
+Both ought to be able to represent effects of commercial fuels, which are multicomponent (as gasoline) and/or hydrophilic (as ethanol, methanol and amonia).
+For this purpose, transport phenomena inside the droplet and non-ideal mixture themodynamics must also be considered.
+Thus a second objetive of this work is to assess the impacts of  increasing the capabilities of droplet heat and mass transport models (so both MEC and MCGI) in spray combustion simulations.
+The simultaneous use of MEC and MCGI, as proposed, requires a switch mechanism, also to be developed, to select which model to use in each droplet.
+This work will contribute to the predictive capabilities of multidimensional simulations of turbulent multicomponent spray combustion.
+
+}
