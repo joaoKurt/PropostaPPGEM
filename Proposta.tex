@@ -61,6 +61,8 @@
 %% Line numbers
 \usepackage{lineno}
 
+% % Blank page
+% \usepackage{afterpage}
 
 % \title{\textbf{Multi-Scale Investigations For Reacting Multi-Phase Dispersed Spray Flows}}
 \title{\textbf{Investigação Numérica dos Efeitos de Chamas Envelopadas em Chamas Turbulentas Diluídas de Sprays Líquidos Multicomponentes}}
@@ -78,8 +80,9 @@
 % \include{10_style/Capa.0}
 % \include{10_style/Capa.1}
 \include{10_style/Capa.2}
+% \include{10_style/Capa.2.PT}
+% \include{10_style/Capa.2.EN}
 % \include{10_style/Capa.3}
-
 
 \input{20_capitulos/0_Resumo.tex}
 
@@ -100,8 +103,9 @@
 
 \newpage
 \newpage
-\pagenumbering{Roman}
+\pagenumbering{roman}
 \setcounter{page}{\value{savecounter}}
+
 % \bibliographystyle{abntex2-alf}
 \bibliographystyle{unsrt}
 \bibliography{bibliography,bibliography2}

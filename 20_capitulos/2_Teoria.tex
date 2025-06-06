@@ -11,7 +11,7 @@
 A combustão turbulenta de sprays é caracterizada pela competição de vários fenômenos físicos e químicos, fortemente acoplados e em diferentes escalas de tempo e comprimento. 
 Na formação de um spray turbulento, um jato de combustível líquido se quebra em gotas menores nos processos de atomização primária e secundária \cite{JennyB2012}.
 A região inicial do spray, chamada de \textbf{densa}, é caracterizada por fenômenos de interação entre gotas, como colisões, coalescência e interferência por esteira aerodinâmica.
-A medida que as gotas se tornam menores e mais dispersas, elas deixam de interferir umas nas outras e o spray é chamado de \textbf{disperso} ou \textbf{diluído}. 
+À medida que as gotas se tornam menores e mais dispersas, elas deixam de interferir umas nas outras e o spray é chamado de \textbf{disperso} ou \textbf{diluído}. 
 Desde a sua formação, as gotas de combustível evaporam, fornecendo vapor combustível para a chama, que por sua vez influencia e é influenciada pelas próprias gotas e pela turbulência local.
 Revisões detalhadas e com mais referências para processos e interações subjacentes à combustão turbulenta de sprays podem ser encontradas em \cite{JennyB2012, MasriA2016, SanchezA2015, ZhouL2021,JiangX2010}.
 
@@ -69,7 +69,7 @@ No contexto de combustão externa, com o uso de MECs, a vaporização do combust
 Em certas condições, essa mistura está em proporção inflamável e a chama formada queima no modo de pré-mistura \cite{PoinsotVeynante2005}.
 Em simulações de combustão nas grandes escalas, a zona de reação pertence a escala sub-malha.
 Ademais, a característica não linear dos termos de reação faz com que a zona de reação não seja corretamente representada pelas quantidades filtradas \cite{SacomanoF2017PhD}.
-Assim, faz-se necessária a modelagem de combustão turbulenta de sprays para tratar esses problemas não resolidos.
+Assim, faz-se necessária a modelagem de combustão turbulenta de sprays para tratar esses problemas não resolvidos.
 Existem diferentes abordagens para modelar a interação chama-turbulência, que podem ser classificadas em abordagens estocásticas (baseadas em funções de distribuição de probabilidade) e  determinísticas.
 
 % O ATF aborda a interação chama-turbulência de duas maneiras: o espessamento artificial da chama e o amarrotamento da zona de reação causado pela turbulência.
@@ -105,7 +105,7 @@ Nos trabalhos do grupo de pesquisa no qual o candidato se insere, o LETE (Labora
 A função de eficiência $E$ baseia-se na função de potência de Charlette \cite{CharletteF2002}, cujo com expoente $\beta$ pode ser assumido constante (como em \cite{SacomanoF2017PhD,SacomanoF2017CF,SacomanoF2019IJHMT,ShastryV2023,SekularacN2024}) ou variável de acordo com as propriedades da mistura (como em \cite{SacomanoF2020CF}).
 
 Ao considerar o método FGM (\emph{Flamelet Generated Manifold}), a taxa de reação $\dot \omega_\psi$, $\rho$ e $\mu$ são obtidos de uma tabela pré-calculada.
-Nesse trabalho, assim como nos aterores do presente grupo de pesquisa, essas tabelas são geradas com os resultados de simulações de chamas de propagação livre, unidimensionais e no regime laminar (\emph{flamelets} de chama pré misturada de propagação livre).
+Nesse trabalho, assim como nos anteriores do presente grupo de pesquisa, essas tabelas são geradas com os resultados de simulações de chamas de propagação livre, unidimensionais e no regime laminar (\emph{flamelets} de chama pré misturada de propagação livre).
 Considerando um \emph{flamelet} adiabático, duas variáveis de acesso são suficientes: a fração de mistura $Z$ e uma variável de progresso da reação $Y_{pv}$ \cite{PoinsotVeynante2005}.
 % Neste trabalho, como feito também em trabalhos anteriores do presente grupo de pesquisa, as tabelas são geradas ...
 % Nessa abordagem, os estados termoquímicos da mistura são calculados antecipadamente, mapeados e salvos, para serem acessados por variáveis de acesso transportadas durante a simulação.
@@ -342,7 +342,7 @@ Um exemplo desse esforço é \cite{UlzamaS2007}, que relaxou a hipótese de regi
 
 MCGIs também são estudados para a combustão de pós metálicos que queimam em combustão homogênea, como o alumínio \cite[p. 7]{Bergthorson2015}.
 Alguns trabalhos nessa área se destacam pela sua descrição multicomponente da fase gasosa. 
-Zhang\etal \cite{Zhang2022_Coflow,Zhang2022_Counterflow}, por exemplo, obtiveram uma solução analítica para um modelo extendido de Godsave-Spalding, incluindo um produto da reação de fase gasosa.
+Zhang\etal \cite{Zhang2022_Coflow,Zhang2022_Counterflow}, por exemplo, obtiveram uma solução analítica para um modelo estendido de Godsave-Spalding, incluindo um produto da reação de fase gasosa.
 Esse produto, alumina ($\qAlAlOOO$) no trabalho deles, é produzido na zona de reação e pode ser transportado tanto para a partícula quanto para o ambiente.
 Um desenvolvimento semelhante foi realizado por DesJardin\etal \cite{DesJardin2005}.
 Essa modelagem também é relevante para combustíveis hidrofílicos como o etanol e o metanol, cuja combustão produz vapor d'água que pode condensar sobre a  gota \cite{SacomanoF2024CF,SacomanoF2025CF}.
